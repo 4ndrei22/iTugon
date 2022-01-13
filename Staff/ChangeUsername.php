@@ -133,7 +133,7 @@
                 <h4 class="card-title"> Change Username </h4>
               </div>
               <div class="card-body">
-                <form>                  
+                <form action="getUsername.php" method="post" >                  
                   <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group">

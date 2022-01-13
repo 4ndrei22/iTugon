@@ -138,16 +138,16 @@
                     <?php
                       include 'connect.php';
                       //$sql = "SELECT Firstname, Lastname FROM staffs";
-                      $sql = "SELECT * FROM staffs";
+                      $sql = "SELECT * FROM loginaccess";
                       $result = mysqli_query($con,$sql);
                       if(mysqli_num_rows($result) > 0){
                         while ($row = mysqli_fetch_assoc($result)){
                         
-                          $firstname = $row['Firstname'];
-                          $lastname = $row['Lastname'];
+                          $firstname = $row['firstname'];
+                          $lastname = $row['lastname'];
                           $fullname = $firstname . " " . $lastname;
-                          $email = $row['Email'];
-                          $contactnum = $row['Contactnum'];
+                          $email = $row['email'];
+                          $contactnum = $row['contactnum'];
                           echo "<h5 style =  'text-transform: uppercase;'>$fullname</h5>";
                         }
                       }

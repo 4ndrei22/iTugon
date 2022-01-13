@@ -1,3 +1,3 @@
 function adminresolvedFunction() {
-    location.replace("Super Admin/Ticket(Resolved).php");
+    location.replace("http://localhost/iTugon/Super%20Admin/Ticket(Resolved).php");
   }

@@ -25,13 +25,13 @@
 				$_SESSION["UsernameL"] = $user;
 				$_SESSION["passwordL"] = $pass;
 				header("Location: ../Dashboard(staff).php");
-				$insert = "INSERT INTO staffs (Firstname,Lastname,Email,Contactnum, accessLVL) SELECT Firstname,Lastname,Email,Contactnum,AdminKey FROM accountcreation WHERE Username = '$user' ";
+				$insert = "INSERT INTO staffs (Firstname,Lastname,Email,Contactnum, accessLVL,Username) SELECT Firstname,Lastname,Email,Contactnum,AdminKey,Username FROM accountcreation WHERE Username = '$user' ";
 				mysqli_query($con,$insert);
 				}else{
 				$_SESSION["UsernameL"] = $user;
 				$_SESSION["passwordL"] = $pass;
 				header("Location: ../Dashboard(super).php");
-				$insert = "INSERT INTO staffs (Firstname,Lastname,Email,Contactnum, accessLVL) SELECT Firstname,Lastname,Email,Contactnum,AdminKey FROM accountcreation WHERE Username = '$user' ";
+				$insert = "INSERT INTO staffs (Firstname,Lastname,Email,Contactnum, accessLVL,Username) SELECT Firstname,Lastname,Email,Contactnum,AdminKey,Username FROM accountcreation WHERE Username = '$user' ";
 				mysqli_query($con,$insert);
 				}
 			

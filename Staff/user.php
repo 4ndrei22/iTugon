@@ -109,7 +109,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                       <a class="dropdown-item" href="./ChangeUsername.php">Change Username</a>
                       <a class="dropdown-item" href="./ChangePassword.php">Change Password</a>
-                      <a class="dropdown-item" href="./truncateUser.php">Logout</a>
+                      <a class="dropdown-item" href="truncateUser.php">Logout</a>
                     </div>
                   </li>
                   
@@ -131,16 +131,16 @@
                     <?php
                       include 'connect.php';
                       //$sql = "SELECT Firstname, Lastname FROM staffs";
-                      $sql = "SELECT * FROM staffs";
+                      $sql = "SELECT * FROM loginaccess";
                       $result = mysqli_query($con,$sql);
                       if(mysqli_num_rows($result) > 0){
                         while ($row = mysqli_fetch_assoc($result)){
                         
-                          $firstname = $row['Firstname'];
-                          $lastname = $row['Lastname'];
+                          $firstname = $row['firstname'];
+                          $lastname = $row['lastname'];
                           $fullname = $firstname . " " . $lastname;
-                          $email = $row['Email'];
-                          $contactnum = $row['Contactnum'];
+                          $email = $row['email'];
+                          $contactnum = $row['contactnum'];
                           echo "<h5 style =  'text-transform: uppercase;'>$fullname</h5>";
                         }
                       }

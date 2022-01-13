@@ -17,11 +17,11 @@
   <link href="./CSS Files/Staff_Dashboard.css" rel="stylesheet" />
   <link href="./CSS Files/demo.css" rel="stylesheet" />
   <!-- JS Files -->
-  <script src="/JS Files/ActiveTicket(onClick).js"></script>
-  <script src="/JS Files/Reopened(onClick).js"></script>
-  <script src="/JS Files/Pending(onClick).js"></script>
-  <script src="/JS Files/Resolved(onClick).js"></script>
-  <script src="/JS Files/Closed(onClick).js"></script>
+  <script src="./JS Files/ActiveTicket(onClick).js"></script>
+  <script src="../iTugon/JS Files/Reopened(onClick).js"></script>
+  <script src="./JS Files/Pending(onClick).js"></script>
+  <script src="./JS Files/Resolved(onClick).js"></script>
+  <script src="./JS Files/Closed(onClick).js"></script>
   <script src="./JS Files/core/jquery.min.js"></script>
   <script src="./JS Files/core/popper.min.js"></script>
   <script src="./JS Files/core/bootstrap.min.js"></script>
@@ -547,5 +547,6 @@
       });
   </script>
 </body>
+
 
 </html>

@@ -1,3 +1,31 @@
+<?php
+    $msg = "";
+    if (isset($_POST['submit'])) {
+      $con = new mysqli('localhost', 'root', '', 'db_admin');
+      $username = $con->real_escape_string($_POST['CurUsername']);
+      $newUsername =$con->real_escape_string($_POST['NewUsername']);
+      $password = $con->real_escape_string($_POST['CUPassword']);
+
+      $sql = $con->query("SELECT id,password FROM accountcreation WHERE username='$username'");
+        
+      if ($sql->num_rows > 0) {
+		  $data = $sql->fetch_array();
+		    
+      if (password_verify($password, $data['password'])) {
+                $sql1 = "UPDATE `accountcreation` SET username = '$newUsername' WHERE username = '$username'";
+                $sql2 = "UPDATE `loginaccess` SET username = '$newUsername' WHERE username = '$username'";
+                mysqli_query($con,$sql1);
+                mysqli_query($con,$sql2);
+                echo "<meta http-equiv='refresh' content='0'>";
+                header('Location: ChangeUsername.php');
+
+            }else
+			    $msg = "Incorrect Password";
+        } else
+            $msg = "Please check your inputs!";
+    } 
+ 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -139,12 +167,27 @@
                 <h4 class="card-title"> Change Username </h4>
               </div>
               <div class="card-body">
-                <form>                  
+              <?php
+                      include 'connect.php';
+                      //$sql = "SELECT Firstname, Lastname FROM staffs";
+                      $sql = "SELECT * FROM loginaccess";
+                      $result = mysqli_query($con,$sql);
+                      if(mysqli_num_rows($result) > 0){
+                        while ($row = mysqli_fetch_assoc($result)){
+                        
+                          $username = $row['username'];
+                        }
+                      }
+                        
+                      
+              ?>
+              <?php if ($msg != "") echo $msg . "<br><br>"; ?>
+                <form action="ChangeUsername.php" method = "post">                  
                   <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Current Username</label>
-                        <input type="text" class="form-control" placeholder="Current Username" value="">
+                        <input type="text" class="form-control" placeholder="Current Username" name="CurUsername" value="<?php echo $username; ?>">
                       </div>
                     </div>
                   </div>
@@ -152,7 +195,7 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>New Username</label>
-                        <input type="text" class="form-control" placeholder="New Username" value="">
+                        <input type="text" class="form-control" placeholder="New Username" name="NewUsername" value="">
                       </div>
                     </div>
                   </div>
@@ -160,13 +203,13 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Password</label>
-                        <input type="password" class="form-control" placeholder="password" value="">
+                        <input type="password" class="form-control" placeholder="password" name="CUPassword" value="">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="update ml-auto mr-auto">
-                      <button type="submit" class="btn btn-primary btn-round">Change Username</button>
+                      <button type="submit" name="submit" class="btn btn-primary btn-round">Change Username</button>
                     </div>
                   </div>
                 </form>

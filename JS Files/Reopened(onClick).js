@@ -1,3 +1,3 @@
 function adminReopenFunction() {
-    location.replace("Super Admin/Ticket(reopened).php");
+    location.replace("http://localhost/iTugon/Super%20Admin/Ticket(reopened).php");
   }

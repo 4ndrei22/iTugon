@@ -1,3 +1,31 @@
+<?php
+	$msg = "";
+
+	if (isset($_POST['submit'])) {
+		$con = new mysqli('localhost', 'root', '', 'db_admin');
+
+		$firstname = $con->real_escape_string($_POST['firstname']);
+		$lastname = $con->real_escape_string($_POST['lastname']);
+		$email = $con->real_escape_string($_POST['email']);
+		$contactnum = $con->real_escape_string($_POST['contact_number']);
+		$accesslvl = $con->real_escape_string($_POST['accessLvl']);
+		$username = $con->real_escape_string($_POST['usernameR']);
+		$password = $con->real_escape_string($_POST['passwordR']);
+		$cPassword = $con->real_escape_string($_POST['conPassword']);
+
+
+		if ($password != $cPassword)
+			$msg = "Please Check Your Passwords!";
+		else {
+			$hash = password_hash($password, PASSWORD_BCRYPT);
+
+			$con->query("INSERT INTO accountcreation (AdminKey, Firstname, Lastname,email, contactnum, username, password) VALUES ('$accesslvl','$firstname', '$lastname', '$email','$contactnum', '$username', '$hash')");
+			$msg = "You have been registered!";
+      echo "<meta http-equiv='refresh' content='0'>";
+      header('Location: AdminCreation.php');
+		}
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,8 +66,8 @@
 
 <body class="">
   <div class="wrapper ">
-  <div class="sidebar" data-color="white" data-active-color="danger">
-    <div class="logo">
+    <div class="sidebar" data-color="white" data-active-color="danger">
+      <div class="logo">
       <a class="simple-text logo-mini">
         <div class="logo-image-small">
           <img src="../Image Files/logo-small.png">
@@ -48,8 +76,8 @@
       <a class="simple-text logo-normal">
         Super Admin
       </a>
-    </div>
-    <div class="sidebar-wrapper">
+      </div>
+      <div class="sidebar-wrapper">
       <ul class="nav">
         <li class="">
             <a href="../Dashboard(super).php">
@@ -121,7 +149,7 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="./ChangeUsername.php">Change Username</a>
                   <a class="dropdown-item" href="./ChangePassword.php">Change Password</a>
-                  <a class="dropdown-item" href="../Login.php">Logout</a>
+                  <a class="dropdown-item" href="./truncateUser.php">Logout</a>
                 </div>
               </li>
               
@@ -139,7 +167,9 @@
                   <h5 class="card-title">Create Account</h5>
                 </div>
                 <div class="card-body">
-                <form id="form" action="./getData2.php" method="post">
+                <?php if ($msg != "") echo $msg . "<br><br>"; ?>
+                <form id="form" action="AdminCreation.php" method="post">
+
                     <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
@@ -252,8 +282,8 @@
                       if ($result->num_rows > 0) {
                       // output data of each row
                         while($row = $result->fetch_assoc()) {
-                          echo "<tr><td>" . $row["Firstname"]. "</td><td>" . $row["Lastname"] . "</td><td>" . $row["adminKey"] .
-                               "</td><td>". $row["Email"] . "</td><td>". $row["Contactnum"] . "</td><td>". $row["Username"] . "</td></tr>";
+                          echo "<tr><td>" . $row["firstname"]. "</td><td>" . $row["lastname"] . "</td><td>" . $row["adminkey"] .
+                               "</td><td>". $row["email"] . "</td><td>". $row["contactNum"] . "</td><td>". $row["username"] . "</td></tr>";
                         }
                       echo "</table>";
                       } else { echo "0 results"; }
