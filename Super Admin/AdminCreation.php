@@ -15,7 +15,8 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
   <!-- CSS Files -->
   <link href="../CSS Files/bootstrap.min.css" rel="stylesheet" />
-  <link href="../CSS Files/Staff_Dashboard.css?v=2.0.1" rel="stylesheet" />
+  <link href="../CSS Files/Staff_Dashboard.css" rel="stylesheet" />
+  <link href="../CSS Files/Table.css" rel="stylesheet" />
   <link href="../CSS Files/demo.css" rel="stylesheet" />
   <!--   Core JS Files   -->
   <script src="../JS Files/Errormsg.js"></script>
@@ -223,7 +224,7 @@
                   <div class="col-md-6">
                     <label></label>
                 </div>
-                  <div class="col-md-auto">
+                  <div class="col-md-auto"> 
                     <label>Search</label>
                 </div>
                   <div class="col-md-4">
@@ -233,7 +234,7 @@
                     <button><i class="fa fa-search"></i></button>
                   </div>
                 </div>
-                <div class="table-responsive">
+                <div class="table-display">
                   <table class="table">
                     <thead class=" text-primary">
                       <th>First Name</th>

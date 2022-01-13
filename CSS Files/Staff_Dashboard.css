@@ -2428,7 +2428,7 @@
     display: inline-block;
     font: normal normal normal 14px/1 'nucleo-icons';
     font-size: inherit;
-    speak: none;
+    /* speak: none; */
     text-transform: none;
     /* Better Font Rendering */
     -webkit-font-smoothing: antialiased;
@@ -2960,7 +2960,8 @@
       width: 100%; }
   
   .table-responsive {
-    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
     padding-bottom: 10px; }
   
   #tables .table-responsive {

@@ -160,13 +160,13 @@
                       <div class="col-md-3" style="margin-left: 24%;">
                         <div class="form-group">
                           <label for="fname">First Name</label>
-                          <input type="text" class="form-control" placeholder="First Name" value="<?php echo $firstname; ?>" id="firstname" required>
+                          <input type="text" class="form-control" placeholder="First Name" value="<?php echo $firstname; ?>" name="firstname" required>
                         </div>
                       </div>
                       <div class="col-md-3" style="margin-left: 2%;">
                         <div class="form-group">
                           <label for="lname">Last Name</label>
-                          <input type="text" class="form-control" placeholder="Last Name" value="<?php echo $lastname; ?>" id="lastname" required>
+                          <input type="text" class="form-control" placeholder="Last Name" value="<?php echo $lastname; ?>" name="lastname" required>
                         </div>
                       </div>
                     </div>
@@ -174,13 +174,13 @@
                       <div class="col-md-3" style="margin-left: 24%;">
                         <div class="form-group">
                           <label for="email">Email</label>
-                          <input type="text" class="form-control" placeholder="Email" value="<?php echo $email; ?>" id="email" required>
+                          <input type="text" class="form-control" placeholder="Email" value="<?php echo $email; ?>" name="email" required>
                         </div>
                       </div>
                       <div class="col-md-3" style="margin-left: 2%;">
                         <div class="form-group">
                           <label for="contactnum">Contact Number</label>
-                          <input type="text" class="form-control" placeholder="Contact Number" value="<?php echo $contactnum; ?>" id="Contact Number" required>
+                          <input type="text" class="form-control" placeholder="Contact Number" value="<?php echo $contactnum; ?>" name="Contact Number" required>
                         </div>
                       </div>
                     </div>

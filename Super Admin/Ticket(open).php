@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="../assets/img/BulSU.png">
+  <link rel="icon" type="image/png" href="../Image Files/Logo/BulSU.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     BulSU iTugon
@@ -136,7 +136,7 @@
             
           </div>
         <div class="container">
-          <div class="row">
+          <div class="row ticketRow">
           <div class="col-lg-4 col-md-4 col-sm-4  box-type" onclick="AssignedFunction();">
                 <div class="card-block">
                   <div class="row">

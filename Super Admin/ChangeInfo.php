@@ -13,19 +13,20 @@
 	
 	include 'connect.php';
 
-	$sql1 = "UPDATE `accountcreation` SET Firstname = '$firstname', Lastname = '$lastname', Email = '$email', Contactnum = '$contactnum'
-            WHERE Firstname = '$firstname' OR Lastname = '$lastname' OR Email = '$email' OR Contactnum = '$contactnum'";
-	$sql2 = "SELECT * FROM accountcreation WHERE Firstname = '$firstname' AND Lastname = '$last'";
-	mysqli_query($con,$sql1);
-	$result = mysqli_query($con, $sql2);
+	
+	$sql1 = "SELECT * FROM accountcreation WHERE Firstname = '$firstname' OR Lastname = '$last' OR Email = '$email' OR Contactnum = '$contactnum'";
+	
+	$result = mysqli_query($con, $sql1);
 
 	$count =  mysqli_num_rows ($result);
 	if($count == 1)
 	{
 		while ($row = mysqli_fetch_array($result)){
+			
 			if($row["Firstname"] == $firstname || $row["Lastname"] == $lastname || $row["Email"] == $email || $row["Contactnum"] == $contactnum){
-				// $_SESSION["userL"] = $user;
-				// $_SESSION["passwordL"] = $pass;
+				$sql2 = "UPDATE `accountcreation` SET Firstname = '$firstname', Lastname = '$lastname', Email = '$email', Contactnum = '$contactnum'
+           				 WHERE Firstname = '$firstname' OR Lastname = '$lastname' OR Email = '$email' OR Contactnum = '$contactnum'";
+				mysqli_query($con,$sql2);			
 				header("Location: ../Dashboard(super).php");
 			}
 			else{

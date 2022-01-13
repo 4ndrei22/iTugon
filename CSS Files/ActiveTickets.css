@@ -1,11 +1,16 @@
+.ticketRow{
+	position: static;
+    margin-right: -1px;
+    padding-left: -100%;
+}
+
 .box-type{
 	background-color: rgba(255, 255, 255, 0.8);
 	border: 1px solid black;
-	width: 50%;
-	height: 40%;
 	margin-top:5px;
-	/* margin-left: 1px; */
+	margin-left: 1px;
   }
+
 .box-img{
 	/* padding-left: 7px; */
 	padding-top: 7px;

@@ -3189,7 +3189,7 @@
     display: inline-block;
     font: normal normal normal 14px/1 nucleo-icons;
     font-size: inherit;
-    speak: none;
+    /* speak: none; */
     text-transform: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -3706,7 +3706,8 @@
     width: 100%;
   }
   .table-responsive {
-    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
     padding-bottom: 10px;
   }
   #tables .table-responsive {
@@ -4416,7 +4417,7 @@
   }
   .footer nav {
     display: inline-block;
-    float: left;
+    /* float: left; */
     padding-left: 0;
   }
   .footer ul {
@@ -4582,7 +4583,7 @@
     text-transform: uppercase;
   }
   .fixed-plugin .adjustments-line p {
-    float: left;
+    /* float: left; */
     display: inline-block;
     margin-bottom: 0;
     font-size: 1em;
