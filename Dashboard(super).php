@@ -17,11 +17,11 @@
   <link href="./CSS Files/Staff_Dashboard.css" rel="stylesheet" />
   <link href="./CSS Files/demo.css" rel="stylesheet" />
   <!-- JS Files -->
-  <script src="./JS Files/ActiveTicket(onClick).js"></script>
-  <script src="./JS Files/Reopened(onClick).js"></script>
-  <script src="./JS Files/Pending(onClick).js"></script>
-  <script src="./JS Files/Resolved(onClick).js"></script>
-  <script src="./JS Files/Closed(onClick).js"></script>
+  <script src="/JS Files/ActiveTicket(onClick).js"></script>
+  <script src="/JS Files/Reopened(onClick).js"></script>
+  <script src="/JS Files/Pending(onClick).js"></script>
+  <script src="/JS Files/Resolved(onClick).js"></script>
+  <script src="/JS Files/Closed(onClick).js"></script>
   <script src="./JS Files/core/jquery.min.js"></script>
   <script src="./JS Files/core/popper.min.js"></script>
   <script src="./JS Files/core/bootstrap.min.js"></script>
@@ -137,7 +137,7 @@
         <!-- Tickets -->
         <div class="row" id="tickets" >
           <!-- Open ticket -->
-		      <div class=" col"id="ActiveTicket" onclick="ActiveFunction();">
+		      <div class=" col"id="OpenTicket" onclick="adminActiveFunction();">
             <div class="card card-stats" style="background-color:#5cb85c;">
               <div class="card-body ">
                 <div class="row">
@@ -164,7 +164,7 @@
             </div>
           </div>
           <!-- Pending ticket -->
-          <div class=" col"id="ActiveTicket" onclick="pendingFunction();">
+          <div class=" col"id="PendingTicket" onclick="adminpendingFunction();">
             <div class="card card-stats" style="background-color:#d9534f;">
               <div class="card-body ">
                 <div class="row">
@@ -191,7 +191,7 @@
             </div>
           </div>
           <!-- Reopen ticket -->
-          <div class=" col"id="ActiveTicket" onclick="ReopenFunction();">
+          <div class=" col"id="ReopenedTicket" onclick="adminReopenFunction();">
             <div class="card card-stats" style="background-color:#f0ad4e;">
               <div class="card-body ">
                 <div class="row">
@@ -218,7 +218,7 @@
             </div>
           </div>
           <!-- Resolved ticket -->
-          <div class="col "id="ActiveTicket" onclick="resolvedFunction();">
+          <div class="col "id="ResolvedTicket" onclick="adminresolvedFunction();">
             <div class="card card-stats" style="background-color:#5bc0de;">
               <div class="card-body ">
                 <div class="row">
@@ -245,7 +245,7 @@
             </div>
           </div>
           <!-- Closed ticket -->
-          <div class=" col"id="ActiveTicket" onclick="closedFunction();">
+          <div class=" col"id="ClosedTicket" onclick="adminclosedFunction();">
             <div class="card card-stats" style="background-color:#292b2c;">
               <div class="card-body ">
                 <div class="row">
