@@ -12,8 +12,9 @@
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <!-- CSS Files -->
-  <link href="./CSS Files/bootstrap.min.css" rel="stylesheet" />
   <link href="./CSS Files/Staff_Dashboard.css" rel="stylesheet" />
   <link href="./CSS Files/demo.css" rel="stylesheet" />
   <!-- JS Files -->
@@ -203,7 +204,7 @@
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category text-white">Reopened</p>
-                      <p class="card-title text-white">25<p>
+                      <p class="card-title text-white">18<p>
                     </div>
                   </div>
                 </div>
@@ -314,43 +315,43 @@
             </div>
           </div>
           <div class="col-md-3">
-            <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h5 class="card-title">User Satisfaction</h5>
+            <div class="card shadow mb-2">
+              <div class="card-header py-1">
+                <h5 class="card-title">User Satisfaction</h5>
+              </div>
+              <div class="card-body">
+                  <h4 id="satisfy" class="small font-weight-bold">Very Satisfied <span
+                          class="float-right">40%</span></h4>
+                  <div class="progress mb-4">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 40%"
+                          aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <h4 id="satisfy" class="small font-weight-bold">Satisfied <span
+                          class="float-right">30%</span></h4>
+                  <div class="progress mb-4">
+                      <div class="progress-bar bg-info" role="progressbar" style="width: 30%"
+                          aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <h4 id="satisfy" class="small font-weight-bold">Good <span
+                          class="float-right">15%</span></h4>
+                  <div class="progress mb-4">
+                      <div class="progress-bar" role="progressbar" style="width: 15%"
+                          aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <h4 id="satisfy" class="small font-weight-bold">Unsatisfied <span
+                          class="float-right">10%</span></h4>
+                  <div class="progress mb-4">
+                      <div class="progress-bar bg-warning" role="progressbar" style="width: 10%"
+                          aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <h4 id="satisfy" class="small font-weight-bold">Very Unsatisfied <span
+                          class="float-right">5%</span></h4>
+                  <div class="progress">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 5%"
+                          aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+              </div>
             </div>
-            <div class="card-body">
-                <h4 id="satisfy" class="small font-weight-bold">Very Satisfied <span
-                        class="float-right">40%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 40%"
-                        aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <h4 id="satisfy" class="small font-weight-bold">Satisfied <span
-                        class="float-right">30%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: 30%"
-                        aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <h4 id="satisfy" class="small font-weight-bold">Good<span
-                        class="float-right">15%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar" role="progressbar" style="width: 15%"
-                        aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <h4 id="satisfy" class="small font-weight-bold">Unsatisfied <span
-                        class="float-right">10%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 10%"
-                        aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <h4 id="satisfy" class="small font-weight-bold">Very Unsatisfied<span
-                        class="float-right">5%</span></h4>
-                <div class="progress">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 5%"
-                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-        </div>
           </div>
           
         </div>
@@ -372,22 +373,21 @@
                       <th>Ticket Closed</th>
                     </thead>
                     <tbody>
-                    <?php
-                      include "connect.php";
-                      $sql = "SELECT * FROM staff_tickets WHERE accessLVL ='Staff'";
-                      $result = $con->query($sql);
-                      if ($result->num_rows > 0) {
-                      // output data of each row
-                        while($row = $result->fetch_assoc()) {
-                          echo "<tr><td>" . $row["Staff_Name"]. "</td><td>" . $row["TicketAssigned"] . "</td><td>" . $row["TicketResolved"] .
-                              "</td><td>" . $row["TicketClosed"] ."</td></tr>";
-                        }
-                      echo "</table>";
-                      } else { echo "0 results"; }
-                      $con->close();
-                      ?>
+                      <?php
+                        include "connect.php";
+                        $sql = "SELECT * FROM staff_tickets WHERE accessLVL ='Staff'";
+                        $result = $con->query($sql);
+                        if ($result->num_rows > 0) {
+                        // output data of each row
+                          while($row = $result->fetch_assoc()) {
+                            echo "<tr><td>" . $row["Staff_Name"]. "</td><td>" . $row["TicketAssigned"] . "</td><td>" . $row["TicketResolved"] .
+                                "</td><td>" . $row["TicketClosed"] ."</td></tr>";
+                          }
+                        echo "</table>";
+                        } else { echo "0 results"; }
+                        $con->close();
+                        ?>
                       
-                    </tbody>
                     </tbody>
                   </table>
                 </div>
@@ -430,10 +430,10 @@
     var xValues = ["Reopened", "Pending", "Resolved", "Closed"];
     var yValues = [3, 2, 15, 20];
     var barColors = [
-      "#0275d8",
       "#f0ad4e",
       "#d9534f",
       "#5bc0de",
+      "#292b2c",
     ];
     
     new Chart("piechart", {
@@ -444,9 +444,7 @@
       backgroundColor: barColors,
       data: yValues,
     hoverOffset: 2
-    }]
-  },
-  options: {
+    }]},options: {
             responsive: true,
             legend: {
                 position: 'right',

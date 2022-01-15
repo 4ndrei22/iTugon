@@ -12,18 +12,12 @@
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-  <!-- Autocomplete -->
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <!-- CSS Files -->
   <link href="../CSS Files/bootstrap.min.css" rel="stylesheet" />
   <link href="../CSS Files/Assigned.css" rel="stylesheet" />
   <link href="../CSS Files/demo.css" rel="stylesheet" />
-  <!-- JS FIles -->
-  <script src="./JS Files/goto msg(staff)/msg(pending).js"></script>
-  <script src="./JS Files/goto msg(staff)/msg(reopen).js"></script>
-  <script src="./JS Files/goto msg(staff)/msg(resolved).js"></script>
   <!--   Core JS Files   -->
   <script src="../JS Files/core/jquery.min.js"></script>
   <script src="../JS Files/core/popper.min.js"></script>
@@ -33,8 +27,6 @@
   <script src="../JS Files/plugins/bootstrap-notify.js"></script>
     <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../JS Files/Staff_Dashboard.min.js?v=2.0.1" type="text/javascript"></script>
-    <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-  <script src="../CSS Files/demo.css"></script>
 </head>
 
 <body class="">
@@ -170,48 +162,48 @@
                                 <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_03.jpg" alt="">
                               <div>
                                 <h2>Prénom Nom
-                          <span class="status"></span>
-                          #0003
-                        </h2>
+                                  <span class="status"></span>
+                                  #0003
+                                  </h2>
                                 <h3>
                                     <span class="status green"></span>
                                     Assigned &nbsp; &nbsp;
                                     <span class="status green"></span>
                                     Low
-                                  </h3>
+                                </h3>
                               </div>
                             </li>
                             <li>
                               <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_04.jpg" alt="">
                               <div>
                                 <h2>Prénom Nom
-                          <span class="status"></span>
-                          #0004
-                        </h2>
+                                  <span class="status"></span>
+                                  #0004
+                                </h2>
                                 <h3>
                                     <span class="status green"></span>
                                     Assigned &nbsp; &nbsp;
                                     <span class="status green"></span>
                                     Low
-                                  </h3>
+                                </h3>
                               </div>
                             </li>
                             <li>
                               <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_05.jpg" alt="">
                               <div>
                                 <h2>Prénom Nom
-                          <span class="status"></span>
-                          #0005
-                        </h2>
+                                  <span class="status"></span>
+                                  #0005
+                                </h2>
                                 <h3>
                                     <span class="status green"></span>
                                     Assigned &nbsp; &nbsp;
                                     <span class="status green"></span>
                                     Low
-                                  </h3>
+                                </h3>
                               </div>
                             </li>
-                          </ul>
+                        </ul>
                     </div>
                 </div>
               </div>

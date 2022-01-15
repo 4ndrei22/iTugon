@@ -12,15 +12,12 @@
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-  <!-- Autocomplete -->
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="../assets/js/Autocomplete.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <!-- CSS Files -->
-  <link href="../CSS Files/bootstrap.min.css" rel="stylesheet" />
-  <link href="../CSS Files/Assigned.css" rel="stylesheet" />
+  <link href="../CSS Files/Staff_Dashboard.css" rel="stylesheet" />
   <link href="../CSS Files/demo.css" rel="stylesheet" />
+  <link href="../CSS Files/AssignedTicket.css" rel="stylesheet">
   <!-- JS FIles -->
   <script src="../JS Files/OnCLick/Assigned(onClick).js"></script>
   <script src="../JS Files/OnCLick/ActiveTicket(onClick).js"></script>
@@ -29,13 +26,10 @@
   <script src="../JS Files/core/popper.min.js"></script>
   <script src="../JS Files/core/bootstrap.min.js"></script>
   <script src="../JS Files/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <!-- Chart JS -->
-  <script src="../assets/js/plugins/chartjs.min.js"></script>
   <!--  Notifications Plugin    -->
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script><!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-  <script src="../assets/demo/demo.js"></script>
+  <script src="../assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
 </head>
 
 <body class="">
@@ -324,7 +318,7 @@
               </div>
             </div>
           </div>
-          <!-- <div class="col-lg-3 col-md-3 col-sm-9" id="ThirdCol1">
+          <div class="col-lg-3 col-md-3 col-sm-9" id="ThirdCol1">
             <div class="card card-stats">
               <div class="card-body ">
                 <div class="row">
@@ -397,7 +391,7 @@
                 </div>
               </div>
             </div>
-          </div> -->
+          </div>
         </div>    
       </div>
     </div>

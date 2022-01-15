@@ -1,8 +1,3 @@
-.ticketRow{
-	position: static;
-    margin-right: -1px;
-    padding-left: -100%;
-}
 
 .box-type{
 	background-color: rgba(255, 255, 255, 0.8);
@@ -21,6 +16,7 @@
 	font-size:15px;
 	text-align: left;
 }
+
 .status{
 	width:8px;
 	height:8px;
@@ -46,7 +42,7 @@
 	background-color:#ffe75d;
 }
 .blk{
-	background-color:#0000;
+	background-color:rgba(0, 0, 0, 0);
 }
 .Header{
 	margin-top:7%;

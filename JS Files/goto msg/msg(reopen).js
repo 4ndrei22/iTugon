@@ -1,3 +1,3 @@
-function msgOpenFunction() {
+function msgReopenFunction() {
     location.replace("Message(reopen).html");
   }

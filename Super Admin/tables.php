@@ -130,20 +130,20 @@
                       <th>Ticket Closed</th>
                     </thead>
                     <tbody>
-                    <?php
-                      include "connect.php";
-                      $sql = "SELECT * FROM staff_tickets WHERE accessLVL ='Staff'";
-                      $result = $con->query($sql);
-                      if ($result->num_rows > 0) {
-                      // output data of each row
-                        while($row = $result->fetch_assoc()) {
-                          echo "<tr><td>" . $row["Staff_Name"]. "</td><td>" . $row["TicketAssigned"] . "</td><td>" . $row["TicketResolved"] .
-                              "</td><td>" . $row["TicketClosed"] ."</td></tr>";
-                        }
-                      echo "</table>";
-                      } else { echo "0 results"; }
-                      $con->close();
-                      ?>
+                      <?php
+                        include "connect.php";
+                        $sql = "SELECT * FROM staff_tickets WHERE accessLVL ='Staff'";
+                        $result = $con->query($sql);
+                        if ($result->num_rows > 0) {
+                        // output data of each row
+                          while($row = $result->fetch_assoc()) {
+                            echo "<tr><td>" . $row["Staff_Name"]. "</td><td>" . $row["TicketAssigned"] . "</td><td>" . $row["TicketResolved"] .
+                                "</td><td>" . $row["TicketClosed"] ."</td></tr>";
+                          }
+                        echo "</table>";
+                        } else { echo "0 results"; }
+                        $con->close();
+                        ?>
                     </tbody>
                   </table>
                 </div>

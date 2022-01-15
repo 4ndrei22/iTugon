@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/BulSU.png">
+    <link rel="icon" type="image/png" href="../Image Files/Logo/BulSU.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
       BulSU iTugon
@@ -24,10 +24,6 @@
     <script src="../JS Files/core/popper.min.js"></script>
     <script src="../JS Files/core/bootstrap.min.js"></script>
     <script src="../JS Files/plugins/perfect-scrollbar.jquery.min.js"></script>
-    <!--  Google Maps Plugin    -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-    <!-- Chart JS -->
-    <script src="../JS Files/plugins/chartjs.min.js"></script>
     <!--  Notifications Plugin    -->
     <script src="../JS Files/plugins/bootstrap-notify.js"></script>
     <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
@@ -126,554 +122,529 @@
             </div>
           </div>
       </nav>
-        <div class="Header">
-          <h2>
-            Reopened Tickets
-          </h2>
-          <div class="inner-addon right-addon">
-            <i class="fa fa-search"></i>
-            <input type="text" class="form-control" placeholder="Search..." />
-        </div>
+        
+        <div class="content">
+          <div class="Header pb-4">
+            <h2>
+              Reopened Tickets
+            </h2>
+            <div class="inner-addon right-addon">
+              <i class="fa fa-search"></i>
+              <input type="text" class="form-control" placeholder="Search..." />
+            </div>
           
-        </div>
-        <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type" onclick="msgOpenFunction();">
-                <div class="card-block">
-                  <div class="row">
-                    <div class="col-md-auto">
-                      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                    </div>
-                    <div class="col-lg-auto col-md-auto col-sm-auto">
-                      <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                      <h6 class="box-ticket">#00025</h6>
-                      <h3 class="box-status"><span class="status green"></span>
-                        Reopened &nbsp; &nbsp;
-                        <span class="status red"></span>
-                        Urgent</h3>
-                    </div>
-                  </div>
-              </div>
           </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-                <div class="card-block">
-                  <div class="row">
-                    <div class="col-md-auto">
-                      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                    </div>
-                    <div class="col-lg-auto col-md-auto col-sm-auto">
-                      <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                      <h6 class="box-ticket">#00024</h6>
-                      <h3 class="box-status"><span class="status green"></span>
-                        Reopened &nbsp; &nbsp;
-                        <span class="status orange"></span>
-                        high</h3>
+          <div class="row">
+              <div class="col-lg-3 col-md-3 col-sm-3"  onclick="msgReopenFunction();">
+                <div class="card card-stats" >
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-auto" >
+                        <div class="icon-small text-center icon-warning">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                        </div>
+                      </div>
+                      <div class="col-md-auto">
+                        <div class="numbers">
+                          <!-- <p class="card-category text-white">Open</p>
+                          <p class="card-title text-white">54<p> -->
+                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
+                          <h6 class="box-ticket">#00018</h6>
+                          <h3 class="box-status"><span class="status yellow"></span>
+                            Reopened &nbsp; &nbsp;
+                            <span class="status green"></span>
+                            Normal</h3>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  
-                  
-                </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-                <div class="card-block">
-                  <div class="row">
-                    <div class="col-md-auto">
-                      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                    </div>
-                    <div class="col-lg-auto col-md-auto col-sm-auto">
-                      <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                      <h6 class="box-ticket">#00023</h6>
-                      <h3 class="box-status"><span class="status green"></span>
-                        Reopened &nbsp; &nbsp;
-                        <span class="status green"></span>
-                        Normal</h3>
-                    </div>
-                  </div>
-                  
-                  
-                </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-                <div class="card-block">
-                  <div class="row">
-                    <div class="col-md-auto">
-                      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                    </div>
-                    <div class="col-lg-auto col-md-auto col-sm-auto">
-                      <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                      <h6 class="box-ticket">#00022</h6>
-                      <h3 class="box-status"><span class="status green"></span>
-                        Reopened &nbsp; &nbsp;
-                        <span class="status green"></span>
-                        Normal</h3>
-                    </div>
-                  </div>
-                  
-                  
-                </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-              <div class="card-block">
-                <div class="row">
-                  <div class="col-md-auto">
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                  </div>
-                  <div class="col-lg-auto col-md-auto col-sm-auto">
-                    <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                    <h6 class="box-ticket">#00021</h6>
-                    <h3 class="box-status"><span class="status green"></span>
-                      Reopened &nbsp; &nbsp;
-                      <span class="status blue"></span>
-                      Low</h3>
+                  <div class="card-footer ">
+                    <hr>
                   </div>
                 </div>
-            </div>
-          </div>
-          <!-- 2nd row -->
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-            <div class="card-block">
-              <div class="row">
-                <div class="col-md-auto">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card card-stats" >
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-auto" >
+                        <div class="icon-small text-center icon-warning">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                        </div>
+                      </div>
+                      <div class="col-md-auto">
+                        <div class="numbers">
+                          <!-- <p class="card-category text-white">Open</p>
+                          <p class="card-title text-white">54<p> -->
+                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
+                          <h6 class="box-ticket">#00017</h6>
+                          <h3 class="box-status"><span class="status yellow"></span>
+                            Reopened &nbsp; &nbsp;
+                            <span class="status green"></span>
+                            Normal</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                  </div>
                 </div>
-                <div class="col-lg-auto col-md-auto col-sm-auto">
-                  <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                  <h6 class="box-ticket">#00020</h6>
-                  <h3 class="box-status"><span class="status green"></span>
-                    Reopened &nbsp; &nbsp;
-                    <span class="status red"></span>
-                    Urgent</h3>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card card-stats" >
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-auto" >
+                        <div class="icon-small text-center icon-warning">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                        </div>
+                      </div>
+                      <div class="col-md-auto">
+                        <div class="numbers">
+                          <!-- <p class="card-category text-white">Open</p>
+                          <p class="card-title text-white">54<p> -->
+                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
+                          <h6 class="box-ticket">#00016</h6>
+                          <h3 class="box-status"><span class="status yellow"></span>
+                            Reopened &nbsp; &nbsp;
+                            <span class="status red"></span>
+                            Urgent</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <!-- second row -->
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card card-stats" >
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-auto" >
+                        <div class="icon-small text-center icon-warning">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                        </div>
+                      </div>
+                      <div class="col-md-auto">
+                        <div class="numbers">
+                          <!-- <p class="card-category text-white">Open</p>
+                          <p class="card-title text-white">54<p> -->
+                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
+                          <h6 class="box-ticket">#00015</h6>
+                          <h3 class="box-status"><span class="status yellow"></span>
+                            Reopened &nbsp; &nbsp;
+                            <span class="status blue"></span>
+                            Low</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card card-stats" >
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-auto" >
+                        <div class="icon-small text-center icon-warning">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                        </div>
+                      </div>
+                      <div class="col-md-auto">
+                        <div class="numbers">
+                          <!-- <p class="card-category text-white">Open</p>
+                          <p class="card-title text-white">54<p> -->
+                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
+                          <h6 class="box-ticket">#000014</h6>
+                          <h3 class="box-status"><span class="status yellow"></span>
+                            Reopened &nbsp; &nbsp;
+                            <span class="status blue"></span>
+                            Low</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card card-stats" >
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-auto" >
+                        <div class="icon-small text-center icon-warning">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                        </div>
+                      </div>
+                      <div class="col-md-auto">
+                        <div class="numbers">
+                          <!-- <p class="card-category text-white">Open</p>
+                          <p class="card-title text-white">54<p> -->
+                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
+                          <h6 class="box-ticket">#00013</h6>
+                          <h3 class="box-status"><span class="status yellow"></span>
+                            Reopened &nbsp; &nbsp;
+                            <span class="status green"></span>
+                            Normal</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card card-stats" >
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-auto" >
+                        <div class="icon-small text-center icon-warning">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                        </div>
+                      </div>
+                      <div class="col-md-auto">
+                        <div class="numbers">
+                          <!-- <p class="card-category text-white">Open</p>
+                          <p class="card-title text-white">54<p> -->
+                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
+                          <h6 class="box-ticket">#00012</h6>
+                          <h3 class="box-status"><span class="status yellow"></span>
+                            Reopened &nbsp; &nbsp;
+                            <span class="status green"></span>
+                            Normal</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card card-stats" >
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-auto" >
+                        <div class="icon-small text-center icon-warning">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                        </div>
+                      </div>
+                      <div class="col-md-auto">
+                        <div class="numbers">
+                          <!-- <p class="card-category text-white">Open</p>
+                          <p class="card-title text-white">54<p> -->
+                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
+                          <h6 class="box-ticket">#00011</h6>
+                          <h3 class="box-status"><span class="status yellow"></span>
+                            Reopened &nbsp; &nbsp;
+                            <span class="status red"></span>
+                            Urgent</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <!-- third row -->
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card card-stats" >
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-auto" >
+                        <div class="icon-small text-center icon-warning">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                        </div>
+                      </div>
+                      <div class="col-md-auto">
+                        <div class="numbers">
+                          <!-- <p class="card-category text-white">Open</p>
+                          <p class="card-title text-white">54<p> -->
+                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
+                          <h6 class="box-ticket">#00010</h6>
+                          <h3 class="box-status"><span class="status yellow"></span>
+                            Reopened &nbsp; &nbsp;
+                            <span class="status blue"></span>
+                            Low</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card card-stats" >
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-auto" >
+                        <div class="icon-small text-center icon-warning">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                        </div>
+                      </div>
+                      <div class="col-md-auto">
+                        <div class="numbers">
+                          <!-- <p class="card-category text-white">Open</p>
+                          <p class="card-title text-white">54<p> -->
+                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
+                          <h6 class="box-ticket">#00009</h6>
+                          <h3 class="box-status"><span class="status yellow"></span>
+                            Reopened &nbsp; &nbsp;
+                            <span class="status blue"></span>
+                            Low</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card card-stats" >
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-auto" >
+                        <div class="icon-small text-center icon-warning">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                        </div>
+                      </div>
+                      <div class="col-md-auto">
+                        <div class="numbers">
+                          <!-- <p class="card-category text-white">Open</p>
+                          <p class="card-title text-white">54<p> -->
+                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
+                          <h6 class="box-ticket">#00008</h6>
+                          <h3 class="box-status"><span class="status yellow"></span>
+                            Reopened &nbsp; &nbsp;
+                            <span class="status green"></span>
+                            Normal</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card card-stats" >
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-auto" >
+                        <div class="icon-small text-center icon-warning">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                        </div>
+                      </div>
+                      <div class="col-md-auto">
+                        <div class="numbers">
+                          <!-- <p class="card-category text-white">Open</p>
+                          <p class="card-title text-white">54<p> -->
+                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
+                          <h6 class="box-ticket">#00007</h6>
+                          <h3 class="box-status"><span class="status yellow"></span>
+                            Reopened &nbsp; &nbsp;
+                            <span class="status green"></span>
+                            Normal</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card card-stats" >
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-auto" >
+                        <div class="icon-small text-center icon-warning">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                        </div>
+                      </div>
+                      <div class="col-md-auto">
+                        <div class="numbers">
+                          <!-- <p class="card-category text-white">Open</p>
+                          <p class="card-title text-white">54<p> -->
+                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
+                          <h6 class="box-ticket">#00006</h6>
+                          <h3 class="box-status"><span class="status yellow"></span>
+                            Reopened &nbsp; &nbsp;
+                            <span class="status green"></span>
+                            Normal</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <!-- forth row -->
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card card-stats" >
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-auto" >
+                        <div class="icon-small text-center icon-warning">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                        </div>
+                      </div>
+                      <div class="col-md-auto">
+                        <div class="numbers">
+                          <!-- <p class="card-category text-white">Open</p>
+                          <p class="card-title text-white">54<p> -->
+                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
+                          <h6 class="box-ticket">#00005</h6>
+                          <h3 class="box-status"><span class="status yellow"></span>
+                            Reopened &nbsp; &nbsp;
+                            <span class="status green"></span>
+                            Normal</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card card-stats" >
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-auto" >
+                        <div class="icon-small text-center icon-warning">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                        </div>
+                      </div>
+                      <div class="col-md-auto">
+                        <div class="numbers">
+                          <!-- <p class="card-category text-white">Open</p>
+                          <p class="card-title text-white">54<p> -->
+                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
+                          <h6 class="box-ticket">#00004</h6>
+                          <h3 class="box-status"><span class="status yellow"></span>
+                            Reopened &nbsp; &nbsp;
+                            <span class="status green"></span>
+                            Normal</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card card-stats" >
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-auto" >
+                        <div class="icon-small text-center icon-warning">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                        </div>
+                      </div>
+                      <div class="col-md-auto">
+                        <div class="numbers">
+                          <!-- <p class="card-category text-white">Open</p>
+                          <p class="card-title text-white">54<p> -->
+                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
+                          <h6 class="box-ticket">#00003</h6>
+                          <h3 class="box-status"><span class="status yellow"></span>
+                            Reopened &nbsp; &nbsp;
+                            <span class="status green"></span>
+                            Normal</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card card-stats" >
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-auto" >
+                        <div class="icon-small text-center icon-warning">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                        </div>
+                      </div>
+                      <div class="col-md-auto">
+                        <div class="numbers">
+                          <!-- <p class="card-category text-white">Open</p>
+                          <p class="card-title text-white">54<p> -->
+                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
+                          <h6 class="box-ticket">#00002</h6>
+                          <h3 class="box-status"><span class="status yellow"></span>
+                            Reopened &nbsp; &nbsp;
+                            <span class="status green"></span>
+                            Normal</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card card-stats" >
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-md-auto" >
+                        <div class="icon-small text-center icon-warning">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                        </div>
+                      </div>
+                      <div class="col-md-auto">
+                        <div class="numbers">
+                          <!-- <p class="card-category text-white">Open</p>
+                          <p class="card-title text-white">54<p> -->
+                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
+                          <h6 class="box-ticket">#00001</h6>
+                          <h3 class="box-status"><span class="status yellow"></span>
+                            Reopened &nbsp; &nbsp;
+                            <span class="status green"></span>
+                            Normal</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <hr>
+                  </div>
                 </div>
               </div>
           </div>
-            </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-            <div class="card-block">
-              <div class="row">
-                <div class="col-md-auto">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                </div>
-                <div class="col-lg-auto col-md-auto col-sm-auto">
-                  <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                  <h6 class="box-ticket">#00019</h6>
-                  <h3 class="box-status"><span class="status green"></span>
-                    Reopened &nbsp; &nbsp;
-                    <span class="status orange"></span>
-                    high</h3>
-                </div>
-              </div>
-              
-              
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-            <div class="card-block">
-              <div class="row">
-                <div class="col-md-auto">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                </div>
-                <div class="col-lg-auto col-md-auto col-sm-auto">
-                  <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                  <h6 class="box-ticket">#00018</h6>
-                  <h3 class="box-status"><span class="status green"></span>
-                    Reopened &nbsp; &nbsp;
-                    <span class="status green"></span>
-                    Normal</h3>
-                </div>
-              </div>
-              
-              
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-            <div class="card-block">
-              <div class="row">
-                <div class="col-md-auto">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                </div>
-                <div class="col-lg-auto col-md-auto col-sm-auto">
-                  <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                  <h6 class="box-ticket">#00017</h6>
-                  <h3 class="box-status"><span class="status green"></span>
-                    Reopened &nbsp; &nbsp;
-                    <span class="status green"></span>
-                    Normal</h3>
-                </div>
-              </div>
-              
-              
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-          <div class="card-block">
-            <div class="row">
-              <div class="col-md-auto">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-              </div>
-              <div class="col-lg-auto col-md-auto col-sm-auto">
-                <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                <h6 class="box-ticket">#00016</h6>
-                <h3 class="box-status"><span class="status green"></span>
-                  Reopened &nbsp; &nbsp;
-                  <span class="status blue"></span>
-                  Low</h3>
-              </div>
-            </div>
-        </div>
-          </div>
-          <!-- 3rd row -->
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-            <div class="card-block">
-              <div class="row">
-                <div class="col-md-auto">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                </div>
-                <div class="col-lg-auto col-md-auto col-sm-auto">
-                  <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                  <h6 class="box-ticket">#00015</h6>
-                  <h3 class="box-status"><span class="status green"></span>
-                    Reopened &nbsp; &nbsp;
-                    <span class="status red"></span>
-                    Urgent</h3>
-                </div>
-              </div>
-          </div>
-            </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-            <div class="card-block">
-              <div class="row">
-                <div class="col-md-auto">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                </div>
-                <div class="col-lg-auto col-md-auto col-sm-auto">
-                  <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                  <h6 class="box-ticket">#00014</h6>
-                  <h3 class="box-status"><span class="status green"></span>
-                    Reopened &nbsp; &nbsp;
-                    <span class="status orange"></span>
-                    high</h3>
-                </div>
-              </div>
-              
-              
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-            <div class="card-block">
-              <div class="row">
-                <div class="col-md-auto">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                </div>
-                <div class="col-lg-auto col-md-auto col-sm-auto">
-                  <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                  <h6 class="box-ticket">#00013</h6>
-                  <h3 class="box-status"><span class="status green"></span>
-                    Reopened &nbsp; &nbsp;
-                    <span class="status green"></span>
-                    Normal</h3>
-                </div>
-              </div>
-              
-              
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-            <div class="card-block">
-              <div class="row">
-                <div class="col-md-auto">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                </div>
-                <div class="col-lg-auto col-md-auto col-sm-auto">
-                  <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                  <h6 class="box-ticket">#00012</h6>
-                  <h3 class="box-status"><span class="status green"></span>
-                    Reopened &nbsp; &nbsp;
-                    <span class="status green"></span>
-                    Normal</h3>
-                </div>
-              </div>
-              
-              
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-          <div class="card-block">
-            <div class="row">
-              <div class="col-md-auto">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-              </div>
-              <div class="col-lg-auto col-md-auto col-sm-auto">
-                <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                <h6 class="box-ticket">#00011</h6>
-                <h3 class="box-status"><span class="status green"></span>
-                  Reopened &nbsp; &nbsp;
-                  <span class="status blue"></span>
-                  Low</h3>
-              </div>
-            </div>
-        </div>
-          </div>
-          <!-- 4th row -->
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-            <div class="card-block">
-              <div class="row">
-                <div class="col-md-auto">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                </div>
-                <div class="col-lg-auto col-md-auto col-sm-auto">
-                  <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                  <h6 class="box-ticket">#00010</h6>
-                  <h3 class="box-status"><span class="status green"></span>
-                    Reopened &nbsp; &nbsp;
-                    <span class="status red"></span>
-                    Urgent</h3>
-                </div>
-              </div>
-          </div>
-            </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-            <div class="card-block">
-              <div class="row">
-                <div class="col-md-auto">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                </div>
-                <div class="col-lg-auto col-md-auto col-sm-auto">
-                  <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                  <h6 class="box-ticket">#00009</h6>
-                  <h3 class="box-status"><span class="status green"></span>
-                    Reopened &nbsp; &nbsp;
-                    <span class="status orange"></span>
-                    high</h3>
-                </div>
-              </div>
-              
-              
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-            <div class="card-block">
-              <div class="row">
-                <div class="col-md-auto">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                </div>
-                <div class="col-lg-auto col-md-auto col-sm-auto">
-                  <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                  <h6 class="box-ticket">#00008</h6>
-                  <h3 class="box-status"><span class="status green"></span>
-                    Reopened &nbsp; &nbsp;
-                    <span class="status green"></span>
-                    Normal</h3>
-                </div>
-              </div>
-              
-              
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-            <div class="card-block">
-              <div class="row">
-                <div class="col-md-auto">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                </div>
-                <div class="col-lg-auto col-md-auto col-sm-auto">
-                  <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                  <h6 class="box-ticket">#00007</h6>
-                  <h3 class="box-status"><span class="status green"></span>
-                    Reopened &nbsp; &nbsp;
-                    <span class="status green"></span>
-                    Normal</h3>
-                </div>
-              </div>
-              
-              
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-          <div class="card-block">
-            <div class="row">
-              <div class="col-md-auto">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-              </div>
-              <div class="col-lg-auto col-md-auto col-sm-auto">
-                <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                <h6 class="box-ticket">#00006</h6>
-                <h3 class="box-status"><span class="status green"></span>
-                  Reopened &nbsp; &nbsp;
-                  <span class="status blue"></span>
-                  Low</h3>
-              </div>
-            </div>
-        </div>
-          </div>
-          <!-- 5th row -->
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-            <div class="card-block">
-              <div class="row">
-                <div class="col-md-auto">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                </div>
-                <div class="col-lg-auto col-md-auto col-sm-auto">
-                  <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                  <h6 class="box-ticket">#00005</h6>
-                  <h3 class="box-status"><span class="status green"></span>
-                    Reopened &nbsp; &nbsp;
-                    <span class="status red"></span>
-                    Urgent</h3>
-                </div>
-              </div>
-          </div>
-            </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-            <div class="card-block">
-              <div class="row">
-                <div class="col-md-auto">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                </div>
-                <div class="col-lg-auto col-md-auto col-sm-auto">
-                  <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                  <h6 class="box-ticket">#00004</h6>
-                  <h3 class="box-status"><span class="status green"></span>
-                    Reopened &nbsp; &nbsp;
-                    <span class="status orange"></span>
-                    high</h3>
-                </div>
-              </div>
-              
-              
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-            <div class="card-block">
-              <div class="row">
-                <div class="col-md-auto">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                </div>
-                <div class="col-lg-auto col-md-auto col-sm-auto">
-                  <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                  <h6 class="box-ticket">#00003</h6>
-                  <h3 class="box-status"><span class="status green"></span>
-                    Reopened &nbsp; &nbsp;
-                    <span class="status green"></span>
-                    Normal</h3>
-                </div>
-              </div>
-              
-              
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-            <div class="card-block">
-              <div class="row">
-                <div class="col-md-auto">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-                </div>
-                <div class="col-lg-auto col-md-auto col-sm-auto">
-                  <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                  <h6 class="box-ticket">#00002</h6>
-                  <h3 class="box-status"><span class="status green"></span>
-                    Reopened &nbsp; &nbsp;
-                    <span class="status green"></span>
-                    Normal</h3>
-                </div>
-              </div>
-              
-              
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4  box-type">
-          <div class="card-block">
-            <div class="row">
-              <div class="col-md-auto">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="box-img">
-              </div>
-              <div class="col-lg-auto col-md-auto col-sm-auto">
-                <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                <h6 class="box-ticket">#00001</h6>
-                <h3 class="box-status"><span class="status green"></span>
-                  Reopened &nbsp; &nbsp;
-                  <span class="status blue"></span>
-                  Low</h3>
-              </div>
-            </div>
-        </div>
-          </div>
-        </div>
         </div>
     </div>
   </div>
-  <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js"></script>
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <!-- Chart JS -->
-  <script src="../assets/js/plugins/chartjs.min.js"></script>
-  <!--  Notifications Plugin    -->
-  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
-  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script><!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-  <script src="../assets/demo/demo.js"></script>
 </body>
-<script>
-
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function Prioritization() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-</script>
-<script>
-    function Status() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-</script>
-<script>
-function Forwarded() {
-  document.getElementById("Forwarded").classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-</script>
     

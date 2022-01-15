@@ -38,12 +38,14 @@
   <title>BulSU iTugon</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./CSS Files/bootstrap.min.css">
   <link rel="stylesheet" href="./CSS Files/Login.css">
   <link rel="stylesheet" href="./CSS Files/Staff_Dashboard.css">
 </head>
 <body>
-    <div class="row">
-        <div class="col-md-7 slideshow-container">
+  <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8 bg-light">
+        <div class="slideshow-container">
           <div class="mySlides fade">
             <!-- <div class="numbertext">1 / 3</div> -->
             <img src="./Image Files/BulSU MVG/Mission.jpg" class="imgSize">
@@ -99,27 +101,47 @@
             dots[slideIndex-1].className += " active";
           }
         </script>
-      <div class="col">
-        <div id="mainDiv">
-          <div class="imgcontainer">
-            <img src="./Image Files/Logo/BulSU.png" alt="Avatar" class="avatar">
-            <h2>BulSU iTugon</h2>
-          </div>
-        <h2 id="h2">Login Form</h2>
-        <?php if ($msg != "") echo $msg . "<br><br>"; ?>
-          <div class="container">
-            <form id="LoginForm" method="post" action="Logincopy.php">
-            <label for="username"><b>Username</b></label> 
-            <input type="text" placeholder="Enter Username" name="usernameL" id="usernameL" required>
-            <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="passwordL" id="passwordL" required>
-            <button type="submit" name = "submit" >Login</button>
-            </form>
-          </div>
-        </div>
+      </div>
+        
+      <div class="col-lg-4 col-md-4 col-sm-4 bg-success" id="container">
+        <h4 class="card-title"> Change Username </h4>
+              <div class="card-body">
+                <form action="ChangeUsername.php" method = "post">                  
+                  <div class="row">
+                    <div class="col-md-6 pr-1">
+                      <div class="form-group">
+                        <label>Current Username</label>
+                        <input type="text" class="form-control" placeholder="Current Username" name="CurUsername" value="<?php echo $username; ?>">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 pr-1">
+                      <div class="form-group">
+                        <label>New Username</label>
+                        <input type="text" class="form-control" placeholder="New Username" name="NewUsername" value="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 pr-1">
+                      <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" placeholder="password" name="CUPassword" value="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="update ml-auto mr-auto">
+                      <button type="submit" name="submit" class="btn btn-primary btn-round">Change Username</button>
+                    </div>
+                  </div>
+                </form>
+                  
+              </div>
+            
       </div>
     </div>
-    
   
 </body>
 </html>
