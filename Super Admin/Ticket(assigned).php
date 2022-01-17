@@ -28,8 +28,6 @@
   <script src="../JS Files/plugins/perfect-scrollbar.jquery.min.js"></script>
   <!--  Notifications Plugin    -->
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
-  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
 </head>
 
 <body class="">
@@ -128,8 +126,7 @@
       <!-- end nav bar -->
       <div class="content" >
         <div class="row">
-          <div class="col-lg-3 col-md-3 col-sm-3">
-            <div class="card card-stats">
+          <div class="col-lg-3 col-md-3 col-sm-3 min-vh-100">
               <div class="card-body ">
                 <div class="row">
                     <div class="col" id="FirstCol">
@@ -217,9 +214,8 @@
                     </div>
                 </div>
               </div>
-            </div>
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-6" id="SecondCol1" >
+          <div class="col-lg-6 col-md-6 col-sm-6" id="" >
             <div class="card card-stats">
               <div class="card-body ">
                 <div class="row">
@@ -318,7 +314,7 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-3 col-sm-9" id="ThirdCol1">
+          <div class="col-lg-3 col-md-3 col-sm-9" id="">
             <div class="card card-stats">
               <div class="card-body ">
                 <div class="row">
@@ -332,67 +328,62 @@
                                   <div class="dropdown" style="width: 330px; padding-left: 10px;">
                                     <h4 style="padding-left: 5px; color: black; font-size:18">Prioritization</h4>
                                     <div class="dropdown">
-                                        <button onclick="Prioritization()" class="dropbtn">Low</button>
-                                        <div id="myDropdown" class="dropdown-content">
-                                          <a href="#home">Low</a>
-                                          <a href="#about">Normal</a>
-                                          <a href="#contact">Important</a>
-                                          <a href="#contact">Urgent</a>
-                                        </div>
+                                      <button onclick="Prioritization()" class="dropbtn">Low</button>
+                                      <div id="myDropdown" class="dropdown-content">
+                                        <a href="#home">Low</a>
+                                        <a href="#about">Normal</a>
+                                        <a href="#contact">Important</a>
+                                        <a href="#contact">Urgent</a>
                                       </div>
+                                    </div>
                                   </div>
                                 </div>
-                              </li>
-                              <li>
-                                <div>
-                                  <div class="dropdown" style="width: 330px; padding-left: 10px;">
-                                    <h4 style="padding-left: 5px; color: black; font-size:18">Status</h4>
-                                    <div class="dropdown">
-                                        <button onclick="Status()" class="dropbtn">Low</button>
-                                        <div id="myDropdown" class="dropdown-content">
-                                          <a href="#home">Open</a>
-                                          <a href="#about">On Process</a>
-                                          <a href="#contact">Resolved</a>
-                                          <a href="#contact">Resolved</a>
-                                        </div>
-                                      </div>
+                            </li>
+                            <li>
+                              <div>
+                                <div class="dropdown" style="width: 330px; padding-left: 10px;">
+                                  <h4 style="padding-left: 5px; color: black; font-size:18">Status</h4>
+                                  <div class="dropdown">
+                                    <button onclick="Status()" class="dropbtn">Low</button>
+                                    <div id="myDropdown" class="dropdown-content">
+                                      <a href="#home">Open</a>
+                                      <a href="#about">On Process</a>
+                                      <a href="#contact">Resolved</a>
+                                      <a href="#contact">Resolved</a>
+                                    </div>
                                   </div>
                                 </div>
-                              </li>
-                              <li>
+                              </div>
+                            </li>
+                            <li>
                                 <div>
                                   <div class="dropdown" style="width: 330px; padding-left: 10px;">
                                     <h4 style="padding-left: 5px; color: black; font-size:18">Forwarded to office concern</h4>
                                     <div class="dropdown">
-                                        <button onclick="forwarded()" class="dropbtn">Low</button>
-                                        <div id="Forwarded" class="dropdown-content">
-                                          <a href="#home">Admission Concern</a>
-                                          <a href="#about">Enrollment Concern</a>
-                                          <a href="#contact">Grade Concern</a>
-                                          <a href="#contact">Document Concern</a>
-                                        </div>
+                                      <button onclick="forwarded()" class="dropbtn">Low</button>
+                                      <div id="Forwarded" class="dropdown-content">
+                                        <a href="#home">Admission Concern</a>
+                                        <a href="#about">Enrollment Concern</a>
+                                        <a href="#contact">Grade Concern</a>
+                                        <a href="#contact">Document Concern</a>
                                       </div>
+                                    </div>
                                   </div>
                                 </div>
-                              </li>
-                              <li>
-                                <div>
-                                  <button type="button" class="btn btn-light btn-lg"
-                                  style="margin-left: 10px; width:320px;">Done</button>
-                                </div>
-                              </li>
+                            </li>
+                            <li>
+                              <div>
+                                <button type="button" class="btn btn-light btn-lg"
+                                style="margin-left: 10px; width:320px;">Done</button>
+                              </div>
+                            </li>
                         </ul>
-          </div>
-      </div>
-              </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
+                    </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>    
+          </div>    
+        </div>
       </div>
     </div>
   </div>

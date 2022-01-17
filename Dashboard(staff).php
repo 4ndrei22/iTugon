@@ -188,8 +188,18 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category text-white">Open Tickets</p>
-                      <p class="card-title text-white">150<p>
+                      <?php
+                        include 'connect.php';
+                        //$sql = "SELECT Firstname, Lastname FROM staffs";
+                        $sql = "SELECT PrioLvl FROM ticketInfo WHERE PrioLvl='Open'";
+                        if ($result = mysqli_query($con, $sql)) {
+                      
+                        // Return the number of rows in result set
+                        $rowcount = mysqli_num_rows( $result );
+                        }
+                      ?>
+                      <p class="card-category text-white">Open</p>
+                      <p class="card-title text-white"><?php echo $rowcount; ?><p>
                     </div>
                   </div>
                 </div>
@@ -212,8 +222,18 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
+                      <?php
+                        include 'connect.php';
+                        //$sql = "SELECT Firstname, Lastname FROM staffs";
+                        $sql = "SELECT PrioLvl FROM ticketInfo WHERE PrioLvl='Pending'";
+                        if ($result = mysqli_query($con, $sql)) {
+                      
+                        // Return the number of rows in result set
+                        $rowcount = mysqli_num_rows( $result );
+                        }
+                      ?>
                       <p class="card-category text-white">Pending</p>
-                      <p class="card-title text-white">4<p>
+                      <p class="card-title text-white"><?php echo $rowcount; ?><p>
                     </div>
                   </div>
                 </div>
@@ -235,9 +255,19 @@
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
-                    <div class="numbers">
+                  <div class="numbers">
+                      <?php
+                        include 'connect.php';
+                        //$sql = "SELECT Firstname, Lastname FROM staffs";
+                        $sql = "SELECT PrioLvl FROM ticketInfo WHERE PrioLvl='Resolved'";
+                        if ($result = mysqli_query($con, $sql)) {
+                      
+                        // Return the number of rows in result set
+                        $rowcount = mysqli_num_rows( $result );
+                        }
+                      ?>
                       <p class="card-category text-white">Resolved</p>
-                      <p class="card-title text-white">15<p>
+                      <p class="card-title text-white"><?php echo $rowcount; ?><p>
                     </div>
                   </div>
                 </div>
@@ -260,8 +290,18 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
+                      <?php
+                        include 'connect.php';
+                        //$sql = "SELECT Firstname, Lastname FROM staffs";
+                        $sql = "SELECT PrioLvl FROM ticketInfo WHERE PrioLvl='Reopened'";
+                        if ($result = mysqli_query($con, $sql)) {
+                      
+                        // Return the number of rows in result set
+                        $rowcount = mysqli_num_rows( $result );
+                        }
+                      ?>
                       <p class="card-category text-white">Reopened</p>
-                      <p class="card-title text-white">1<p>
+                      <p class="card-title text-white"><?php echo $rowcount; ?><p>
                     </div>
                   </div>
                 </div>
@@ -284,8 +324,18 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
+                      <?php
+                        include 'connect.php';
+                        //$sql = "SELECT Firstname, Lastname FROM staffs";
+                        $sql = "SELECT PrioLvl FROM ticketInfo WHERE PrioLvl='Closed'";
+                        if ($result = mysqli_query($con, $sql)) {
+                      
+                        // Return the number of rows in result set
+                        $rowcount = mysqli_num_rows( $result );
+                        }
+                      ?>
                       <p class="card-category text-white">Closed</p>
-                      <p class="card-title text-white">20<p>
+                      <p class="card-title text-white"><?php echo $rowcount; ?><p>
                     </div>
                   </div>
                 </div>

@@ -1,3 +1,3 @@
 function StaffActiveFunction() {
-    location.replace("http://localhost/iTugon2/Staff/Ticket(open).php");
+    location.replace("Staff/Ticket(open).php");
   }

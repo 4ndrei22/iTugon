@@ -15,14 +15,14 @@
 		        $msg = "You have been logged IN to staff dashboard";
             $insert = "INSERT INTO loginaccess (Firstname,Lastname,Email,Contactnum, accessLVL,Username) SELECT firstname,lastname,email,contactNum,adminkey,username FROM accountcreation WHERE username = '$username' ";
 				    mysqli_query($con,$insert);
-            header("Location: Dashboard(Staff).php");
+            header("Location: ./Dashboard(Staff).php");
 
             }elseif (password_verify($password, $data['password']) && $data['adminkey'] == 2) {
 
               $msg = "You have been logged IN to admin dashboard";
               $insert = "INSERT INTO loginaccess (firstname,lastname,email,contactnum, accesslvl,username) SELECT firstname,lastname,email,contactNum,adminkey,username FROM accountcreation WHERE username = '$username' ";
 				      mysqli_query($con,$insert);
-              header("Location: Dashboard(super).php");
+              header("Location: ./Dashboard(super).php");
               } else
 			    $msg = "Incorrect Password";
           header('refresh: 1, url = login.php');
@@ -121,7 +121,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 pl-1">
                       <div class="form-group">
                         <label>Username</label>
-                        <input type="text" class="form-control" placeholder="Current Username" name="usernameL" value="">
+                        <input type="text" class="form-control" placeholder="Username" name="usernameL" value="">
                       </div>
                     </div>
                   </div>
@@ -129,7 +129,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 pl-1">
                       <div class="form-group">
                         <label>Password</label>
-                        <input type="password" class="form-control" placeholder="password" name="passwordL" value="">
+                        <input type="password" class="form-control" placeholder="Password" name="passwordL" value="">
                       </div>
                     </div>
                   </div>

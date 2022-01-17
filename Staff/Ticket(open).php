@@ -56,15 +56,15 @@
             </a>
           </li>
           <li class="dropdown active ">
-              <a class="dropbtn active " >
+              <a class="dropbtn " >
                 <i class="fa fa-ticket"></i>
                 Tickets &nbsp; &nbsp;
                 <span class="fa fa-caret-down"></span>
               </a>
               <div class="dropdown-content" >
-                <a href="./Ticket(open).php">Open</a>
-                <a href="./Ticket(Pending).php">Pending</a>
-                <a href="./Ticket(reopened).php">Reopened</a>
+                <p href="./Ticket(open).php">Open</p>
+                <p href="./Ticket(Pending).php">Pending</p>
+                <p href="./Ticket(reopened).php">Reopened</p>
               </div>
           </li>
           <li>

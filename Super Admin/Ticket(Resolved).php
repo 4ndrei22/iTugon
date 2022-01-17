@@ -134,513 +134,73 @@
           
           </div>
           <div class="row">
-              <div class="col-lg-3 col-md-3 col-sm-3"  onclick="msgResolvedFunction();">
-                <div class="card card-stats" >
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-md-auto" >
-                        <div class="icon-small text-center icon-warning">
-                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+            <?php
+              include 'connect.php';
+              //$sql = "SELECT Firstname, Lastname FROM staffs";
+              $sql = "SELECT * FROM ticketInfo";
+              $result = mysqli_query($con,$sql);
+              if(mysqli_num_rows($result) > 0){
+                  while ($row = mysqli_fetch_assoc($result)){
+                                  
+                  $ticketnum=$row['TicketNum'];
+                  $ticketSender = $row['TicketSender'];
+                  $prioLvl = $row['PrioLvl'];
+                  $Stat = $row['Stat'];
+                  $date = $row['Date'];
+                  $message = $row['Message'];
+                  $disMessage = substr($message, 0, 30);
+                  $subject = $row['Subject'];
+
+                  if($prioLvl == "Resolved"){
+            ?>
+                  <div class="col-lg-3 col-md-3 col-sm-3" onclick="AssignedFunction();">
+                    <div class="card card-stats">
+                      <div class="card-body ">
+                        <div class="row">
+                          <div class="col-md-auto" >
+                            <div class="icon-small text-center icon-warning">
+                              <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                            </div>
+                          </div>
+                          <div class="col-md-auto">
+                            <div class="numbers">
+                              <h4 class="box-title"><?php echo $ticketSender; ?><span class="status"></span><?php echo $date; ?></h4> 
+                              <h6 class="box-ticket">#<?php echo $ticketnum; ?></h6>
+                              <h5 class="box-title"><?php echo $disMessage; ?></h5> 
+                              <h5 class="box-title"><?php echo $subject; ?></h5> 
+                              <h3 class="box-status"><span class="status blue"></span>
+                                <?php echo $prioLvl; ?> &nbsp; &nbsp;
+                                <?php 
+                                  if($Stat == "Urgent"){
+                                    echo"<span class='status red'></span>";
+                                    echo $Stat;"</h3>";
+                                  }elseif($Stat == "High"){
+                                    echo"<span class='status orange'></span>";
+                                    echo $Stat;"</h3>";
+                                  }elseif ($Stat =="Normal"){
+                                    echo"<span class='status green'></span>";
+                                    echo $Stat;"</h3>";
+                                  }else{
+                                    echo"<span class='status blue'></span>";
+                                    echo $Stat;"</h3>";
+                                  }
+                                ?>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div class="col-md-auto">
-                        <div class="numbers">
-                          <!-- <p class="card-category text-white">Open</p>
-                          <p class="card-title text-white">54<p> -->
-                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                          <h6 class="box-ticket">#00018</h6>
-                          <h3 class="box-status"><span class="status blue"></span>
-                            Resolved &nbsp; &nbsp;
-                            <span class="status green"></span>
-                            Normal</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer ">
-                    <hr>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="card card-stats" >
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-md-auto" >
-                        <div class="icon-small text-center icon-warning">
-                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
-                        </div>
-                      </div>
-                      <div class="col-md-auto">
-                        <div class="numbers">
-                          <!-- <p class="card-category text-white">Open</p>
-                          <p class="card-title text-white">54<p> -->
-                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                          <h6 class="box-ticket">#00017</h6>
-                          <h3 class="box-status"><span class="status blue"></span>
-                            Resolved &nbsp; &nbsp;
-                            <span class="status green"></span>
-                            Normal</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer ">
-                    <hr>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="card card-stats" >
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-md-auto" >
-                        <div class="icon-small text-center icon-warning">
-                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
-                        </div>
-                      </div>
-                      <div class="col-md-auto">
-                        <div class="numbers">
-                          <!-- <p class="card-category text-white">Open</p>
-                          <p class="card-title text-white">54<p> -->
-                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                          <h6 class="box-ticket">#00016</h6>
-                          <h3 class="box-status"><span class="status blue"></span>
-                            Resolved &nbsp; &nbsp;
-                            <span class="status red"></span>
-                            Urgent</h3>
-                        </div>
+                      <div class="card-footer ">
+                        <hr>
                       </div>
                     </div>
                   </div>
-                  <div class="card-footer ">
-                    <hr>
-                  </div>
-                </div>
-              </div>
-              <!-- second row -->
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="card card-stats" >
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-md-auto" >
-                        <div class="icon-small text-center icon-warning">
-                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
-                        </div>
-                      </div>
-                      <div class="col-md-auto">
-                        <div class="numbers">
-                          <!-- <p class="card-category text-white">Open</p>
-                          <p class="card-title text-white">54<p> -->
-                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                          <h6 class="box-ticket">#00015</h6>
-                          <h3 class="box-status"><span class="status blue"></span>
-                            Resolved &nbsp; &nbsp;
-                            <span class="status blue"></span>
-                            Low</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer ">
-                    <hr>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="card card-stats" >
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-md-auto" >
-                        <div class="icon-small text-center icon-warning">
-                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
-                        </div>
-                      </div>
-                      <div class="col-md-auto">
-                        <div class="numbers">
-                          <!-- <p class="card-category text-white">Open</p>
-                          <p class="card-title text-white">54<p> -->
-                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                          <h6 class="box-ticket">#000014</h6>
-                          <h3 class="box-status"><span class="status blue"></span>
-                            Resolved &nbsp; &nbsp;
-                            <span class="status blue"></span>
-                            Low</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer ">
-                    <hr>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="card card-stats" >
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-md-auto" >
-                        <div class="icon-small text-center icon-warning">
-                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
-                        </div>
-                      </div>
-                      <div class="col-md-auto">
-                        <div class="numbers">
-                          <!-- <p class="card-category text-white">Open</p>
-                          <p class="card-title text-white">54<p> -->
-                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                          <h6 class="box-ticket">#00013</h6>
-                          <h3 class="box-status"><span class="status blue"></span>
-                            Resolved &nbsp; &nbsp;
-                            <span class="status green"></span>
-                            Normal</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer ">
-                    <hr>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="card card-stats" >
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-md-auto" >
-                        <div class="icon-small text-center icon-warning">
-                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
-                        </div>
-                      </div>
-                      <div class="col-md-auto">
-                        <div class="numbers">
-                          <!-- <p class="card-category text-white">Open</p>
-                          <p class="card-title text-white">54<p> -->
-                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                          <h6 class="box-ticket">#00012</h6>
-                          <h3 class="box-status"><span class="status blue"></span>
-                            Resolved &nbsp; &nbsp;
-                            <span class="status green"></span>
-                            Normal</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer ">
-                    <hr>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="card card-stats" >
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-md-auto" >
-                        <div class="icon-small text-center icon-warning">
-                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
-                        </div>
-                      </div>
-                      <div class="col-md-auto">
-                        <div class="numbers">
-                          <!-- <p class="card-category text-white">Open</p>
-                          <p class="card-title text-white">54<p> -->
-                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                          <h6 class="box-ticket">#00011</h6>
-                          <h3 class="box-status"><span class="status blue"></span>
-                            Resolved &nbsp; &nbsp;
-                            <span class="status red"></span>
-                            Urgent</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer ">
-                    <hr>
-                  </div>
-                </div>
-              </div>
-              <!-- third row -->
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="card card-stats" >
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-md-auto" >
-                        <div class="icon-small text-center icon-warning">
-                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
-                        </div>
-                      </div>
-                      <div class="col-md-auto">
-                        <div class="numbers">
-                          <!-- <p class="card-category text-white">Open</p>
-                          <p class="card-title text-white">54<p> -->
-                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                          <h6 class="box-ticket">#00010</h6>
-                          <h3 class="box-status"><span class="status blue"></span>
-                            Resolved &nbsp; &nbsp;
-                            <span class="status blue"></span>
-                            Low</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer ">
-                    <hr>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="card card-stats" >
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-md-auto" >
-                        <div class="icon-small text-center icon-warning">
-                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
-                        </div>
-                      </div>
-                      <div class="col-md-auto">
-                        <div class="numbers">
-                          <!-- <p class="card-category text-white">Open</p>
-                          <p class="card-title text-white">54<p> -->
-                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                          <h6 class="box-ticket">#00009</h6>
-                          <h3 class="box-status"><span class="status blue"></span>
-                            Resolved &nbsp; &nbsp;
-                            <span class="status blue"></span>
-                            Low</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer ">
-                    <hr>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="card card-stats" >
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-md-auto" >
-                        <div class="icon-small text-center icon-warning">
-                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
-                        </div>
-                      </div>
-                      <div class="col-md-auto">
-                        <div class="numbers">
-                          <!-- <p class="card-category text-white">Open</p>
-                          <p class="card-title text-white">54<p> -->
-                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                          <h6 class="box-ticket">#00008</h6>
-                          <h3 class="box-status"><span class="status blue"></span>
-                            Resolved &nbsp; &nbsp;
-                            <span class="status green"></span>
-                            Normal</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer ">
-                    <hr>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="card card-stats" >
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-md-auto" >
-                        <div class="icon-small text-center icon-warning">
-                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
-                        </div>
-                      </div>
-                      <div class="col-md-auto">
-                        <div class="numbers">
-                          <!-- <p class="card-category text-white">Open</p>
-                          <p class="card-title text-white">54<p> -->
-                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                          <h6 class="box-ticket">#00007</h6>
-                          <h3 class="box-status"><span class="status blue"></span>
-                            Resolved &nbsp; &nbsp;
-                            <span class="status green"></span>
-                            Normal</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer ">
-                    <hr>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="card card-stats" >
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-md-auto" >
-                        <div class="icon-small text-center icon-warning">
-                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
-                        </div>
-                      </div>
-                      <div class="col-md-auto">
-                        <div class="numbers">
-                          <!-- <p class="card-category text-white">Open</p>
-                          <p class="card-title text-white">54<p> -->
-                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                          <h6 class="box-ticket">#00006</h6>
-                          <h3 class="box-status"><span class="status blue"></span>
-                            Resolved &nbsp; &nbsp;
-                            <span class="status green"></span>
-                            Normal</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer ">
-                    <hr>
-                  </div>
-                </div>
-              </div>
-              <!-- forth row -->
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="card card-stats" >
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-md-auto" >
-                        <div class="icon-small text-center icon-warning">
-                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
-                        </div>
-                      </div>
-                      <div class="col-md-auto">
-                        <div class="numbers">
-                          <!-- <p class="card-category text-white">Open</p>
-                          <p class="card-title text-white">54<p> -->
-                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                          <h6 class="box-ticket">#00005</h6>
-                          <h3 class="box-status"><span class="status blue"></span>
-                            Resolved &nbsp; &nbsp;
-                            <span class="status green"></span>
-                            Normal</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer ">
-                    <hr>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="card card-stats" >
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-md-auto" >
-                        <div class="icon-small text-center icon-warning">
-                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
-                        </div>
-                      </div>
-                      <div class="col-md-auto">
-                        <div class="numbers">
-                          <!-- <p class="card-category text-white">Open</p>
-                          <p class="card-title text-white">54<p> -->
-                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                          <h6 class="box-ticket">#00004</h6>
-                          <h3 class="box-status"><span class="status blue"></span>
-                            Resolved &nbsp; &nbsp;
-                            <span class="status green"></span>
-                            Normal</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer ">
-                    <hr>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="card card-stats" >
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-md-auto" >
-                        <div class="icon-small text-center icon-warning">
-                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
-                        </div>
-                      </div>
-                      <div class="col-md-auto">
-                        <div class="numbers">
-                          <!-- <p class="card-category text-white">Open</p>
-                          <p class="card-title text-white">54<p> -->
-                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                          <h6 class="box-ticket">#00003</h6>
-                          <h3 class="box-status"><span class="status blue"></span>
-                            Resolved &nbsp; &nbsp;
-                            <span class="status green"></span>
-                            Normal</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer ">
-                    <hr>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="card card-stats" >
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-md-auto" >
-                        <div class="icon-small text-center icon-warning">
-                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
-                        </div>
-                      </div>
-                      <div class="col-md-auto">
-                        <div class="numbers">
-                          <!-- <p class="card-category text-white">Open</p>
-                          <p class="card-title text-white">54<p> -->
-                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                          <h6 class="box-ticket">#00002</h6>
-                          <h3 class="box-status"><span class="status blue"></span>
-                            Resolved &nbsp; &nbsp;
-                            <span class="status green"></span>
-                            Normal</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer ">
-                    <hr>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="card card-stats" >
-                  <div class="card-body ">
-                    <div class="row">
-                      <div class="col-md-auto" >
-                        <div class="icon-small text-center icon-warning">
-                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
-                        </div>
-                      </div>
-                      <div class="col-md-auto">
-                        <div class="numbers">
-                          <!-- <p class="card-category text-white">Open</p>
-                          <p class="card-title text-white">54<p> -->
-                          <h4 class="box-title">Prénom Nom<span class="status"></span> 08/12/2021</h4> 
-                          <h6 class="box-ticket">#00001</h6>
-                          <h3 class="box-status"><span class="status blue"></span>
-                            Resolved &nbsp; &nbsp;
-                            <span class="status green"></span>
-                            Normal</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer ">
-                    <hr>
-                  </div>
-                </div>
-              </div>
+            <?php
+                  }
+                }
+              }
+                                  
+            ?>
+            
           </div>
         </div>
     </div>
