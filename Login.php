@@ -1,36 +1,63 @@
+<?php 
+  session_start();
+  
+?>
+
 <?php
 	$msg = "";
-
+  
 	if (isset($_POST['submit'])) {
 		$con = new mysqli('localhost', 'root', '', 'db_admin');
 
 		$username = $con->real_escape_string($_POST['usernameL']);
 		$password = $con->real_escape_string($_POST['passwordL']);
 
-		$sql = $con->query("SELECT id, password,adminkey FROM accountcreation WHERE username='$username'");
+		$sql = $con->query("SELECT * FROM accountcreation WHERE username='$username'");
 		if ($sql->num_rows > 0) {
 		    $data = $sql->fetch_array();
 		    if (password_verify($password, $data['password']) && $data['adminkey'] == 1) {
+            $firstname = $data['firstname'];
+            $lastname = $data['lastname'];
+            $email = $data['email'];
+            $contactnum = $data['contactNum'];
+            $user = $data['username'];
+            $password = $data['password'];
+
+            $_SESSION['Firstname'] = $firstname;
+            $_SESSION['Lastname'] = $lastname;
+            $_SESSION['email'] = $email;
+            $_SESSION['contactnum'] = $contactnum;
+            $_SESSION['username'] = $user;
+            $_SESSION['password'] = $password;
 
 		        $msg = "You have been logged IN to staff dashboard";
-            $insert = "INSERT INTO loginaccess (Firstname,Lastname,Email,Contactnum, accessLVL,Username) SELECT firstname,lastname,email,contactNum,adminkey,username FROM accountcreation WHERE username = '$username' ";
-				    mysqli_query($con,$insert);
             header("Location: ./Dashboard(Staff).php");
 
             }elseif (password_verify($password, $data['password']) && $data['adminkey'] == 2) {
+              $firstname = $data['firstname'];
+              $lastname = $data['lastname'];
+              $email = $data['email'];
+              $contactnum = $data['contactNum'];
+              $user = $data['username'];
+              $password = $data['password'];
 
+              $_SESSION['Firstname'] = $firstname;
+              $_SESSION['Lastname'] = $lastname;
+              $_SESSION['email'] = $email;
+              $_SESSION['contactnum'] = $contactnum;
+              $_SESSION['username'] = $user;
+              $_SESSION['password'] = $password;
               $msg = "You have been logged IN to admin dashboard";
-              $insert = "INSERT INTO loginaccess (firstname,lastname,email,contactnum, accesslvl,username) SELECT firstname,lastname,email,contactNum,adminkey,username FROM accountcreation WHERE username = '$username' ";
-				      mysqli_query($con,$insert);
               header("Location: ./Dashboard(super).php");
               } else
 			    $msg = "Incorrect Password";
-          header('refresh: 1, url = login.php');
+          header('refresh: 1, url = Login.php');
         } else
             $msg = "Incorrect Username";
-            header('refresh: 1, url = login.php');
+            header('refresh: 1, url = Login.php');
 	}
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,6 +76,7 @@
 
 </head>
 <body>
+
     <div class="row">
       <div class="col-lg-8 col-md-8 col-sm-8 vh-100 pt-5 mt-5">
         <div class="card">
@@ -145,10 +173,7 @@
               </div>
           </div>
         </div>
-        </div>
       </div>
-    </div>
-    
-  
+
 </body>
 </html>

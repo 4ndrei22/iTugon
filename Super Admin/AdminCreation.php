@@ -1,4 +1,9 @@
 <?php
+  session_start();
+  if(isset($_SESSION["Firstname"])&& ($_SESSION["Lastname"])){
+
+?>
+<?php
 	$msg = "";
 
 	if (isset($_POST['submit'])) {
@@ -327,3 +332,8 @@
 </body>
 
 </html>
+<?php
+  }else{ 
+    header('refresh: 1, url = Login.php');
+  }
+  ?>

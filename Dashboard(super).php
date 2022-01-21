@@ -1,3 +1,9 @@
+<?php
+  session_start();
+  if(isset($_SESSION["Firstname"])&& ($_SESSION["Lastname"])){
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -599,3 +605,8 @@
 
 
 </html>
+<?php
+  }else{ 
+    header('refresh: 1, url = Login.php');
+  }
+  ?>

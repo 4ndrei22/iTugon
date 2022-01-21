@@ -1,3 +1,36 @@
+<?php
+  session_start();
+  if(isset($_SESSION["Firstname"])&& ($_SESSION["Lastname"])){
+
+?>
+<?php
+    $msg = "";
+    if (isset($_POST['submit'])) {
+      $con = new mysqli('localhost', 'root', '', 'db_admin');
+      $username = $con->real_escape_string($_POST['CurPassword']);
+      $newUsername =$con->real_escape_string($_POST['NewUsername']);
+      $password = $con->real_escape_string($_POST['CUPassword']);
+
+      $sql = $con->query("SELECT id,password FROM accountcreation WHERE username='$username'");
+        
+      if ($sql->num_rows > 0) {
+		  $data = $sql->fetch_array();
+		    
+      if (password_verify($password, $data['password'])) {
+                $sql1 = "UPDATE `accountcreation` SET username = '$newUsername' WHERE username = '$username'";
+                $sql2 = "UPDATE `loginaccess` SET username = '$newUsername' WHERE username = '$username'";
+                mysqli_query($con,$sql1);
+                mysqli_query($con,$sql2);
+                echo "<meta http-equiv='refresh' content='0'>";
+                header('Location: ChangeUsername.php');
+
+            }else
+			    $msg = "Incorrect Password";
+        } else
+            $msg = "Please check your inputs!";
+    } 
+ 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -134,12 +167,29 @@
                 <h4 class="card-title"> Change Password </h4>
               </div>
               <div class="card-body">
-                <form action="">                  
+              <?php
+                      include 'connect.php';
+                      //$sql = "SELECT Firstname, Lastname FROM staffs";
+                      $sql = "SELECT * FROM loginaccess";
+                      $result = mysqli_query($con,$sql);
+                      if(mysqli_num_rows($result) > 0){
+                        while ($row = mysqli_fetch_assoc($result)){
+                        
+                          // $password = $row['password'];
+                          $username = $row['username'];
+
+                        }
+                      }
+                        
+                      
+              ?>
+              <?php if ($msg != "") echo $msg . "<br><br>"; ?>
+              <form action="ChangePassword.php" method = "post">                  
                   <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Username</label>
-                        <input type="text" class="form-control" placeholder="Username" id="username" value="<?php echo $_SESSION['Username']; ?>" >
+                        <input type="text" class="form-control" placeholder="Username" id="username" value="<?php echo $username; ?>" >
                       </div>
                     </div>
                   </div>
@@ -184,3 +234,8 @@
 </body>
 
 </html>
+<?php
+  }else{ 
+    header('refresh: 1, url = Login.php');
+  }
+  ?>

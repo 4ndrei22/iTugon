@@ -1,3 +1,8 @@
+<?php
+  session_start();
+  if(isset($_SESSION["Firstname"])&& ($_SESSION["Lastname"])){
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -147,8 +152,9 @@
                   $prioLvl = $row['PrioLvl'];
                   $Stat = $row['Stat'];
                   $date = $row['Date'];
-                  $message = $row['Message'];
-                  $disMessage = substr($message, 0, 30);
+                  $ticketname = substr($ticketSender, 0, 10);
+                  //$message = $row['Message'];
+                  //$disMessage = substr($message, 0, 30);
                   $subject = $row['Subject'];
 
                   if($prioLvl == "Resolved"){
@@ -164,10 +170,10 @@
                           </div>
                           <div class="col-md-auto">
                             <div class="numbers">
-                              <h4 class="box-title"><?php echo $ticketSender; ?><span class="status"></span><?php echo $date; ?></h4> 
+                              <h4 class="box-title"><?php echo $ticketname; ?><span class="status"></span><?php echo $date; ?></h4> 
                               <h6 class="box-ticket">#<?php echo $ticketnum; ?></h6>
-                              <h5 class="box-title"><?php echo $disMessage; ?></h5> 
-                              <h5 class="box-title"><?php echo $subject; ?></h5> 
+                              <!-- <h5 class="box-title"><?php echo $disMessage; ?></h5>  -->
+                              <!-- <h5 class="box-title"><?php echo $subject; ?></h5>  -->
                               <h3 class="box-status"><span class="status blue"></span>
                                 <?php echo $prioLvl; ?> &nbsp; &nbsp;
                                 <?php 
@@ -206,3 +212,8 @@
     </div>
   </div>
 </body>
+<?php
+  }else{ 
+    header('refresh: 1, url = Login.php');
+  }
+  ?>

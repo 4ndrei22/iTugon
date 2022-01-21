@@ -1,3 +1,8 @@
+<?php
+  session_start();
+  if(isset($_SESSION["Firstname"])&& ($_SESSION["Lastname"])){
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -148,6 +153,7 @@
                 $prioLvl = $row['PrioLvl'];
                 $Stat = $row['Stat'];
                 $date = $row['Date'];
+                $ticketname = substr($ticketSender, 0, 10);
                 
                 if($prioLvl == "Pending"){
           ?>
@@ -164,7 +170,7 @@
                           <div class="numbers">
                             <!-- <p class="card-category text-white">Open</p>
                             <p class="card-title text-white">54<p> -->
-                            <h4 class="box-title"><?php echo $ticketSender; ?><span class="status"></span><?php echo $date; ?></h4> 
+                            <h4 class="box-title"><?php echo $ticketname; ?><span class="status"></span><?php echo $date; ?></h4> 
                             <h6 class="box-ticket">#<?php echo $ticketnum; ?></h6>
                             <h3 class="box-status"><span class="status orange"></span>
                               <?php echo $prioLvl; ?> &nbsp; &nbsp;
@@ -206,3 +212,8 @@
   
     
 </body>
+<?php
+  }else{ 
+    header('refresh: 1, url = Login.php');
+  }
+  ?>

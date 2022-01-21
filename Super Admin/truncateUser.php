@@ -1,6 +1,6 @@
 <?php
-    include 'connect.php';
-    $sql = "TRUNCATE TABLE loginaccess";
-    mysqli_query($con,$sql);
+    session_start();
+    session_unset();
+    session_destroy();
     header("Location: ../Login.php")
 ?>

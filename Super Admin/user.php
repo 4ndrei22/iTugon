@@ -1,3 +1,8 @@
+<?php
+  session_start();
+  if(isset($_SESSION["Firstname"])&& ($_SESSION["Lastname"])){
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +36,7 @@
     <script src="../JS Files/openTickets.js"></script>
   </head>
 
-<body class="">
+<body class="" style="overflow:hidden;">
   <div class="wrapper ">
   <div class="sidebar" data-color="white" data-active-color="danger">
     <div class="logo">
@@ -125,7 +130,7 @@
         </div>
       </nav>
       <!-- End Navbar -->
-      <div class="content pt-5">
+      <div class="content">
         <div class="row">
           <div class="col-md-12">
             <div class="card card-user">
@@ -135,38 +140,20 @@
               <div class="card-body">
                 <div class="author">
                     <img class="avatar border-gray" src="../Image Files/logo-small.png" alt="...">
-                    <?php
-                      include 'connect.php';
-                      //$sql = "SELECT Firstname, Lastname FROM staffs";
-                      $sql = "SELECT * FROM loginaccess";
-                      $result = mysqli_query($con,$sql);
-                      if(mysqli_num_rows($result) > 0){
-                        while ($row = mysqli_fetch_assoc($result)){
-                        
-                          $firstname = $row['firstname'];
-                          $lastname = $row['lastname'];
-                          $fullname = $firstname . " " . $lastname;
-                          $email = $row['email'];
-                          $contactnum = $row['contactnum'];
-                          echo "<h5 style =  'text-transform: uppercase;'>$fullname</h5>";
-                        }
-                      }
-                        
-                      
-                    ?>
+                    <h5 style =  'text-transform: uppercase;'><?php echo $_SESSION['Firstname']." ".$_SESSION['Lastname']?></h5>
                   <!-- <form action="./ChangeInfo.php" method="post">   -->
                   <form  method="post">                  
                     <div class="row">
                       <div class="col-md-3" style="margin-left: 24%;">
                         <div class="form-group">
                           <label for="fname">First Name</label>
-                          <input type="text" class="form-control" placeholder="First Name" value="<?php echo $firstname; ?>" name="firstname" required>
+                          <input type="text" class="form-control" placeholder="First Name" value="<?php echo $_SESSION['Firstname'] ?>" name="firstname" required>
                         </div>
                       </div>
                       <div class="col-md-3" style="margin-left: 2%;">
                         <div class="form-group">
                           <label for="lname">Last Name</label>
-                          <input type="text" class="form-control" placeholder="Last Name" value="<?php echo $lastname; ?>" name="lastname" required>
+                          <input type="text" class="form-control" placeholder="Last Name" value="<?php echo $_SESSION['Lastname'] ?>" name="lastname" required>
                         </div>
                       </div>
                     </div>
@@ -174,13 +161,13 @@
                       <div class="col-md-3" style="margin-left: 24%;">
                         <div class="form-group">
                           <label for="email">Email</label>
-                          <input type="text" class="form-control" placeholder="Email" value="<?php echo $email; ?>" name="email" required>
+                          <input type="text" class="form-control" placeholder="Email" value="<?php echo $_SESSION['email']; ?>" name="email" required>
                         </div>
                       </div>
                       <div class="col-md-3" style="margin-left: 2%;">
                         <div class="form-group">
                           <label for="contactnum">Contact Number</label>
-                          <input type="text" class="form-control" placeholder="Contact Number" value="<?php echo $contactnum; ?>" name="Contact Number" required>
+                          <input type="text" class="form-control" placeholder="Contact Number" value="<?php echo $_SESSION['contactnum']; ?>" name="Contact Number" required>
                         </div>
                       </div>
                     </div>
@@ -231,3 +218,8 @@
 </body>
 
 </html>
+<?php
+  }else{ 
+    header('refresh: 1, url = Login.php');
+  }
+  ?>
