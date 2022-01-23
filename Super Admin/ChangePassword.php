@@ -7,28 +7,32 @@
     $msg = "";
     if (isset($_POST['submit'])) {
       $con = new mysqli('localhost', 'root', '', 'db_admin');
-      $username = $con->real_escape_string($_POST['CurPassword']);
-      $newUsername =$con->real_escape_string($_POST['NewUsername']);
-      $password = $con->real_escape_string($_POST['CUPassword']);
+      $username = $con->real_escape_string($_POST['username']);
+      $newPassword =$con->real_escape_string($_POST['new_password']);
+      $password = $con->real_escape_string($_POST['current_password']);
+      $confirm_password = $con->real_escape_string($_POST['confirm_password']);
+      if ($password = $confirm_password){
+        $sql = $con->query("SELECT id,password FROM accountcreation WHERE username='$username'");
+        if ($sql->num_rows > 0) {
+        $data = $sql->fetch_array();
+        if (password_verify($password, $data['password'])) {
+                  $pass = $data['password'];
+                  $hash = password_hash($newPassword, PASSWORD_BCRYPT);
+                  $sql1 = "UPDATE `accountcreation` SET password = '$hash' WHERE password = '$pass'";
+                  mysqli_query($con,$sql1);
 
-      $sql = $con->query("SELECT id,password FROM accountcreation WHERE username='$username'");
-        
-      if ($sql->num_rows > 0) {
-		  $data = $sql->fetch_array();
-		    
-      if (password_verify($password, $data['password'])) {
-                $sql1 = "UPDATE `accountcreation` SET username = '$newUsername' WHERE username = '$username'";
-                $sql2 = "UPDATE `loginaccess` SET username = '$newUsername' WHERE username = '$username'";
-                mysqli_query($con,$sql1);
-                mysqli_query($con,$sql2);
-                echo "<meta http-equiv='refresh' content='0'>";
-                header('Location: ChangeUsername.php');
+                  echo "<meta http-equiv='refresh' content='0'>";
+                  header('Location: ChangePassword.php');
 
-            }else
-			    $msg = "Incorrect Password";
-        } else
-            $msg = "Please check your inputs!";
-    } 
+              }else
+                $msg = "Incorrect Password";
+          } else
+              $msg = "Please check your inputs";
+      } else
+        $msg = "password did not match";
+      
+      
+    }
  
 ?>
 <!DOCTYPE html>
@@ -167,29 +171,13 @@
                 <h4 class="card-title"> Change Password </h4>
               </div>
               <div class="card-body">
-              <?php
-                      include 'connect.php';
-                      //$sql = "SELECT Firstname, Lastname FROM staffs";
-                      $sql = "SELECT * FROM loginaccess";
-                      $result = mysqli_query($con,$sql);
-                      if(mysqli_num_rows($result) > 0){
-                        while ($row = mysqli_fetch_assoc($result)){
-                        
-                          // $password = $row['password'];
-                          $username = $row['username'];
-
-                        }
-                      }
-                        
-                      
-              ?>
               <?php if ($msg != "") echo $msg . "<br><br>"; ?>
               <form action="ChangePassword.php" method = "post">                  
                   <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Username</label>
-                        <input type="text" class="form-control" placeholder="Username" id="username" value="<?php echo $username; ?>" >
+                        <input type="text" class="form-control" placeholder="Username" name="username" value="<?php echo $_SESSION['username']; ?>" >
                       </div>
                     </div>
                   </div>
@@ -197,7 +185,7 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Current Password</label>
-                        <input type="password" class="form-control" placeholder="Current Password" id="current_password" value="">
+                        <input type="password" class="form-control" placeholder="Current Password" name="current_password" value="">
                       </div>
                     </div>
                   </div>
@@ -205,7 +193,7 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>New Password</label>
-                        <input type="password" class="form-control" placeholder="New Password" id="new_password" value="">
+                        <input type="password" class="form-control" placeholder="New Password" name="new_password" value="">
                       </div>
                     </div>
                   </div>
@@ -213,13 +201,13 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Confirm Password</label>
-                        <input type="password" class="form-control" placeholder="Confirm Password" id="confirm_password" value="">
+                        <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password" value="">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="update ml-auto mr-auto">
-                      <button type="submit" class="btn btn-primary btn-round">Change Password</button>
+                      <button type="submit" name = "submit"class="btn btn-primary btn-round">Change Password</button>
                     </div>
                   </div>
                 </form>

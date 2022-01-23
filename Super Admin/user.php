@@ -1,7 +1,51 @@
 <?php
   session_start();
   if(isset($_SESSION["Firstname"])&& ($_SESSION["Lastname"])){
+?>
+<?php
+    $msg = "";
+    if (isset($_POST['submit'])) {
+      $con = new mysqli('localhost', 'root', '', 'db_admin');
+      $firstname = $con->real_escape_string($_POST['firstname']);
+      $lastname =$con->real_escape_string($_POST['lastname']);
+      $email = $con->real_escape_string($_POST['email']);
+      $contactnum = $con->real_escape_string($_POST['ContactNumber']);
+      $sql = $con->query("SELECT id,password FROM accountcreation WHERE username='$firstname'");
+        
+      $sql1 = "SELECT * FROM accountcreation WHERE firstname = '$firstname' OR lastname = '$lastname' OR email = '$email' OR contactNum = '$contactnum'";
+	
+      $result = mysqli_query($con, $sql1);
 
+      $count =  mysqli_num_rows ($result);
+      if($count == 1)
+      {
+        while ($row = mysqli_fetch_array($result)){
+          
+          if($row["firstname"] == $firstname || $row["lastname"] == $lastname || $row["email"] == $email || $row["contactNum"] == $contactnum){
+            $sql2 = "UPDATE `accountcreation` SET firstname = '$firstname', lastname = '$lastname', email = '$email', contactNum = '$contactnum'
+                      WHERE firstname = '$firstname' OR lastname = '$lastname' OR email = '$email' OR contactNum = '$contactnum'";
+            mysqli_query($con,$sql2);	
+            $_SESSION['Firstname'] = $firstname;
+            $_SESSION['Lastname'] = $lastname;
+            $_SESSION['email'] = $email;
+            $_SESSION['contactnum'] = $contactnum;
+            $msg = "Profile successfully update";
+            echo "<meta http-equiv='refresh' content='1'>";		
+          }
+          else{
+            $msg = "please check your inputs";
+            echo "<meta http-equiv='refresh' content='0'>";	
+          }
+        }
+        
+        
+      }
+      else
+      {
+        $msg = "unable to update";
+        echo "<meta http-equiv='refresh' content='0'>";
+      }
+    } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,7 +133,7 @@
           </li>
         </ul>
       </div>
-    </div>
+  </div>
     <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-absolute fixed-top" Style="background-color: #671e1e;">
@@ -141,8 +185,9 @@
                 <div class="author">
                     <img class="avatar border-gray" src="../Image Files/logo-small.png" alt="...">
                     <h5 style =  'text-transform: uppercase;'><?php echo $_SESSION['Firstname']." ".$_SESSION['Lastname']?></h5>
+                    <?php if ($msg != "") echo "<h5 class='errormsg'>$msg </h5> "; ?>
                   <!-- <form action="./ChangeInfo.php" method="post">   -->
-                  <form  method="post">                  
+                  <form action="./user.php" method="post">                  
                     <div class="row">
                       <div class="col-md-3" style="margin-left: 24%;">
                         <div class="form-group">
@@ -167,14 +212,14 @@
                       <div class="col-md-3" style="margin-left: 2%;">
                         <div class="form-group">
                           <label for="contactnum">Contact Number</label>
-                          <input type="text" class="form-control" placeholder="Contact Number" value="<?php echo $_SESSION['contactnum']; ?>" name="Contact Number" required>
+                          <input type="text" class="form-control" placeholder="Contact Number" value="<?php echo $_SESSION['contactnum']; ?>" name="ContactNumber" required>
                         </div>
                       </div>
                     </div>
                     
                     <div class="row">
                       <div class="update ml-auto mr-auto">
-                        <button type="submit" class="btn btn-primary btn-round">Update Profile</button>
+                        <button type="submit" name="submit" class="btn btn-primary btn-round">Update Profile</button>
                       </div>
                     </div>
                   </form>

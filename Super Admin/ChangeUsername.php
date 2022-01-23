@@ -27,7 +27,7 @@
             }else
 			    $msg = "Incorrect Password";
         } else
-            $msg = "Please check your inputs!";
+            $msg = "Please check your inputs";
     } 
  
 ?>
@@ -192,7 +192,7 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Current Username</label>
-                        <input type="text" class="form-control" placeholder="Current Username" name="CurUsername" value="<?php echo $username; ?>">
+                        <input type="text" class="form-control" placeholder="Current Username" name="CurUsername" value="<?php echo $_SESSION['username']; ?>">
                       </div>
                     </div>
                   </div>

@@ -49,6 +49,7 @@
               $_SESSION['password'] = $password;
               $msg = "You have been logged IN to admin dashboard";
               header("Location: ./Dashboard(super).php");
+              // header("Location: ./truncateUser.php");
               } else
 			    $msg = "Incorrect Password";
           header('refresh: 1, url = Login.php');
@@ -167,7 +168,7 @@
                     </div>
                   </div>
                   <div class="row">
-                    <a href="#" class="forgot">Forgot Password</a>
+                    <a href="./truncateUser.php" class="forgot">Forgot Password</a>
                   </div>
                 </form>
               </div>
