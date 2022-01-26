@@ -214,6 +214,12 @@
                           </select>
                       </div>
                     </div>
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label>Id Number</label>
+                        <input type="text" class="form-control" placeholder="" name="id_number" id="id_number" >
+                      </div>
+                    </div>
                   </div>
                     <div class="row">
                     <div class="col-md-6 pr-1">

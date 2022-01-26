@@ -294,7 +294,7 @@
           </div>
           <!-- Closed ticket -->
           <div class=" col"id="ClosedTicket" onclick="adminclosedFunction();">
-            <div class="card card-stats" style="background-color:#292b2c;">
+            <div class="card card-stats" style="background-color:#333333;">
               <div class="card-body ">
                 <div class="row">
                   <div class="col-5 col-md-4" >
