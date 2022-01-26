@@ -4,15 +4,16 @@
         echo ("Database connection failed");
     }
 
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $account_type = $_POST['account_type'];
+    $adminkey = $_POST['adminkey'];
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
     $id_number = $_POST['id_number'];
     $email = $_POST['email'];
-    $contact_number = $_POST['contact_number']; 
-    $pssword = $_POST['pssword'];
+    $contactNum = $_POST['contactNum'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-    $sql = "SELECT * FROM tbl_mobile_app_accounts WHERE email = '".$email."' AND pssword = '".$pssword."'";
+    $sql = "SELECT * FROM accountcreation WHERE email = '".$email."'";
 
     $result = mysqli_query($db, $sql);
     $count = mysqli_num_rows($result);
@@ -20,12 +21,12 @@
     if ($count == 1){
         echo json_encode("Error");
     }else{
-        $insert = "INSERT INTO tbl_mobile_app_accounts(first_name, last_name, account_type, id_number, email, contact_number, pssword) 
-        VALUES('".$first_name."', '".$last_name."', '".$account_type."', '".$id_number."', '".$email."', '".$contact_number."', '".$pssword."',)";
+        $insert = "INSERT INTO accountcreation(adminkey, firstname, lastname, email, contactNum, username, password, id_number,) 
+        VALUES('".$adminkey."', '".$firstname."', '".$lastname."', '".$email."', '".$contactNum."', '".$username."', '".$pssword."', '".$id_number."')";
 
         $query = mysqli_query($db, $insert);
 
-        if ($que3w2ery){
+        if ($query){
             echo json_encode("Success");
         }
     }
