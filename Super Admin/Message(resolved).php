@@ -27,14 +27,21 @@
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="white" data-active-color="danger">
-      <div class="logo">
+    <div class="logo">
         <a class="simple-text logo-mini">
           <div class="logo-image-small">
-            <img src="../Image Files/logo-small.png">
+            <?php 
+              include 'connect.php';
+              $sql = mysqli_query($con, "SELECT * FROM accountcreation WHERE unique_id = {$_SESSION['U_unique_id']}");
+                if(mysqli_num_rows($sql) > 0){
+                $row = mysqli_fetch_assoc($sql);
+              }
+              ?>
+              <img class="icon-simple" src="images/<?php echo $row['img']; ?>" alt="">
           </div>
         </a>
         <a class="simple-text logo-normal">
-          Super Admin
+          <?php echo $row['firstname']. " "  ?>
         </a>
       </div>
       <div class="sidebar-wrapper">
