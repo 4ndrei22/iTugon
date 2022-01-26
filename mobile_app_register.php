@@ -19,7 +19,7 @@
     $count = mysqli_num_rows($result);
 
     if ($count == 1){
-        echo json_encode("Error"); 
+        echo json_encode("Error");
     }else{
         $encrypt_pass = md5($password);
         $insert = "INSERT INTO accountcreation(adminkey, firstname, lastname, email, contactNum, username, password) 
