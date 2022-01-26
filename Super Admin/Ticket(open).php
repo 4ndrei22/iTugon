@@ -111,7 +111,7 @@ include "Ticket_header.php";
       <div class="content">
       <div class="Header pb-4">
             <h2>
-              Closed Tickets
+              Open Tickets
             </h2>
             <div class="inner-addon right-addon">
               <i class="fa fa-search"></i>

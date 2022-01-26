@@ -12,7 +12,7 @@
         $sql = mysqli_query($con, "SELECT * FROM accountcreation WHERE username = '{$username}'");
         if(mysqli_num_rows($sql) > 0){
             $row = mysqli_fetch_assoc($sql);
-            $user_pass = md5($password);
+            $user_pass = sha1($password);
             $enc_pass = $row['password'];
             if($user_pass === $enc_pass){
                 $status = "Active now";
