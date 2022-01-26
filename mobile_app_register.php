@@ -9,7 +9,7 @@
     $account_type = $_POST['account_type'];
     $id_number = $_POST['id_number'];
     $email = $_POST['email'];
-    $contact_number = $_POST['contact_number'];
+    $contact_number = $_POST['contact_number']; 
     $pssword = $_POST['pssword'];
 
     $sql = "SELECT * FROM tbl_mobile_app_accounts WHERE email = '".$email."' AND pssword = '".$pssword."'";
