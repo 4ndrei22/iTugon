@@ -1,6 +1,8 @@
 <?php
   session_start();
-  if(isset($_SESSION["Firstname"])&& ($_SESSION["Lastname"])){
+  if(!isset($_SESSION['U_unique_id'])){
+    header('refresh: 1, url = ../Login.php');
+  }
 ?>
 <?php
     $msg = "";
@@ -47,39 +49,9 @@
       }
     } 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="../Image Files/Logo/BulSU.png">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>
-      BulSU iTugon
-    </title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <!-- CSS Files -->
-    <link href="../CSS Files/bootstrap.min.css" rel="stylesheet" />
-    <link href="../CSS Files/Users.css" rel="stylesheet" />
-    <link href="../CSS Files/demo.css" rel="stylesheet" />
-    <!-- JS Files -->
-    <script src="../JS Files/core/jquery.min.js"></script>
-    <script src="../JS Files/core/popper.min.js"></script>
-    <script src="../JS Files/core/bootstrap.min.js"></script>
-    <script src="../JS Files/plugins/perfect-scrollbar.jquery.min.js"></script>
-    <!-- Chart JS -->
-    <script src="../JS Files/plugins/chartjs.min.js"></script>
-    <!--  Notifications Plugin    -->
-    <script src="../JS Files/plugins/bootstrap-notify.js"></script>
-    <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="../JS Files/Staff_Dashboard.min.js?v=2.0.1" type="text/javascript"></script><!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-    <script src="../JS Files/demo/demo.js"></script>
-    <script src="../JS Files/openTickets.js"></script>
-  </head>
-
+<?php 
+  include "main_header.php";
+?>
 <body class="" style="overflow:hidden;">
   <div class="wrapper ">
   <div class="sidebar" data-color="white" data-active-color="danger">
@@ -183,8 +155,15 @@
               </div>
               <div class="card-body">
                 <div class="author">
+                    <?php 
+                      include 'connect.php';
+                      $sql = mysqli_query($con, "SELECT * FROM accountcreation WHERE unique_id = {$_SESSION['U_unique_id']}");
+                        if(mysqli_num_rows($sql) > 0){
+                        $row = mysqli_fetch_assoc($sql);
+                      }
+                    ?>
                     <img class="avatar border-gray" src="../Image Files/logo-small.png" alt="...">
-                    <h5 style =  'text-transform: uppercase;'><?php echo $_SESSION['Firstname']." ".$_SESSION['Lastname']?></h5>
+                    <h5 style =  'text-transform: uppercase;'><?php echo $row['firstname']." ".$row['lastname']?></h5>
                     <?php if ($msg != "") echo "<h5 class='errormsg'>$msg </h5> "; ?>
                   <!-- <form action="./ChangeInfo.php" method="post">   -->
                   <form action="./user.php" method="post">                  
@@ -192,13 +171,13 @@
                       <div class="col-md-3" style="margin-left: 24%;">
                         <div class="form-group">
                           <label for="fname">First Name</label>
-                          <input type="text" class="form-control" placeholder="First Name" value="<?php echo $_SESSION['Firstname'] ?>" name="firstname" required>
+                          <input type="text" class="form-control" placeholder="First Name" value="<?php echo $row['firstname'] ?>" name="firstname" required>
                         </div>
                       </div>
                       <div class="col-md-3" style="margin-left: 2%;">
                         <div class="form-group">
                           <label for="lname">Last Name</label>
-                          <input type="text" class="form-control" placeholder="Last Name" value="<?php echo $_SESSION['Lastname'] ?>" name="lastname" required>
+                          <input type="text" class="form-control" placeholder="Last Name" value="<?php echo $row['lastname'] ?>" name="lastname" required>
                         </div>
                       </div>
                     </div>
@@ -206,13 +185,13 @@
                       <div class="col-md-3" style="margin-left: 24%;">
                         <div class="form-group">
                           <label for="email">Email</label>
-                          <input type="text" class="form-control" placeholder="Email" value="<?php echo $_SESSION['email']; ?>" name="email" required>
+                          <input type="text" class="form-control" placeholder="Email" value="<?php echo $row['email']; ?>" name="email" required>
                         </div>
                       </div>
                       <div class="col-md-3" style="margin-left: 2%;">
                         <div class="form-group">
                           <label for="contactnum">Contact Number</label>
-                          <input type="text" class="form-control" placeholder="Contact Number" value="<?php echo $_SESSION['contactnum']; ?>" name="ContactNumber" required>
+                          <input type="text" class="form-control" placeholder="Contact Number" value="<?php echo $row['contactNum']; ?>" name="ContactNumber" required>
                         </div>
                       </div>
                     </div>
@@ -263,8 +242,3 @@
 </body>
 
 </html>
-<?php
-  }else{ 
-    header('refresh: 1, url = Login.php');
-  }
-  ?>

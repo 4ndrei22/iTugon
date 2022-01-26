@@ -1,7 +1,8 @@
 <?php
   session_start();
-  if(isset($_SESSION["Firstname"])&& ($_SESSION["Lastname"])){
-
+  if(!isset($_SESSION['U_unique_id'])){
+    header('refresh: 1, url = Login.php');
+  }
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +23,7 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <!-- CSS Files -->
   <link href="./CSS Files/Staff_Dashboard.css" rel="stylesheet" />
-  <link href="./CSS Files/demo.css" rel="stylesheet" />
+  <link href="./CSS Files/demo.css" rel="stylesheet" /> 
   <!-- JS Files -->
   <script src="./JS Files/ActiveTicket(onClick).js"></script>
   <script src="../iTugon/JS Files/Reopened(onClick).js"></script>
@@ -52,11 +53,18 @@
       <div class="logo">
         <a class="simple-text logo-mini">
           <div class="logo-image-small">
-            <img src="./Image Files/logo-small.png">
+            <?php 
+              include 'connect.php';
+              $sql = mysqli_query($con, "SELECT * FROM accountcreation WHERE unique_id = {$_SESSION['U_unique_id']}");
+                if(mysqli_num_rows($sql) > 0){
+                $row = mysqli_fetch_assoc($sql);
+              }
+              ?>
+              <img class="icon-simple" src="Super Admin/images/<?php echo $row['img']; ?>" alt="">
           </div>
         </a>
         <a class="simple-text logo-normal">
-          Super Admin
+          <?php echo $row['firstname']. " "  ?>
         </a>
       </div>
       <div class="sidebar-wrapper">
@@ -605,8 +613,3 @@
 
 
 </html>
-<?php
-  }else{ 
-    header('refresh: 1, url = Login.php');
-  }
-  ?>

@@ -1,61 +1,51 @@
 <?php 
   session_start();
-  
 ?>
-
 <?php
 	$msg = "";
   
 	if (isset($_POST['submit'])) {
 		$con = new mysqli('localhost', 'root', '', 'db_admin');
-
-		$username = $con->real_escape_string($_POST['usernameL']);
-		$password = $con->real_escape_string($_POST['passwordL']);
-
-		$sql = $con->query("SELECT * FROM accountcreation WHERE username='$username'");
-		if ($sql->num_rows > 0) {
-		    $data = $sql->fetch_array();
-		    if (password_verify($password, $data['password']) && $data['adminkey'] == 1) {
-            $firstname = $data['firstname'];
-            $lastname = $data['lastname'];
-            $email = $data['email'];
-            $contactnum = $data['contactNum'];
-            $user = $data['username'];
-            $password = $data['password'];
-
-            $_SESSION['Firstname'] = $firstname;
-            $_SESSION['Lastname'] = $lastname;
-            $_SESSION['email'] = $email;
-            $_SESSION['contactnum'] = $contactnum;
-            $_SESSION['username'] = $user;
-            $_SESSION['password'] = $password;
-
-		        $msg = "You have been logged IN to staff dashboard";
-            header("Location: ./Dashboard(Staff).php");
-
-            }elseif (password_verify($password, $data['password']) && $data['adminkey'] == 2) {
-              $firstname = $data['firstname'];
-              $lastname = $data['lastname'];
-              $email = $data['email'];
-              $contactnum = $data['contactNum'];
-              $user = $data['username'];
-              $password = $data['password'];
-
-              $_SESSION['Firstname'] = $firstname;
-              $_SESSION['Lastname'] = $lastname;
-              $_SESSION['email'] = $email;
-              $_SESSION['contactnum'] = $contactnum;
-              $_SESSION['username'] = $user;
-              $_SESSION['password'] = $password;
-              $msg = "You have been logged IN to admin dashboard";
-              header("Location: ./Dashboard(super).php");
-              // header("Location: ./truncateUser.php");
-              } else
-			    $msg = "Incorrect Password";
+    $username = mysqli_real_escape_string($con, $_POST['usernameL']);
+    $password = mysqli_real_escape_string($con, $_POST['passwordL']);
+    if(!empty($username) && !empty($password)){
+        $sql = mysqli_query($con, "SELECT * FROM accountcreation WHERE username = '{$username}'");
+        if(mysqli_num_rows($sql) > 0){
+            $row = mysqli_fetch_assoc($sql);
+            $user_pass = md5($password);
+            $enc_pass = $row['password'];
+            if($user_pass === $enc_pass){
+                $status = "Active now";
+                $sql2 = mysqli_query($con, "UPDATE accountcreation SET status = '{$status}' WHERE unique_id = {$row['unique_id']}");
+                if($sql2){
+                  if($row['adminkey'] == '1'){
+                    $_SESSION['U_unique_id'] = $row['unique_id'];
+                    $_SESSION['accesslvl'] = $row['adminkey'];
+                    header("location: Dashboard(staff).php");
+                    $msg = "success";
+                  }elseif($row['adminkey'] == '2'){
+                    $_SESSION['U_unique_id'] = $row['unique_id'];
+                    $_SESSION['accesslvl'] = $row['adminkey'];
+                    header("location: Dashboard(super).php");
+                    $msg = "success";
+                  }
+                   
+                }else{
+                  $msg = "Something went wrong. Please try again!";
+                  header('refresh: 1, url = Login.php');
+                }
+            }else{
+              $msg = "Username or Password is Incorrect!";
+               header('refresh: 1, url = Login.php');
+            }
+        }else{
+          $msg = "$username - This username not Exist!";
           header('refresh: 1, url = Login.php');
-        } else
-            $msg = "Incorrect Username";
-            header('refresh: 1, url = Login.php');
+        }
+    }else{
+      $msg = "All input fields are required!";
+      header('refresh: 1, url = Login.php');
+    }
 	}
 ?>
 

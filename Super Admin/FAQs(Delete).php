@@ -1,7 +1,8 @@
 <?php
   session_start();
-  if(isset($_SESSION["Firstname"])&& ($_SESSION["Lastname"])){
-
+  if(!isset($_SESSION['U_unique_id'])){
+    header('refresh: 1, url = ../Login.php');
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -202,8 +203,3 @@
 </body>
 
 </html>
-<?php
-  }else{ 
-    header('refresh: 1, url = Login.php');
-  }
-  ?>

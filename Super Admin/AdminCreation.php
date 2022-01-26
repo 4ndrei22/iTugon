@@ -1,74 +1,84 @@
 <?php
   session_start();
-  if(isset($_SESSION["Firstname"])&& ($_SESSION["Lastname"])){
-
+  if(!isset($_SESSION['U_unique_id'])){
+    header('refresh: 1, url = ../Login.php');
+  }
 ?>
+
 <?php
 	$msg = "";
-
+  include 'connect.php';
 	if (isset($_POST['submit'])) {
-		$con = new mysqli('localhost', 'root', '', 'db_admin');
+        $con = new mysqli('localhost', 'root', '', 'db_admin');
 
-		$firstname = $con->real_escape_string($_POST['firstname']);
-		$lastname = $con->real_escape_string($_POST['lastname']);
-		$email = $con->real_escape_string($_POST['email']);
-		$contactnum = $con->real_escape_string($_POST['contact_number']);
-		$accesslvl = $con->real_escape_string($_POST['accessLvl']);
-		$username = $con->real_escape_string($_POST['usernameR']);
-		$password = $con->real_escape_string($_POST['passwordR']);
-		$cPassword = $con->real_escape_string($_POST['conPassword']);
+        $firstname = $con->real_escape_string($_POST['firstname']);
+        $lastname = $con->real_escape_string($_POST['lastname']);
+        $email = $con->real_escape_string($_POST['email']);
+        $contactnum = $con->real_escape_string($_POST['contact_number']);
+        $accesslvl = $con->real_escape_string($_POST['accessLvl']);
+        $username = $con->real_escape_string($_POST['usernameR']);
+        $password = $con->real_escape_string($_POST['passwordR']);
 
+    if(!empty($firstname) && !empty($lastname) && !empty($email) && !empty($contactnum) && !empty($accesslvl) && !empty($username) && !empty($password)){
+      if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+        $sql = mysqli_query($con, "SELECT * FROM accountcreation WHERE email = '{$email}'");
+            if(mysqli_num_rows($sql) > 0){
+              $msg =  "$email - This email already exist!";
+              header('refresh: 1, url = AdminCreation.php');
+            }else{
+              $sql1 = mysqli_query($con, "SELECT * FROM accountcreation WHERE username = '{$username}'");
+              if(mysqli_num_rows($sql1) > 0){
+                $msg =  "$username - This username already exist!";
+                header('refresh: 1, url = AdminCreation.php');
+              }else{
+                if(isset($_FILES['image'])){
+                  $img_name = $_FILES['image']['name'];
+                  $img_type = $_FILES['image']['type'];
+                  $tmp_name = $_FILES['image']['tmp_name'];
+                  
+                  $img_explode = explode('.',$img_name);
+                  $img_ext = end($img_explode);
 
-		if ($password != $cPassword)
-			$msg = "Please Check Your Passwords!";
-		else {
-			$hash = password_hash($password, PASSWORD_BCRYPT);
-
-			$con->query("INSERT INTO accountcreation (AdminKey, Firstname, Lastname,email, contactnum, username, password) VALUES ('$accesslvl','$firstname', '$lastname', '$email','$contactnum', '$username', '$hash')");
-			$msg = "You have been registered!";
-      echo "<meta http-equiv='refresh' content='0'>";
-      header('Location: AdminCreation.php');
-		}
-	}
+                  $extensions = ["jpeg", "png", "jpg"];
+                  if(in_array($img_ext, $extensions) === true){
+                      $types = ["image/jpeg", "image/jpg", "image/png"];
+                      if(in_array($img_type, $types) === true){
+                          $time = time();
+                          $new_img_name = $time.$img_name;
+                          if(move_uploaded_file($tmp_name,"images/".$new_img_name)){
+                              $ran_id = rand(time(), 100000000);
+                              $status = "Offline now";
+                              $encrypt_pass = md5($password);
+                              $insert_query = mysqli_query($con, "INSERT INTO accountcreation (unique_id, adminkey, firstname, lastname, email, contactNum,username, password, img, status)
+                              VALUES ({$ran_id},'{$accesslvl}','{$firstname}','{$lastname}', '{$email}','{$contactnum}','{$username}', '{$encrypt_pass}', '{$new_img_name}', '{$status}')");
+                              if($insert_query){
+                                $msg = "success";
+                                header('refresh: 1, url = AdminCreation.php');
+                              }
+                          }
+                      }else{
+                        $msg = "Please upload an image file - jpeg, png, jpg";
+                        header('refresh: 1, url = AdminCreation.php');
+                      }
+                  }else{
+                    $msg = "Please upload an image file - jpeg, png, jpg";
+                    header('refresh: 1, url = AdminCreation.php');
+                  }
+                }
+              }
+            }
+      }else{
+        $msg = "$email is not a valid email";
+        header('refresh: 1, url = AdminCreation.php');}
+    }else{ 
+      $msg = "all input fields are required";
+      header('refresh: 1, url = AdminCreation.php');
+    }
+	 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="../Image Files/Logo/BulSU.png">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>
-    BulSU iTugon
-  </title>
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
-  <!--     Fonts and icons     -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-  <!-- CSS Files -->
-  <link href="../CSS Files/bootstrap.min.css" rel="stylesheet" />
-  <link href="../CSS Files/Staff_Dashboard.css" rel="stylesheet" />
-  <link href="../CSS Files/Table.css" rel="stylesheet" />
-  <link href="../CSS Files/demo.css" rel="stylesheet" />
-  <!--   Core JS Files   -->
-  <script src="../JS Files/Errormsg.js"></script>
-  <script src="../JS Files/core/jquery.min.js"></script>
-  <script src="../JS Files/core/popper.min.js"></script>
-  <script src="../JS Files/core/bootstrap.min.js"></script>
-  <script src="../JS Files/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <!-- Chart JS -->
-  <script src="../JS Files/plugins/chartjs.min.js"></script>
-  <!--  Notifications Plugin    -->
-  <script src="../JS Files/plugins/bootstrap-notify.js"></script>
-  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../JS Files/Staff_Dashboard.min.js" type="text/javascript"></script>
-  <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-  <script src="../assets/demo/demo.js"></script>
-</head>
-
+<?php 
+  include "main_header.php";
+?>
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="white" data-active-color="danger">
@@ -164,28 +174,26 @@
       </nav>
       <!-- End Navbar -->
       <div class="content">
-        
           <div class="row">
             <div class="col-md-12">
               <div class="card card-user">
                 <div class="card-header">
                   <h5 class="card-title">Create Account</h5>
                 </div>
-                <div class="card-body">
-                <?php if ($msg != "") echo $msg . "<br><br>"; ?>
-                <form id="form" action="AdminCreation.php" method="post">
-
+                <div class="card-body form signup">
+                <?php if ($msg != "") echo "<h5 class='errormsg'>$msg </h5> "; ?>
+                <form id="form" method="POST" enctype="multipart/form-data" autocomplete="off">
                     <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>First Name</label>
-                        <input type="text" class="form-control" placeholder="First Name" name="firstname" id="firstname">
+                        <input type="text" class="form-control" placeholder="First Name" name="firstname" id="firstname" required>
                       </div>
                     </div>
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label>Last Name</label>
-                        <input type="text" class="form-control" placeholder="Last Name" name="lastname" id="lastname">
+                        <input type="text" class="form-control" placeholder="Last Name" name="lastname" id="lastname" required>
                       </div>
                     </div>
                     </div>
@@ -193,13 +201,13 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Email</label>
-                        <input type="text" class="form-control" placeholder="abc@email.com" name="email" id="email">
+                        <input type="text" class="form-control" placeholder="abc@email.com" name="email" id="email" required>
                       </div>
                     </div>
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label>Contact Number</label>
-                        <input type="text" class="form-control" placeholder="09123456789" name="contact_number" id="contact_number" >
+                        <input type="text" class="form-control" placeholder="09123456789" name="contact_number" id="contact_number" required>
                       </div>
                     </div>
                     </div>
@@ -207,7 +215,7 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                           <label for="access">Access Level</label>
-                          <select class="form-control" name="accessLvl" id="accessLvl">
+                          <select class="form-control" name="accessLvl" id="accessLvl" required>
                             <!-- <option value="">Select access level</option> -->
                             <option value="1"name="Staff" id="Staff">Staff</option>
                             <option value="2" name="Super Admin" id="Super Admin">Super Admin</option>
@@ -216,10 +224,18 @@
                     </div>
                   </div>
                     <div class="row">
+                      <div class="col-md-6 pr-1">
+                        <div class="form-group">
+                          <label>Select Image</label>
+                          <input type="file" name="image" class="form-control"accept="image/x-png,image/gif,image/jpeg,image/jpg" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Username</label>
-                        <input type="text" class="form-control" placeholder="Username" name="usernameR" id="usernameR">
+                        <input type="text" class="form-control" placeholder="Username" name="usernameR" id="usernameR" required>
                       </div>
                     </div>
                     </div>
@@ -227,18 +243,11 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Password</label>
-                        <input type="password" class="form-control" placeholder="Password" name="passwordR" id="passwordR">
+                        <input type="password" class="form-control" placeholder="Password" name="passwordR" id="passwordR" required>
                       </div>
                     </div>
                     </div>
-                    <div class="row">
-                    <div class="col-md-6 pr-1">
-                      <div class="form-group">
-                        <label>Confirm Password</label>
-                        <input type="Password" class="form-control" placeholder="Confirm Password" name="conPassword" id="conPassword">
-                      </div>
-                    </div>
-                    </div>
+                    
                     <div class="row">
                     <div class="update ml-auto mr-auto">
                       <button type="submit" name = "submit" id="submit" class="btn btn-primary btn-round">Create</button>
@@ -330,10 +339,4 @@
   </div>
   
 </body>
-
 </html>
-<?php
-  }else{ 
-    header('refresh: 1, url = Login.php');
-  }
-  ?>

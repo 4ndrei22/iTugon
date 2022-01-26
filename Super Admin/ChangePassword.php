@@ -1,7 +1,8 @@
 <?php
   session_start();
-  if(isset($_SESSION["Firstname"])&& ($_SESSION["Lastname"])){
-
+  if(!isset($_SESSION['U_unique_id'])){
+    header('refresh: 1, url = ../Login.php');
+  }
 ?>
 <?php
     $msg = "";
@@ -11,63 +12,42 @@
       $newPassword =$con->real_escape_string($_POST['new_password']);
       $password = $con->real_escape_string($_POST['current_password']);
       $confirm_password = $con->real_escape_string($_POST['confirm_password']);
-      if ($password = $confirm_password){
-        $sql = $con->query("SELECT id,password FROM accountcreation WHERE username='$username'");
-        if ($sql->num_rows > 0) {
-        $data = $sql->fetch_array();
-        if (password_verify($password, $data['password'])) {
-                  $pass = $data['password'];
-                  $hash = password_hash($newPassword, PASSWORD_BCRYPT);
-                  $sql1 = "UPDATE `accountcreation` SET password = '$hash' WHERE password = '$pass'";
-                  mysqli_query($con,$sql1);
-
-                  echo "<meta http-equiv='refresh' content='0'>";
-                  header('Location: ChangePassword.php');
-
-              }else
-                $msg = "Incorrect Password";
-          } else
-              $msg = "Please check your inputs";
-      } else
-        $msg = "password did not match";
-      
-      
+      if(!empty($newPassword) && !empty($password) && !empty($confirm_password)){
+        $sql = mysqli_query($con, "SELECT * FROM accountcreation WHERE username = '{$username}'");
+        if(mysqli_num_rows($sql) > 0){
+          $row = mysqli_fetch_assoc($sql);
+          $user_pass = md5($password);
+          $newPass = md5($newPassword);
+          $enc_pass = $row['password'];
+          if($password == $confirm_password){
+            if($user_pass === $enc_pass){
+              $sql1 = "UPDATE `accountcreation` SET password = '$newPass' WHERE password = '$user_pass'";
+              mysqli_query($con,$sql1);
+              $msg = "update successfully";
+              header('refresh: 1, url = ChangePassword.php');
+              }else{
+              $msg = "Incorrect Password";
+              header('refresh: 1, url = ChangePassword.php');
+              }
+          }else{
+            $msg = "Password didn't match";
+            header('refresh: 1, url = ChangePassword.php');
+          }
+          
+        }else{
+          $msg = "$username - This is your current username";
+          header('refresh: 1, url = ChangePassword.php');
+        }
+      }else{
+        $msg = "All input fields are required";
+        header('refresh: 1, url = ChangePassword.php');
+      }
     }
  
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="../Image Files/Logo/BulSU.png">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>
-      BulSU iTugon
-    </title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <!-- CSS Files -->
-    <link href="../CSS Files/bootstrap.min.css" rel="stylesheet" />
-    <link href="../CSS Files/Staff_Dashboard.css" rel="stylesheet" />
-    <link href="../CSS Files/demo.css" rel="stylesheet" />
-    <!-- JS Files -->
-    <script src="../JS Files/core/jquery.min.js"></script>
-    <script src="../JS Files/core/popper.min.js"></script>
-    <script src="../JS Files/core/bootstrap.min.js"></script>
-    <script src="../JS Files/plugins/perfect-scrollbar.jquery.min.js"></script>
-    <!-- Chart JS -->
-    <script src="../JS Files/plugins/chartjs.min.js"></script>
-    <!--  Notifications Plugin    -->
-    <script src="../JS Files/plugins/bootstrap-notify.js"></script>
-    <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="../JS Files/Staff_Dashboard.min.js" type="text/javascript"></script>
-    <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-    <script src="../JS Files/demo/demo.js"></script>
-    <script src="../JS Files/openTickets.js"></script>
-</head>
+<?php 
+  include "main_header.php";
+?>
 
 <body class="">
   <div class="wrapper ">
@@ -171,13 +151,20 @@
                 <h4 class="card-title"> Change Password </h4>
               </div>
               <div class="card-body">
+                <?php 
+                  include 'connect.php';
+                  $sql = mysqli_query($con, "SELECT * FROM accountcreation WHERE unique_id = {$_SESSION['U_unique_id']}");
+                  if(mysqli_num_rows($sql) > 0){
+                    $row = mysqli_fetch_assoc($sql);
+                   }
+                ?>
               <?php if ($msg != "") echo $msg . "<br><br>"; ?>
               <form action="ChangePassword.php" method = "post">                  
                   <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Username</label>
-                        <input type="text" class="form-control" placeholder="Username" name="username" value="<?php echo $_SESSION['username']; ?>" >
+                        <input type="text" class="form-control" placeholder="Username" name="username" value="<?php echo $row['username']; ?>" >
                       </div>
                     </div>
                   </div>
@@ -222,8 +209,3 @@
 </body>
 
 </html>
-<?php
-  }else{ 
-    header('refresh: 1, url = Login.php');
-  }
-  ?>
