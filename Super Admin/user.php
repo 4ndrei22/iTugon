@@ -12,40 +12,33 @@
       $lastname =$con->real_escape_string($_POST['lastname']);
       $email = $con->real_escape_string($_POST['email']);
       $contactnum = $con->real_escape_string($_POST['ContactNumber']);
-      $sql = $con->query("SELECT id,password FROM accountcreation WHERE username='$firstname'");
-        
-      $sql1 = "SELECT * FROM accountcreation WHERE firstname = '$firstname' OR lastname = '$lastname' OR email = '$email' OR contactNum = '$contactnum'";
-	
-      $result = mysqli_query($con, $sql1);
 
-      $count =  mysqli_num_rows ($result);
-      if($count == 1)
-      {
-        while ($row = mysqli_fetch_array($result)){
+      if(!empty($firstname) && !empty($lastname) && !empty($email) && !empty($contactnum)){
+        $sql = mysqli_query($con, "SELECT * FROM accountcreation WHERE unique_id = '{$_SESSION['U_unique_id']}'");
+        if(mysqli_num_rows($sql) > 0){
+          $row = mysqli_fetch_assoc($sql);
+          $db_firstname = $row['firstname'];
+          $db_lastname = $row['lastname'];
+          $db_email = $row['email'];
+          $db_contact = $row['contactNum'];
+          if($db_firstname === $firstname || $db_lastname === $lastname || $db_email === $email||$db_contact === $contactnum){
+            $sql1 = "UPDATE `accountcreation` SET firstname = '{$firstname}', lastname = '{$lastname}', email = '{$email}', contactnum = '{$contactnum}'
+                      WHERE firstname = '{$db_firstname}'";
+            mysqli_query($con,$sql1);
+            $msg = "update successfully";
+            header('refresh: 1, url = ChangeUsername.php');
+          }else{
+            $msg = "Incorrect Password";
+            header('refresh: 1, url = ChangeUsername.php');
+          }
+        }else{
+          $msg = "$email - This username already exists";
+          header('refresh: 1, url = ChangeUsername.php');
           
-          if($row["firstname"] == $firstname || $row["lastname"] == $lastname || $row["email"] == $email || $row["contactNum"] == $contactnum){
-            $sql2 = "UPDATE `accountcreation` SET firstname = '$firstname', lastname = '$lastname', email = '$email', contactNum = '$contactnum'
-                      WHERE firstname = '$firstname' OR lastname = '$lastname' OR email = '$email' OR contactNum = '$contactnum'";
-            mysqli_query($con,$sql2);	
-            $_SESSION['Firstname'] = $firstname;
-            $_SESSION['Lastname'] = $lastname;
-            $_SESSION['email'] = $email;
-            $_SESSION['contactnum'] = $contactnum;
-            $msg = "Profile successfully update";
-            echo "<meta http-equiv='refresh' content='1'>";		
-          }
-          else{
-            $msg = "please check your inputs";
-            echo "<meta http-equiv='refresh' content='0'>";	
-          }
         }
-        
-        
-      }
-      else
-      {
-        $msg = "unable to update";
-        echo "<meta http-equiv='refresh' content='0'>";
+      }else{
+        $msg = "All input fields are required";
+        header('refresh: 1, url = ChangeUsername.php');
       }
     } 
 ?>
