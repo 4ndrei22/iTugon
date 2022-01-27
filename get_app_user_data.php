@@ -7,7 +7,7 @@
      $email = $_POST['email'];
      $password = $_POST['password'];
  
-     $query = $db->query("SELECT * FROM accountcreation WHERE email = '".$email."' AND password = '".md5($password)."'") or die($db->error);
+     $query = $db->query("SELECT username, firstname, lastname, email, unqique_id FROM accountcreation WHERE email = '".$email."' AND password = '".md5($password)."'") or die($db->error);
      
      $result = array();
      
