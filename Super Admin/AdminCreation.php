@@ -48,7 +48,7 @@
                           if(move_uploaded_file($tmp_name,"images/".$new_img_name)){
                               $ran_id = rand(time(), 100000000);
                               $status = "Offline now";
-                              $encrypt_pass = sha1($password);
+                              $encrypt_pass = md5($password);
                               $insert_query = mysqli_query($con, "INSERT INTO accountcreation (unique_id, adminkey, firstname, lastname, email, contactNum,username, password, img, status)
                               VALUES ({$ran_id},'{$accesslvl}','{$firstname}','{$lastname}', '{$email}','{$contactnum}','{$username}', '{$encrypt_pass}', '{$new_img_name}', '{$status}')");
                               if($insert_query){

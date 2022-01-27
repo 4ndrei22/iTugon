@@ -1,7 +1,15 @@
 <?php
   session_start();
+  include_once 'connect.php';
   if(!isset($_SESSION['U_unique_id'])){
     header('refresh: 1, url = ../Login.php');
+  }
+?>
+
+<?php 
+  $sql = mysqli_query($con, "SELECT * FROM accountcreation WHERE unique_id = {$_SESSION['U_unique_id']}");
+  if(mysqli_num_rows($sql) > 0){
+    $row = mysqli_fetch_assoc($sql);
   }
 ?>
 <!DOCTYPE html>
@@ -20,6 +28,8 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <!-- CSS Files -->
   <link href="../CSS Files/Staff_Dashboard.css" rel="stylesheet" />
   <link href="../CSS Files/demo.css" rel="stylesheet" />
@@ -36,10 +46,10 @@
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
 </head>
 
-<body class="">
+<body class="" style="overflow:hidden;">
   <div class="wrapper ">
     <div class="sidebar" data-color="white" data-active-color="danger">
-    <div class="logo">
+      <div class="logo">
         <a class="simple-text logo-mini">
           <div class="logo-image-small">
             <?php 
@@ -138,265 +148,45 @@
       </nav>
       <!-- end nav bar -->
       <div class="content" >
-        <div class="row">
-          <div class="col-lg-3 col-md-3 col-sm-3 min-vh-100">
-              <div class="card-body ">
-                <div class="row">
-                    <div class="col" id="FirstCol">
-                        <header>
-                            <h2>Assigned Ticket</h2>
-                            <input type="text" placeholder="search"   class="fa fa-search">
-                        </header>
-                        <ul>
-                            <li>
-                              <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="">
-                              <div>
-                                <h2>Prénom Nom
-                          <span class="status"></span>
-                          #0001
-                        </h2>
-                                <h3>
-                                  <span class="status green"></span>
-                                  Assigned &nbsp; &nbsp;
-                                  <span class="status orange"></span>
-                                  Urgent
-                                </h3>
-                              </div>
-                            </li>
-                            <li>
-                              <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_02.jpg" alt="">
-                              <div>
-                                <h2>Prénom Nom
-                          <span class="status"></span>
-                          #0002
-                        </h2>
-                                <h3>
-                                  <span class="status green"></span>
-                                  Assigned &nbsp; &nbsp;
-                                  <span class="status green"></span>
-                                  Low
-                                </h3>
-                             </div>
-                            </li>
-                            <li>
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_03.jpg" alt="">
-                              <div>
-                                <h2>Prénom Nom
-                          <span class="status"></span>
-                          #0003
-                        </h2>
-                                <h3>
-                                    <span class="status green"></span>
-                                    Assigned &nbsp; &nbsp;
-                                    <span class="status green"></span>
-                                    Low
-                                  </h3>
-                              </div>
-                            </li>
-                            <li>
-                              <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_04.jpg" alt="">
-                              <div>
-                                <h2>Prénom Nom
-                          <span class="status"></span>
-                          #0004
-                        </h2>
-                                <h3>
-                                    <span class="status green"></span>
-                                    Assigned &nbsp; &nbsp;
-                                    <span class="status green"></span>
-                                    Low
-                                  </h3>
-                              </div>
-                            </li>
-                            <li>
-                              <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_05.jpg" alt="">
-                              <div>
-                                <h2>Prénom Nom
-                          <span class="status"></span>
-                          #0005
-                        </h2>
-                                <h3>
-                                    <span class="status green"></span>
-                                    Assigned &nbsp; &nbsp;
-                                    <span class="status green"></span>
-                                    Low
-                                  </h3>
-                              </div>
-                            </li>
-                          </ul>
-                    </div>
-                </div>
+        <div class="container-lg bg-white p-0" style="height: calc(100vh-42px); display: flex;">
+          <div id="convo-list-div" class="col col-md-5 col-lg-4 bg-default bg-opacity-25 row-cols-1" style="height: calc(100vh - 42px) !important;">
+              <div class="search col p-4">
+                <input id="input-search" type="text" placeholder="Search name" class="col form-control mx-0 border-secondary">
+                <button hidden><i class="fas fa-search"></i></button>
               </div>
+              <input type="text" value="" id="convoIncomingId" hidden>
+              <div class="p-2 overflow-auto" style="height: calc(100vh - 128px) !important;">
+
+                <div class="users-list" id="uList">
+            
+                </div>
+
+              </div>
+
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-6" id="" >
-            <div class="card card-stats">
-              <div class="card-body ">
-                <div class="row">
-                    <div class="col" id="SecondCol">
-                        <header>
-                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="">
-                            <div>
-                              <h2>Chat with Prénom Nom</h2>
-                              <h3>already 10 messages</h3>
-                              <h3 style="color:black; font-weight:bold;">#0001</h3>
-                            </div>
-                          </header>
-                          <ul id="chat">
-                            <li class="you">
-                              <div class="entete">
-                                <span class="status green"></span>
-                                <h2>Prénom</h2>
-                                <h3>10:12AM, Today</h3>
-                              </div>
-                              <div class="triangle"></div>
-                              <div class="message">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                              </div>
-                            </li>
-                            <li class="me">
-                              <div class="entete">
-                                <h3>10:12AM, Today</h3>
-                                <h2>Prénom</h2>
-                                <span class="status blue"></span>
-                              </div>
-                              <div class="triangle"></div>
-                              <div class="message" id="me">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                              </div>
-                            </li>
-                            <li class="me">
-                              <div class="entete">
-                                <h3>10:12AM, Today</h3>
-                                <h2>Prénom</h2>
-                                <span class="status blue"></span>
-                              </div>
-                              <div class="triangle"></div>
-                              <div class="message" id="me">
-                                OK
-                              </div>
-                            </li>
-                            <li class="you">
-                              <div class="entete">
-                                <span class="status green"></span>
-                                <h2>Prénom</h2>
-                                <h3>10:12AM, Today</h3>
-                              </div>
-                              <div class="triangle"></div>
-                              <div class="message">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                              </div>
-                            </li>
-                            <li class="me">
-                              <div class="entete">
-                                <h3>10:12AM, Today</h3>
-                                <h2>Prénom</h2>
-                                <span class="status blue"></span>
-                              </div>
-                              <div class="triangle"></div>
-                              <div class="message" id="me">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                              </div>
-                            </li>
-                            <li class="me">
-                              <div class="entete">
-                                <h3>10:12AM, Today</h3>
-                                <h2>Prénom</h2>
-                                <span class="status blue"></span>
-                              </div>
-                              <div class="triangle"></div>
-                              <div class="message" id="me">
-                                OK
-                              </div>
-                            </li>
-                          </ul>
-                          <div class="chat-box-tray">
-                            <i class="fa fa-smile-o"></i>
-                            <input type="text" placeholder="Type your message here...">
-                            <i class="fa fa-microphone"></i>
-                            <i class="fa fa-send"></i>
-                          </div>
-                    </div>
-                </div>
-              </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <!-- <i class="fa fa-refresh"></i>
-                  Update Now -->
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-9" id="">
-            <div class="card card-stats">
-              <div class="card-body ">
-                <div class="row">
-                    <div class="col" id="ThirdCol">
-                        <header>
-                            <h2>Properties</h2>
-                        </header>
-                        <ul>
-                            <li>
-                                <div>
-                                  <div class="dropdown" style="width: 330px; padding-left: 10px;">
-                                    <h4 style="padding-left: 5px; color: black; font-size:18">Prioritization</h4>
-                                    <div class="dropdown">
-                                      <button onclick="Prioritization()" class="dropbtn">Low</button>
-                                      <div id="myDropdown" class="dropdown-content">
-                                        <a href="#home">Low</a>
-                                        <a href="#about">Normal</a>
-                                        <a href="#contact">Important</a>
-                                        <a href="#contact">Urgent</a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </li>
-                            <li>
-                              <div>
-                                <div class="dropdown" style="width: 330px; padding-left: 10px;">
-                                  <h4 style="padding-left: 5px; color: black; font-size:18">Status</h4>
-                                  <div class="dropdown">
-                                    <button onclick="Status()" class="dropbtn">Low</button>
-                                    <div id="myDropdown" class="dropdown-content">
-                                      <a href="#home">Open</a>
-                                      <a href="#about">On Process</a>
-                                      <a href="#contact">Resolved</a>
-                                      <a href="#contact">Resolved</a>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </li>
-                            <li>
-                                <div>
-                                  <div class="dropdown" style="width: 330px; padding-left: 10px;">
-                                    <h4 style="padding-left: 5px; color: black; font-size:18">Forwarded to office concern</h4>
-                                    <div class="dropdown">
-                                      <button onclick="forwarded()" class="dropbtn">Low</button>
-                                      <div id="Forwarded" class="dropdown-content">
-                                        <a href="#home">Admission Concern</a>
-                                        <a href="#about">Enrollment Concern</a>
-                                        <a href="#contact">Grade Concern</a>
-                                        <a href="#contact">Document Concern</a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </li>
-                            <li>
-                              <div>
-                                <button type="button" class="btn btn-light btn-lg"
-                                style="margin-left: 10px; width:320px;">Done</button>
-                              </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>    
-        </div>
+          <div id="convo-div" class="col position-relative d-none d-sm-block">
+            <iframe id="chat-box-div" src="./conversation.php?user_id=" class="col-12 w-100 col-md-7 col-lg-8 d-flex flex-column" style="height: calc(100vh - 42px) !important;"></iframe>
+            <div class="position-absolute top-0 start-0 mt-2 ms-2 d-block d-sm-none"><a class="link-primary"  href="javascript:goBack()" style="font-size: 30px"><i class="bi bi-chevron-left"></i></a></div>
+          <div>
+      </div>
+        <script src="../javascript/users.js"></script>
+        <script>
+          function showConversation(userid) {
+            document.getElementById('chat-box-div').src = "./conversation.php?user_id=" + userid;
+            document.getElementById('input-search').value = '';
+            document.getElementById('input-search').dispatchEvent(new KeyboardEvent('keydown',  {'keycode':13}));
+            document.getElementById('convo-div').classList.remove("d-none");
+            document.getElementById('convo-div').classList.remove("d-sm-block");
+            document.getElementById('convo-list-div').classList.add("d-none");
+            document.getElementById('convo-list-div').classList.add("d-sm-block");
+          }
+          function goBack() {
+            document.getElementById('convo-div').classList.add("d-none");
+            document.getElementById('convo-div').classList.add("d-sm-block");
+            document.getElementById('convo-list-div').classList.remove("d-none");
+            document.getElementById('convo-list-div').classList.remove("d-sm-block");
+          }
+        </script>
       </div>
     </div>
   </div>

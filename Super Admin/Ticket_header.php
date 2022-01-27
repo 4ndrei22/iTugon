@@ -17,6 +17,7 @@
     <link href="../CSS Files/Staff_Dashboard.css" rel="stylesheet" />
     <link href="../CSS Files/demo.css" rel="stylesheet" />
     <link href="../CSS Files/ActiveTickets.css" rel="stylesheet">
+    <!-- <link href="../CSS Files/ticket.css" rel="stylesheet"> -->
     <!-- JS Files -->
     <script src="./JS Files/goto msg(staff)/msg(closed).js"></script>
   

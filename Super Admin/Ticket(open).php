@@ -109,91 +109,74 @@ include "Ticket_header.php";
     </nav>
     <!-- end nav bar -->
       <div class="content">
-      <div class="Header pb-4">
-            <h2>
-              Open Tickets
-            </h2>
-            <div class="inner-addon right-addon">
-              <i class="fa fa-search"></i>
-              <input type="text" class="form-control" placeholder="Search..." />
-            </div>
+        <div class="Header pb-4">
+          <h2>
+            Open Tickets
+          </h2>
+          <div class="inner-addon right-addon">
+            <i class="fa fa-search"></i>
+            <input type="text" class="form-control" placeholder="Search..." />
           </div>
-          <div class="row">
-            <?php
-              include 'connect.php';
-              //$sql = "SELECT Firstname, Lastname FROM staffs";
-              $sql = "SELECT * FROM ticketInfo";
-              $result = mysqli_query($con,$sql);
-              if(mysqli_num_rows($result) > 0){
-                  while ($row = mysqli_fetch_assoc($result)){
+        </div>
+        <div class="row" style="display: flex;">
+          <?php
+            include 'connect.php';
+            $sql = "SELECT * FROM ticketinfo WHERE prioLvl = 'Open' ORDER BY msg_id DESC LIMIT 1";
+            $result = mysqli_query($con,$sql);
+            if(mysqli_num_rows($result) > 0){
+              //$row = mysqli_fetch_assoc($result);
+              // output data of each row
+              while($row = $result->fetch_assoc()) {
+                $ticketnum = $row['ticket_id'];
+                $prioLvl = $row['prioLvl'];
+                $Stat = $row['stat'];
+                $date = $row['date'];
 
-                    $ticketnum=$row['ticket_id'];
-                    $prioLvl = $row['prioLvl'];
-                    $Stat = $row['stat'];
-                    $date = $row['date'];
-                    
-                    $sql1 = "SELECT * FROM accountcreation WHERE unique_id ={$row['ticketsender_id']}";
-                    $result1 = mysqli_query($con,$sql1);
-                    if(mysqli_num_rows($result1) > 0 ){
-                      $row1 = mysqli_fetch_assoc($result1);
-                      
-                      $ticketSenderFname = $row1['firstname'];
-                      $ticketSenderLname = $row1['lastname'];
-                      $ticketSender = $row1['firstname'] ." ". $row1['lastname'];
-                      $ticketname = substr($ticketSender, 0, 10);
-                    }
-                  
-                  
-                  if($prioLvl == "Closed"){
-              ?>
-                <div class="col-lg-3 col-md-3 col-sm-3">
-                  <div class="card card-stats">
-                    <div class="card-body ">
-                      <div class="row">
-                        <div class="col-md-auto" >
-                          <div class="icon-small text-center icon-warning">
-                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
+                $sql1 = "SELECT * FROM accountcreation WHERE unique_id = '{$row['ticket_id']}' ";
+                $result1 = mysqli_query($con,$sql1);
+                if(mysqli_num_rows($result1) > 0){
+                  $row1 = mysqli_fetch_assoc($result1);;
+                  $firstname = $row1['firstname'];
+                  $lastname = $row1['lastname'];
+                  $img = $row1['img'];
+
+                echo "
+                    <div class='col-lg-3 col-md-3 col-sm-3'>
+                      <a href='./Ticket(assigned).php?user_id='>
+                        <div class='card card-stats'>
+                          <div class='card-body'>
+                            <div class='row'>
+                              <div class='col-md-auto'>
+                                <div class='icon-small text-center icon-warning'>
+                                <img src='Super Admin/images/$img' alt= '' class='icon-simple'>
+                                </div>
+                              </div>
+                              <div class='col-md-auto'>
+                                <div class='numbers'>
+                                  <a class='box-title' >$firstname<span class='status'></span>$date</a> 
+                                  <h6 class='box-ticket'>#$ticketnum</h6>
+                                  <h3 class='box-status'><span class='status bg-dark'></span>
+                                    $prioLvl&nbsp; &nbsp;$Stat
+                                    </h3>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class='card-footer'>
+                            <hr>
                           </div>
                         </div>
-                        <div class="col-md-auto">
-                          <div class="numbers">
-                            <!-- <p class="card-category text-white">Open</p>
-                            <p class="card-title text-white">54<p> -->
-                            <h4 class="box-title"><?php echo $ticketname; ?><span class="status"></span><?php echo $date; ?></h4> 
-                            <h6 class="box-ticket">#<?php echo $ticketnum; ?></h6>
-                            <h3 class="box-status"><span class="status bg-dark"></span>
-                              <?php echo $prioLvl; ?> &nbsp; &nbsp;
-                              <?php 
-                                if($Stat == "Urgent"){
-                                  echo"<span class='status red'></span>";
-                                  echo $Stat;"</h3>";
-                                }elseif($Stat == "High"){
-                                  echo"<span class='status orange'></span>";
-                                  echo $Stat;"</h3>";
-                                }elseif ($Stat =="Normal"){
-                                  echo"<span class='status green'></span>";
-                                  echo $Stat;"</h3>";
-                                }else{
-                                  echo"<span class='status blue'></span>";
-                                  echo $Stat;"</h3>";
-                                }
-                              ?>
-                          </div>
-                        </div>
-                      </div>
+                      </a>  
                     </div>
-                    <div class="card-footer ">
-                      <hr>
-                    </div>
-                  </div>
-                </div>
-            <?php
-                  }
-                }
+                    ";
+                                  }
               }
-                                  
-            ?>
-          </div>
+
+              } 
+                $con->close();
+
+          ?>   
+        </div>
       </div>
     </div>
   </div>
