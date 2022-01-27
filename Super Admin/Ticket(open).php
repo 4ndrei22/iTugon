@@ -119,63 +119,28 @@ include "Ticket_header.php";
           </div>
         </div>
         <div class="row" style="display: flex;">
-          <?php
-            include 'connect.php';
-            $sql = "SELECT * FROM ticketinfo WHERE prioLvl = 'Open' ORDER BY msg_id DESC LIMIT 1";
-            $result = mysqli_query($con,$sql);
-            if(mysqli_num_rows($result) > 0){
-              //$row = mysqli_fetch_assoc($result);
-              // output data of each row
-              while($row = $result->fetch_assoc()) {
-                $ticketnum = $row['ticket_id'];
-                $prioLvl = $row['prioLvl'];
-                $Stat = $row['stat'];
-                $date = $row['date'];
+        <div class="content" >
+        <div class="container-lg bg-white p-0" style="height: calc(100vh-42px); display: flex;">
+          <div id="convo-list-div" class="col col-md-5 col-lg-4 bg-default bg-opacity-25 row-cols-1" style="height: calc(100vh - 42px) !important;">
+              <div class="search col p-4">
+                <input id="input-search" type="text" placeholder="Search name" class="col form-control mx-0 border-secondary">
+                <button hidden><i class="fas fa-search"></i></button>
+              </div>
+              <input type="text" value="" id="convoIncomingId" hidden>
+              <div class="p-2 overflow-auto" style="height: calc(100vh - 128px) !important;">
 
-                $sql1 = "SELECT * FROM accountcreation WHERE unique_id = '{$row['ticket_id']}' ";
-                $result1 = mysqli_query($con,$sql1);
-                if(mysqli_num_rows($result1) > 0){
-                  $row1 = mysqli_fetch_assoc($result1);;
-                  $firstname = $row1['firstname'];
-                  $lastname = $row1['lastname'];
-                  $img = $row1['img'];
+                <div class="users-list" id="uList">
+            
+                </div>
 
-                echo "
-                    <div class='col-lg-3 col-md-3 col-sm-3'>
-                      <a href='./Ticket(assigned).php?user_id='>
-                        <div class='card card-stats'>
-                          <div class='card-body'>
-                            <div class='row'>
-                              <div class='col-md-auto'>
-                                <div class='icon-small text-center icon-warning'>
-                                <img src='Super Admin/images/$img' alt= '' class='icon-simple'>
-                                </div>
-                              </div>
-                              <div class='col-md-auto'>
-                                <div class='numbers'>
-                                  <a class='box-title' >$firstname<span class='status'></span>$date</a> 
-                                  <h6 class='box-ticket'>#$ticketnum</h6>
-                                  <h3 class='box-status'><span class='status bg-dark'></span>
-                                    $prioLvl&nbsp; &nbsp;$Stat
-                                    </h3>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class='card-footer'>
-                            <hr>
-                          </div>
-                        </div>
-                      </a>  
-                    </div>
-                    ";
-                                  }
-              }
+              </div>
 
-              } 
-                $con->close();
-
-          ?>   
+          </div>
+          <div id="convo-div" class="col position-relative d-none d-sm-block">
+            <iframe id="chat-box-div" src="./conversation.php?user_id=" class="col-12 w-100 col-md-7 col-lg-8 d-flex flex-column" style="height: calc(100vh - 42px) !important;"></iframe>
+            <div class="position-absolute top-0 start-0 mt-2 ms-2 d-block d-sm-none"><a class="link-primary"  href="javascript:goBack()" style="font-size: 30px"><i class="bi bi-chevron-left"></i></a></div>
+          <div>
+      </div>  
         </div>
       </div>
     </div>
