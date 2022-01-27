@@ -20,7 +20,7 @@ searchBar.onkeyup = ()=>{
     searchBar.classList.remove("active");
   }
   let xhr = new XMLHttpRequest();
-  xhr.open("POST", "php/search.php", true);
+  xhr.open("POST", "../php/search.php", true);
   xhr.onload = ()=>{
     if(xhr.readyState === XMLHttpRequest.DONE){
         if(xhr.status === 200){
@@ -33,19 +33,24 @@ searchBar.onkeyup = ()=>{
   xhr.send("searchTerm=" + searchTerm);
 }
 
+let first = true;
+
 setInterval(() =>{
   let xhr = new XMLHttpRequest();
-  xhr.open("GET", "php/users.php", true);
+  xhr.open("GET", "../php/users.php", true);
   xhr.onload = ()=>{
     if(xhr.readyState === XMLHttpRequest.DONE){
-        if(xhr.status === 1){
+        if(xhr.status === 200){
           let data = xhr.response;
           if(!searchBar.classList.contains("active")){
             usersList.innerHTML = data;
+            if(first){
+              document.getElementById('chat-box-div').src="conversation?user_id=";
+              first = false;
+            }
           }
         }
     }
   }
   xhr.send();
-}, 1);
-
+}, 1000);

@@ -1,12 +1,23 @@
 <?php
     session_start();
-    include_once "connect.php";
+    include_once "config.php";
     $outgoing_id = $_SESSION['U_unique_id'];
-    $sql = "SELECT * FROM accountcreation WHERE NOT unique_id = {$outgoing_id} ORDER BY user_id DESC";
-    $query = mysqli_query($con, $sql);
+    $sql = "SELECT t1.*, U.*
+    FROM messages t1
+    JOIN ( SELECT LEAST(incoming_msg_id, outgoing_msg_id) user1,
+                  GREATEST(incoming_msg_id, outgoing_msg_id) user2,
+                  MAX(msg_id) msg_id 
+           FROM messages t2
+           GROUP BY user1, user2 ) t3  ON t1.incoming_msg_id IN (t3.user1, t3.user2)
+                                      AND t1.outgoing_msg_id IN (t3.user1, t3.user2)
+                                      AND t1.msg_id = t3.msg_id
+    INNER JOIN accountcreation U
+    ON (U.unique_id = incoming_msg_id XOR U.unique_id = outgoing_msg_id) AND NOT U.unique_id = {$outgoing_id}
+    ORDER BY t1.timestamp DESC";
+    $query = mysqli_query($conn, $sql);
     $output = "";
     if(mysqli_num_rows($query) == 0){
-        $output .= "No users are available to chat";
+        $output .= "<p class='text-center text-black mt-5 p-4 fs-5 fw-600'>Search for user to start a conversation.</>";
     }elseif(mysqli_num_rows($query) > 0){
         include_once "data.php";
     }
