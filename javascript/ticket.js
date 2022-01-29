@@ -1,4 +1,6 @@
-const usersList = document.querySelector(".ticket-list");
+const searchBar = document.querySelector(".search input"),
+searchIcon = document.querySelector(".search button"),
+usersList = document.querySelector(".users-list");
 
 searchIcon.onclick = ()=>{
   searchBar.classList.toggle("show");
@@ -18,7 +20,7 @@ searchBar.onkeyup = ()=>{
     searchBar.classList.remove("active");
   }
   let xhr = new XMLHttpRequest();
-  xhr.open("POST", "../php/ticket_display.php", true);
+  xhr.open("POST", "../php/search.php", true);
   xhr.onload = ()=>{
     if(xhr.readyState === XMLHttpRequest.DONE){
         if(xhr.status === 200){
@@ -30,6 +32,28 @@ searchBar.onkeyup = ()=>{
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.send("searchTerm=" + searchTerm);
 }
+
+ticket.onclick = ()=>{
+  let searchTerm = searchBar.value;
+  if(searchTerm != ""){
+    searchBar.classList.add("active");
+  }else{
+    searchBar.classList.remove("active");
+  }
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "../php/search.php", true);
+  xhr.onload = ()=>{
+    if(xhr.readyState === XMLHttpRequest.DONE){
+        if(xhr.status === 200){
+          let data = xhr.response;
+          usersList.innerHTML = data;
+        }
+    }
+  }
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send("searchTerm=" + searchTerm);
+}
+
 
 let first = true;
 
@@ -43,7 +67,7 @@ setInterval(() =>{
           if(!searchBar.classList.contains("active")){
             usersList.innerHTML = data;
             if(first){
-              document.getElementById('chat-box-div').src="conversation?user_id=";
+              document.getElementById('chat-box-div').src="conversation.php?user_id=";
               first = false;
             }
           }

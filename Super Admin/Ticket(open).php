@@ -118,7 +118,7 @@ include "Ticket_header.php";
               <input type="text" class="form-control" placeholder="Search..." />
             </div>
           </div>
-          <div class="row">
+          <div class="row" id="ticket-list-div">
             <?php
               include 'connect.php';
               //$sql = "SELECT Firstname, Lastname FROM staffs";
@@ -284,7 +284,6 @@ include "Ticket_header.php";
               }
                                   
             ?>
-            <script src="../javascript/users.js"></script>
             <script>
               function showConversation(userid) {
                 document.getElementById('chat-box-div').src = "./conversation.php?user_id=" + userid;
@@ -292,8 +291,8 @@ include "Ticket_header.php";
                 document.getElementById('input-search').dispatchEvent(new KeyboardEvent('keydown',  {'keycode':13}));
                 document.getElementById('convo-div').classList.remove("d-none");
                 document.getElementById('convo-div').classList.remove("d-sm-block");
-                document.getElementById('convo-list-div').classList.add("d-none");
-                document.getElementById('convo-list-div').classList.add("d-sm-block");
+                document.getElementById('ticket-list-div').classList.add("d-none");
+                document.getElementById('ticket-list-div').classList.add("d-sm-block");
               }
               function goBack() {
                 document.getElementById('convo-div').classList.add("d-none");
