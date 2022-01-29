@@ -45,7 +45,7 @@ setInterval(() =>{
           if(!searchBar.classList.contains("active")){
             usersList.innerHTML = data;
             if(first){
-              document.getElementById('chat-box-div').src="conversation?user_id=";
+              document.getElementById('chat-box-div').src="conversation.php?user_id=";
               first = false;
             }
           }

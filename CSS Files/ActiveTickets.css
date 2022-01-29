@@ -16,6 +16,13 @@
 	font-size:15px;
 	text-align: left;
 }
+.box-msg{
+	margin-top: -0.5px;
+	margin-bottom: -0.5px;
+	font-weight: normal;
+	font-size:12px;
+	text-align: left;
+}
 
 .status{
 	width:8px;

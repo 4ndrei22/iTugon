@@ -2,6 +2,7 @@
     session_start();
     include_once "config.php";
     $outgoing_id = $_SESSION['U_unique_id'];
+   // $incoming_id = $_GET['user_id']
     $sql = "SELECT t1.*, U.*
     FROM messages t1
     JOIN ( SELECT LEAST(incoming_msg_id, outgoing_msg_id) user1,

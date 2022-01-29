@@ -8,7 +8,7 @@
 <?php 
     if($_GET['user_id']==''){
       if(!(isset($_SESSION['convo_user_id']))){
-        header("Location: include/view/no-chats");
+        header("Location: no-chats.php");
       }
       $_GET['user_id'] = $_SESSION['convo_user_id'];
     }
@@ -44,7 +44,7 @@
 </head>
 <body style="height: 100vh;">
 
-    <div class="bg-primary bg-opacity-10 d-flex flex-row px-4 py-2">
+    <div class="bg-opacity-10 d-flex flex-row px-4 py-2" Style="background-color: #671e1e;">
         <img class="rounded-circle ms-3 align-self-xl-center my-auto" src="<?php echo $row['img']; ?>" width="42px" height="42px">
         <div>
             <p class="text-truncate fs-5 m-0 ms-2 mt-2 lh-1 fw-600"><?php echo $row['firstname']. " " . $row['lastname'] ?></p>
