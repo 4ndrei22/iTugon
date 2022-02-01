@@ -37,7 +37,9 @@
 
                 if($row['outgoing_msg_id'] === $outgoing_id){
                     $output .= '<div><div class="d-flex flex-row-reverse mt-2">
-                                    <div class="outgoing-chat py-2 px-3 bg-secondary bg-opacity-25" style="max-width: 80%;"><p class="fs-6 p-0 m-0 text-black" style="word-wrap: break-word;">'. $row['msg'] .'</p></div>
+                                    <div class="outgoing-chat py-2 px-3 bg-secondary bg-opacity-25" style="max-width: 80%;">
+                                        <p class="fs-6 p-0 m-0 text-black" style="word-wrap: break-word;">'. $row['msg'] .'</p>
+                                    </div>
                                 </div>
                                 <div class="d-flex flex-row-reverse mb-2">
                                     <small class="mb-2 text-muted">'.$timestamp.'</small>
@@ -49,7 +51,7 @@
                     $output .= '<div class="d-flex my-2">
                                     <img class="rounded-circle p-0 align-self-top me-2" src="'.$row['img'].'" width="28px" height="28px">
                                     <div style="max-width: 80%;">
-                                        <div class="py-2 px-3 bg-primary incoming-chat" ><p class="fs-6 p-0 m-0 text-white" style="word-wrap: break-word;">'. $row['msg'] .'</p></div>
+                                        <div class="bg-light py-2 px-3  incoming-chat"><p class="fs-6 p-0 m-0 text-white" style="word-wrap: break-word;">'. $row['msg'] .'</p></div>
                                         <small class="mb-2 text-muted">'.$timestamp.'</small>
                                     </div>
                                 </div>';

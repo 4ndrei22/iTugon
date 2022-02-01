@@ -54,7 +54,7 @@
                 <a  href="javascript:showConversation('.$row['unique_id'].')" class="text-decoration-none">
                     <div class="chat-convo-list-item p-2 rounded m-0 mb-2'.$selectedConvo.'">
                         <div class="d-flex flex-row">
-                            <img class="rounded-circle p-0 align-self-xl-center my-auto" src="'. $row['img'] .'" width="42px" height="42px">
+                            <img class="rounded-circle p-0 align-self-xl-center my-auto" src="images/'. $row['img'] .'" width="42px" height="42px">
                             <div class="flex-grow-1 align-self-stretch px-2 text-truncate">
                                 <div class="pe-2 overflow-visible"><p class="text-truncate lh-1 mt-1 fs-6 fw-600 mb-0 overflow-visible text-black">'. $row['firstname']. " " . $row['lastname'] .'</p></div>
                                 <div class="d-flex">

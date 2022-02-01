@@ -111,81 +111,46 @@ include "Ticket_header.php";
       <div class="content">
           <div class="Header pb-4">
             <h2>
-              Pending Tickets
+              Open Tickets
             </h2>
             <div class="inner-addon right-addon">
               <i class="fa fa-search"></i>
               <input type="text" class="form-control" placeholder="Search..." />
             </div>
           </div>
-          <div class="row">
-          <?php
-            include 'connect.php';
-            //$sql = "SELECT Firstname, Lastname FROM staffs";
-            $sql = "SELECT * FROM ticketInfo";
-            $result = mysqli_query($con,$sql);
-            if(mysqli_num_rows($result) > 0){
-                while ($row = mysqli_fetch_assoc($result)){
-                                
-                $ticketnum=$row['TicketNum'];
-                $ticketSender = $row['TicketSender'];
-                $prioLvl = $row['PrioLvl'];
-                $Stat = $row['Stat'];
-                $date = $row['Date'];
-                $ticketname = substr($ticketSender, 0, 10);
+          <div class="container-lg bg-white p-0" style="height: calc(100vh-42px); display: flex;">
+            <div id="convo-list-div" class="col col-md-5 col-lg-4 bg-default bg-opacity-25 row-cols-1" style="height: calc(100vh - 42px) !important;">
+              <div class="search col p-4">
+                <input id="input-search" type="text" placeholder="Search name" class="col form-control mx-0 border-secondary">
+                <button hidden><i class="fas fa-search"></i></button>
+              </div>
+              <input type="text" value="" id="convoIncomingId" hidden>
+              <div class="p-2 overflow-auto" style="height: calc(100vh - 128px) !important;">
+                <div class="users-list" id="uList">
                 
-                if($prioLvl == "Pending"){
-          ?>
-                <div class="col-lg-3 col-md-3 col-sm-3">
-                  <div class="card card-stats">
-                    <div class="card-body ">
-                      <div class="row">
-                        <div class="col-md-auto" >
-                          <div class="icon-small text-center icon-warning">
-                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" class="icon-simple">
-                          </div>
-                        </div>
-                        <div class="col-md-auto">
-                          <div class="numbers">
-                            <!-- <p class="card-category text-white">Open</p>
-                            <p class="card-title text-white">54<p> -->
-                            <h4 class="box-title"><?php echo $ticketname; ?><span class="status"></span><?php echo $date; ?></h4> 
-                            <h6 class="box-ticket">#<?php echo $ticketnum; ?></h6>
-                            <h3 class="box-status"><span class="status orange"></span>
-                              <?php echo $prioLvl; ?> &nbsp; &nbsp;
-                              <?php 
-                                if($Stat == "Urgent"){
-                                  echo"<span class='status red'></span>";
-                                  echo $Stat;"</h3>";
-                                }elseif($Stat == "High"){
-                                  echo"<span class='status orange'></span>";
-                                  echo $Stat;"</h3>";
-                                }elseif ($Stat =="Normal"){
-                                  echo"<span class='status green'></span>";
-                                  echo $Stat;"</h3>";
-                                }else{
-                                  echo"<span class='status blue'></span>";
-                                  echo $Stat;"</h3>";
-                                }
-                              ?>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card-footer ">
-                      <hr>
-                    </div>
-                  </div>
                 </div>
-          <?php
-                }
+              </div>
+            </div>
+            <script src="../javascript/ticket_incoming.js"></script>
+            <script>
+              function showConversation(userid) {
+                document.getElementById('chat-box-div').src = "./conversation.php?user_id=" + userid;
+                document.getElementById('input-search').value = '';
+                document.getElementById('input-search').dispatchEvent(new KeyboardEvent('keydown',  {'keycode':13}));
+                document.getElementById('convo-div').classList.remove("d-none");
+                document.getElementById('convo-div').classList.remove("d-sm-block");
+                document.getElementById('convo-list-div').classList.add("d-none");
+                document.getElementById('convo-list-div').classList.add("d-sm-block");
               }
-            }
-                                
-          ?>
-            
+              function goBack() {
+                document.getElementById('convo-div').classList.add("d-none");
+                document.getElementById('convo-div').classList.add("d-sm-block");
+                document.getElementById('convo-list-div').classList.remove("d-none");
+                document.getElementById('convo-list-div').classList.remove("d-sm-block");
+              }
+            </script>
           </div>
-        </div>
+      </div>
     </div>
   </div>
   
