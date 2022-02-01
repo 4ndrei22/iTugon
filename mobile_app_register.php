@@ -21,9 +21,10 @@
     if ($count == 1){
         echo json_encode("Error");
     }else{
+        $ran_id = rand(time(), 100000000);
         $encrypt_pass = md5($password);
-        $insert = "INSERT INTO accountcreation(adminkey, firstname, lastname, email, contactNum, username, password) 
-        VALUES('".$adminkey."', '".$firstname."', '".$lastname."', '".$email."', '".$contactNum."', '".$username."', '".$encrypt_pass."')";
+        $insert = "INSERT INTO accountcreation(unique_id, adminkey, firstname, lastname, email, contactNum, username, password) 
+        VALUES('".$ran_id."', '".$adminkey."', '".$firstname."', '".$lastname."', '".$email."', '".$contactNum."', '".$username."', '".$encrypt_pass."')";
 
         $query = mysqli_query($db, $insert);
 
