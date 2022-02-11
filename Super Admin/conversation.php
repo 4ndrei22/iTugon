@@ -2,23 +2,38 @@
   session_start();
   include_once "connect.php";
   if(!isset($_SESSION['U_unique_id'])){
-    header("location: ../Login.php");
+    header("location: ../Login");
   }
 ?>
 <?php 
     if($_GET['user_id']==''){
       if(!(isset($_SESSION['convo_user_id']))){
-        header("Location: ./no-chats.php");
+        header("Location: ./no-chats");
       }
       $_GET['user_id'] = $_SESSION['convo_user_id'];
     }
     $_SESSION['convo_user_id'] = $_GET['user_id'];
+    //$mobileuser_id = $_GET['user_id'];
+    $staff_id = $_SESSION['U_unique_id'];
     $user_id = mysqli_real_escape_string($con, $_SESSION['convo_user_id']);
+    $select = mysqli_query($con, "SELECT * FROM ticketinfo WHERE ticket_owner = {$user_id}");
+    if(mysqli_num_rows($select) > 0){
+      $row1 = mysqli_fetch_assoc($select);
+      $message = $row1['message'];
+      $status = $row1['status'];
+      if($status == 'Closed'){
+          $hidden = 'hidden';
+      }else{
+          $hidden = '';
+      }
+    }
     $sql = mysqli_query($con, "SELECT * FROM accountcreation WHERE unique_id = {$user_id}");
     if(mysqli_num_rows($sql) > 0){
       $row = mysqli_fetch_assoc($sql);
-    }else{
-      //header("location: users.php");
+        $update = "UPDATE ticketinfo SET status = 'Assigned',ticket_assignee = $staff_id WHERE ticket_owner = $user_id ";
+        mysqli_query($con, $update);
+        //$insert = "INSERT INTO messages (incoming_msg_id, outgoin_msg_id, msg) VALUES ({$user_id},{$staff_id},{$message})";
+        //mysqli_query($con, $insert);
     }
 ?>
 <html>
@@ -45,14 +60,9 @@
 </head>
 <body style="height: 100vh;">
 
-    <div class="bg-opacity-10 d-flex flex-row px-4 py-2" Style="background-color: #671e1e;">
-      <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-3">
-          <img class="rounded-circle ms-2 align-self-xl-center  my-auto" src="images/<?php echo $row['img']; ?>" width="42px" height="42px">
-        </div>
-        <div class="col-lg-5 col-md-5 col-sm-5">
+    <div class="bg-opacity-10 d-flex flex-row py-2" Style="background-color: #671e1e;">
+            <img class="rounded-circle ms-2 align-self-xl-center  my-auto " src="images/<?php echo $row['img']; ?>" width="38px" height="38px">
             <p class="text-truncate fs-5 m-0 ms-1 mt-2 lh-1 fw-600" style="display:block; color:white;"><?php echo $row['firstname']. " " . $row['lastname'] ?></p>
-        </div>
       </div>
         
         
@@ -63,7 +73,7 @@
     <div class="p-2 pb-3 border-top bg-secondary bg-opacity-25 rounded-top">
         <form action="#" class="typing-area">
             <input type="text" class="incoming_id" name="incoming_id" value="<?php echo $user_id; ?>" hidden>
-            <input type="text" name="message" class="input-field form-control col-11" placeholder="Type a message here..." autocomplete="off">
+            <input type="text" name="message" class="input-field form-control col-11" placeholder="Type a message here..." autocomplete="off" <?php echo $hidden;?>>
             <button hidden></button>
         </form>
     </div>

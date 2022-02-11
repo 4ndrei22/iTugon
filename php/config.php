@@ -1,11 +1,13 @@
 <?php
-  $hostname = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "db_admin";
-
-  $conn = mysqli_connect($hostname, $username, $password, $dbname);
-  if(!$conn){
-    echo "Database connection error".mysqli_connect_error();
-  }
+	$servername = 'localhost';
+	$username = 'u106223405_admin';
+	$password = 'Admin123';
+	$dbname = "u106223405_db_admin";
+	
+	$con = mysqli_connect($servername,$username,$password,$dbname);
+	
+	if(!$con){
+	   die('Could not Connect My Sql:' .Sql_error());
+	}
 ?>
+

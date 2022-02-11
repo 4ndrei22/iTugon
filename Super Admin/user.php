@@ -26,19 +26,19 @@
                       WHERE firstname = '{$db_firstname}'";
             mysqli_query($con,$sql1);
             $msg = "update successfully";
-            header('refresh: 1, url = ChangeUsername.php');
+            header('refresh: 1, url = user');
           }else{
             $msg = "Incorrect Password";
-            header('refresh: 1, url = ChangeUsername.php');
+            header('refresh: 1, url = user');
           }
         }else{
           $msg = "$email - This username already exists";
-          header('refresh: 1, url = ChangeUsername.php');
+          header('refresh: 1, url = user');
           
         }
       }else{
         $msg = "All input fields are required";
-        header('refresh: 1, url = ChangeUsername.php');
+        header('refresh: 1, url = user');
       }
     } 
 ?>
@@ -162,7 +162,14 @@
                         $row = mysqli_fetch_assoc($sql);
                       }
                     ?>
-                    <img class="avatar border-gray" src="../Image Files/logo-small.png" alt="...">
+                    <div class="upload">
+                        <img class="avatar border-gray" src="images/<?php echo $row['img']; ?>" alt="">
+                        <div class="round">
+                            <input type="file" name="image" id = "image" accept=".jpg, .jpeg, .png">
+                            <i class = "fa fa-camera" style = "color: #fff;"></i>
+                        </div>
+                    </div>
+                    
                     <h5 style =  'text-transform: uppercase;'><?php echo $row['firstname']." ".$row['lastname']?></h5>
                     <?php if ($msg != "") echo "<h5 class='errormsg'>$msg </h5> "; ?>
                   <!-- <form action="./ChangeInfo.php" method="post">   -->

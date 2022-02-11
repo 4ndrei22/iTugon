@@ -55,7 +55,7 @@
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="active">
-            <a href="./Dashboard(staff).php">
+            <a href="./Dashboard(staff)">
               <i class="fa fa-bank"></i>
               <p>Dashboard</p>
             </a>
@@ -67,19 +67,19 @@
                 <span class="fa fa-caret-down"></span>
               </a>
               <div class="dropdown-content" >
-                <a href="./Staff/Ticket(open).php">Open</a>
-                <a href="./Staff/Ticket(Pending).php">Pending</a>
-                <a href="./Staff/Ticket(reopened).php">Reopened</a>
+                <a href="./Staff/Ticket(open)">Open</a>
+                <a href="./Staff/Ticket(Pending)">Pending</a>
+                <a href="./Staff/Ticket(reopened)">Reopened</a>
               </div>
           </li>
           <li>
-            <a href="./Staff/FAQs(create).php">
+            <a href="./Staff/FAQs(create)">
               <i class="fa fa-book"></i>
               <p>Knowledgebase</p>
             </a>
           </li>
           <li>
-            <a href="./Staff/user.php">
+            <a href="./Staff/user">
               <i class="fa fa-user"></i>
               <p>User Profile</p>
             </a>

@@ -2,7 +2,7 @@
     session_start();
     include_once "config.php";
     $outgoing_id = $_SESSION['U_unique_id'];
-   // $incoming_id = $_GET['user_id']
+    $incoming_id = $_SESSION['convo_user_id'];
     $sql = "SELECT t1.*, U.*
     FROM messages t1
     JOIN ( SELECT LEAST(incoming_msg_id, outgoing_msg_id) user1,
@@ -15,7 +15,7 @@
     INNER JOIN accountcreation U
     ON (U.unique_id = incoming_msg_id XOR U.unique_id = outgoing_msg_id) AND NOT U.unique_id = {$outgoing_id}
     ORDER BY t1.timestamp DESC";
-    $query = mysqli_query($conn, $sql);
+    $query = mysqli_query($con, $sql);
     $output = "";
     if(mysqli_num_rows($query) == 0){
         $output .= "<p class='text-center text-black mt-5 p-4 fs-5 fw-600'>Search for user to start a conversation.</>";

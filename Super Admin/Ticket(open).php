@@ -1,9 +1,10 @@
 <?php
   session_start();
   if(!isset($_SESSION['U_unique_id'])){
-    header('refresh: 1, url = ../Login.php');
+    header('refresh: 1, url = ../Login');
   }
 ?>
+
 <?php
 include "Ticket_header.php";
 ?>
@@ -30,7 +31,7 @@ include "Ticket_header.php";
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class=" ">
-            <a href="../Dashboard(super).php">
+            <a href="../Dashboard(super)">
               <i class="fa fa-bank"></i>
               <p>Dashboard</p>
             </a>
@@ -42,25 +43,25 @@ include "Ticket_header.php";
                 <span class="fa fa-caret-down"></span>
               </a>
               <div class="dropdown-content" >
-                <a href="./Ticket(open).php">Open</a>
-                <a href="./Ticket(Pending).php">Pending</a>
-                <a href="./Ticket(reopened).php">Reopened</a>
+                <a href="./Ticket(open)">Open</a>
+                <a href="./Ticket(Pending)">Pending</a>
+                <a href="./Ticket(reopened)">Reopened</a>
               </div>
           </li>
           <li>
-            <a href="./FAQs(create).php">
+            <a href="./FAQs(create)">
               <i class="fa fa-book"></i>
               <p>Knowledgebase</p>
             </a>
           </li>
           <li class="">
-            <a href="./AdminCreation.php">
+            <a href="./AdminCreation">
               <i class="fa fa-plus"></i>
               <p style="font-size: 10px;">Create Employee Account</p>
             </a>
           </li>
           <li>
-            <a href="./user.php">
+            <a href="./user">
               <i class="fa fa-user"></i>
               <p>User Profile</p>
             </a>
@@ -97,9 +98,9 @@ include "Ticket_header.php";
                     </p>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="./ChangeUsername.php">Change Username</a>
-                    <a class="dropdown-item" href="./ChangePassword.php">Change Password</a>
-                    <a class="dropdown-item" href="./truncateUser.php">Logout</a>
+                    <a class="dropdown-item" href="./ChangeUsername">Change Username</a>
+                    <a class="dropdown-item" href="./ChangePassword">Change Password</a>
+                    <a class="dropdown-item" href="./truncateUser">Logout</a>
                   </div>
                 </li>
                 
@@ -108,7 +109,7 @@ include "Ticket_header.php";
           </div>
       </nav>
       <!-- end nav bar -->
-      <div class="content">
+     <div class="content">
           <div class="Header pb-4">
             <h2>
               Open Tickets
@@ -122,161 +123,163 @@ include "Ticket_header.php";
             <?php
               include 'connect.php';
               //$sql = "SELECT Firstname, Lastname FROM staffs";
-              $sql = "SELECT * FROM ticketInfo";
+              $sql = "SELECT * FROM ticketinfo";
               $result = mysqli_query($con,$sql);
               if(mysqli_num_rows($result) > 0){
                   while ($row = mysqli_fetch_assoc($result)){
                                   
-                  $ticketnum=$row['ticket_id'];
-                  $prioLvl = $row['prioLvl'];
-                  $Stat = $row['stat'];
-                  $date = $row['date'];
-                  $message = $row['message'];
+                  $ticketnum=$row['ticket_owner'];
+                  $ticketId = $row['ticket_id'];
+                  $prioLvl = $row['priority_lvl'];
+                  $Stat = $row['status'];
+                  //$date = $row['date'];
+                  $subj = $row['subject'];
+
                   
                   $sql1 = "SELECT * FROM accountcreation WHERE unique_id = $ticketnum";
                   $result1 = mysqli_query($con,$sql1);
                   if(mysqli_num_rows($result1) > 0 ){
                     while ($row1 = mysqli_fetch_assoc($result1)){
                       $fullname = $row1['firstname'] . ' ' . $row1['lastname'];
-                      $ticketname = substr($fullname, 0, 10);
+                      $ticketname = $fullname;
+                      if(strlen($fullname) > 15){
+                          $name = substr($fullname, 0, 15);
+                          $ticketname = $name."".'...';
+                      }else{
+                          $ticketname;
+                      }
+                      $image = $row1['img'];
                     }
                   }
-                  if($prioLvl == "Open"){
+                  if($Stat == "Open"){
 
-                    if($Stat == "Urgent"){
+                    if($prioLvl == "Urgent"){
+                    
+                        
                       echo "
-                              <div class='col-lg-3 col-md-3 col-sm-3' >
-                              <a href='Ticket(assigned).php?user_id=$ticketnum'>
-                                <div class='card card-stats'>
-                                  <div class='card-body'>
-                                    <div class='row'>
-                                      <div class='col-md-auto' >
-                                        <div class='icon-small text-center icon-warning'>
-                                          <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg' alt='' class='icon-simple'>
+                            <div class='col-lg-3 col-md-3 col-sm-3'>
+                                <a href='Ticket(assigned)?user_id=$ticketnum' style='text-decoration:none;'>
+                                    <div class='card card-stats'>
+                                        <div class='card-body'>
+                                            <div class='row'>
+                                                <div class='col-lg-3 col-md-3 col-sm-3'>
+                                                    <div class='icon-small text-center icon-warning'>
+                                                        <img class='rounded-circle' src='images/$image' alt='' width=42px; hieght=42px;>
+                                                    </div>
+                                                </div>
+                                                <div class='col-lg-9 col-md-9 col-sm-9'>
+                                                    <div class='numbers'>
+                                                        <h4 class='box-title'>$ticketname</h4>  
+                                                        <h6 Style='font-size:12px; text-align:left;'>#$ticketnum</h6>
+                                                        <h3 Style='font-size:9px; text-align:left;'><span class='status bg-danger'></span>
+                                                          $Stat &nbsp; &nbsp;
+                                                          <span class='status red'></span>
+                                                          $prioLvl
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                      </div>
-                                      <div class='col-md-auto'>
-                                        <div class='numbers'>
-                                          <h4 class='box-title'>$ticketname...<span class='status'></span>$date</h4> 
-                                          <h6 class='box-ticket'>#$ticketnum</h6>
-                                          <h6 class='box-msg'>$message<h6>
-                                          <h3 class='box-status'><span class='status bg-dark'></span>
-                                            $prioLvl &nbsp; &nbsp;
-                                            <span class='status red'></span>
-                                            $Stat
-                                          </h3>
-                                              
+                                        <div class='card-footer'>
+                                            <hr>
                                         </div>
-                                      </div>
                                     </div>
-                                  </div>
-                                  <div class='card-footer'>
-                                    <hr>
-                                  </div>
-                                </div>
                                 </a>
-                              </div>
-                            ";
-                    }elseif($Stat == "High"){
+                            </div>";
+                    }elseif($prioLvl == "High"){
+                        
                       echo "
-                      
-                      <div class='col-lg-3 col-md-3 col-sm-3'>
-                        <a href='Ticket(assigned).php?user_id=$ticketnum'>
-                          <div class='card card-stats'>
-                            <div class='card-body'>
-                              <div class='row'>
-                                <div class='col-md-auto' >
-                                  <div class='icon-small text-center icon-warning'>
-                                    <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg' alt='' class='icon-simple'>
-                                  </div>
-                                </div>
-                                <div class='col-md-auto'>
-                                  <div class='numbers'>
-                                    <!-- <p class='card-category text-white'>Open</p>
-                                    <p class='card-title text-white'>54<p> -->
-                                    <h4 class='box-title'>$ticketname...<span class='status'></span>$date</h4> 
-                                    <h6 class='box-ticket'>#$ticketnum</h6>
-                                    <h3 class='box-status'><span class='status bg-dark'></span>
-                                      $prioLvl &nbsp; &nbsp;
-                                      <span class=status orange'></span>
-                                      $Stat
-                                    </h3>
-                                        
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class='card-footer'>
-                              <hr>
-                            </div>
-                          </div>
-                        </a>  
-                      </div>";
-                    }elseif($Stat == "Normal"){
+                            <div class='col-lg-3 col-md-3 col-sm-3'>
+                                <a href='Ticket(assigned)?user_id=$ticketnum' style='text-decoration:none;'>
+                                    <div class='card card-stats'>
+                                        <div class='card-body'>
+                                            <div class='row'>
+                                                <div class='col-lg-3 col-md-3 col-sm-3'>
+                                                    <div class='icon-small text-center icon-warning'>
+                                                        <img class='rounded-circle' src='images/$image' alt='' width=42px; hieght=42px;>
+                                                    </div>
+                                                </div>
+                                                <div class='col-lg-9 col-md-9 col-sm-9'>
+                                                    <div class='numbers'>
+                                                        <h4 class='box-title'>$ticketname</h4>  
+                                                        <h6 Style='font-size:12px; text-align:left;'>#$ticketnum</h6>
+                                                        <h3 Style='font-size:9px; text-align:left;'><span class='status bg-danger'></span>
+                                                          $Stat &nbsp; &nbsp;
+                                                          <span class='status orange'></span>
+                                                          $prioLvl
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class='card-footer'>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>";
+                    }elseif($prioLvl == "Normal"){
                       echo "
-                      
-                        <div class='col-lg-3 col-md-3 col-sm-3'>
-                        <a href='Ticket(assigned).php?user_id=$ticketnum'>
-                          <div class='card card-stats'>
-                            <div class='card-body'>
-                              <div class='row'>
-                                <div class='col-md-auto' >
-                                  <div class='icon-small text-center icon-warning'>
-                                    <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg' alt='' class='icon-simple'>
-                                  </div>
-                                </div>
-                                <div class='col-md-auto'>
-                                  <div class='numbers'>
-                                    <h4 class='box-title'>$ticketname...<span class='status'></span>$date</h4> 
-                                    <h6 class='box-ticket'>#$ticketnum</h6>
-
-                                    <h3 class='box-status'><span class='status bg-dark'></span>
-                                      $prioLvl &nbsp; &nbsp;
-                                      <span class=status green'></span>
-                                      $Stat
-                                    </h3>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class='card-footer'>
-                              <hr>
-                            </div>
-                          </div>
-                        </a>
-                          </div> ";
+                            <div class='col-lg-3 col-md-3 col-sm-3'>
+                                <a href='Ticket(assigned)?user_id=$ticketnum' style='text-decoration:none;'>
+                                    <div class='card card-stats'>
+                                        <div class='card-body'>
+                                            <div class='row'>
+                                                <div class='col-lg-3 col-md-3 col-sm-3'>
+                                                    <div class='icon-small text-center icon-warning'>
+                                                        <img class='rounded-circle' src='images/$image' alt='' width=42px; hieght=42px;>
+                                                    </div>
+                                                </div>
+                                                <div class='col-lg-9 col-md-9 col-sm-9'>
+                                                    <div class='numbers'>
+                                                        <h4 class='box-title'>$ticketname</h4>  
+                                                        <h6 Style='font-size:12px; text-align:left;'>#$ticketnum</h6>
+                                                        <h3 Style='font-size:9px; text-align:left;'><span class='status bg-danger'></span>
+                                                          $Stat &nbsp; &nbsp;
+                                                          <span class='status green'></span>
+                                                          $prioLvl
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class='card-footer'>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>";
                     }else{
                       echo "
-                      
-                        <div class='col-lg-3 col-md-3 col-sm-3'>
-                        <a href='Ticket(assigned).php?user_id=$ticketnum'>
-                          <div class='card card-stats'>
-                            <div class='card-body'>
-                              <div class='row'>
-                                <div class='col-md-auto' >
-                                  <div class='icon-small text-center icon-warning'>
-                                    <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg' alt='' class='icon-simple'>
-                                  </div>
-                                </div>
-                                <div class='col-md-auto'>
-                                  <div class='numbers'>
-                                    <h4 class='box-title'>$ticketname...<span class='status'></span>$date</h4>  
-                                    <h6 class='box-ticket'>#$ticketnum</h6>
-                                    <h3 class='box-status'><span class='status bg-dark'></span>
-                                      $prioLvl &nbsp; &nbsp;
-                                      <span class='status blue'></span>
-                                      $Stat
-                                    </h3>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class='card-footer'>
-                              <hr>
-                            </div>
-                          </div>
-                        </a>
-                        </div>";
+                            <div class='col-lg-3 col-md-3 col-sm-3'>
+                                <a href='Ticket(assigned)?user_id=$ticketnum' style='text-decoration:none;'>
+                                    <div class='card card-stats'>
+                                        <div class='card-body'>
+                                            <div class='row'>
+                                                <div class='col-lg-3 col-md-3 col-sm-3'>
+                                                    <div class='icon-small text-center icon-warning'>
+                                                        <img class='rounded-circle' src='images/$image' alt='' width=42px; hieght=42px;>
+                                                    </div>
+                                                </div>
+                                                <div class='col-lg-9 col-md-9 col-sm-9'>
+                                                    <div class='numbers'>
+                                                        <h4 class='box-title'>$ticketname</h4>  
+                                                        <h6 Style='font-size:12px; text-align:left;'>#$ticketnum</h6>
+                                                        <h3 Style='font-size:9px; text-align:left;'><span class='status bg-danger'></span>
+                                                          $Stat &nbsp; &nbsp;
+                                                          <span class='status blue'></span>
+                                                          $prioLvl
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class='card-footer'>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>";
                     }
             
                   }
@@ -284,23 +287,6 @@ include "Ticket_header.php";
               }
                                   
             ?>
-            <script>
-              function showConversation(userid) {
-                document.getElementById('chat-box-div').src = "./conversation.php?user_id=" + userid;
-                document.getElementById('input-search').value = '';
-                document.getElementById('input-search').dispatchEvent(new KeyboardEvent('keydown',  {'keycode':13}));
-                document.getElementById('convo-div').classList.remove("d-none");
-                document.getElementById('convo-div').classList.remove("d-sm-block");
-                document.getElementById('ticket-list-div').classList.add("d-none");
-                document.getElementById('ticket-list-div').classList.add("d-sm-block");
-              }
-              function goBack() {
-                document.getElementById('convo-div').classList.add("d-none");
-                document.getElementById('convo-div').classList.add("d-sm-block");
-                document.getElementById('convo-list-div').classList.remove("d-none");
-                document.getElementById('convo-list-div').classList.remove("d-sm-block");
-              }
-            </script>
           </div>
       </div>
 

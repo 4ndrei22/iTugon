@@ -57,7 +57,7 @@ setInterval(() =>{
                 first = false;
                 scrollToBottom();
             }else if((chatBox.scrollHeight + (chatBox.scrollTop - chatBox.clientHeight)) < 100){
-                limit += 5;
+                limit += 4;
                 chatboxChildNum = chatBox.childElementCount;
             }else{
                 if((chatBox.childElementCount > chatboxChildNum)&&!((chatBox.scrollHeight + (chatBox.scrollTop - chatBox.clientHeight)) < 2000)){

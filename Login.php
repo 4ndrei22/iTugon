@@ -5,47 +5,49 @@
 	$msg = "";
   
 	if (isset($_POST['submit'])) {
-		$con = new mysqli('localhost', 'root', '', 'db_admin');
-    $username = mysqli_real_escape_string($con, $_POST['usernameL']);
-    $password = mysqli_real_escape_string($con, $_POST['passwordL']);
-    if(!empty($username) && !empty($password)){
-        $sql = mysqli_query($con, "SELECT * FROM accountcreation WHERE username = '{$username}'");
-        if(mysqli_num_rows($sql) > 0){
-            $row = mysqli_fetch_assoc($sql);
-            $user_pass = md5($password);
-            $enc_pass = $row['password'];
-            if($user_pass === $enc_pass){
-                $status = "Active now";
-                $sql2 = mysqli_query($con, "UPDATE accountcreation SET status = '{$status}' WHERE unique_id = {$row['unique_id']}");
-                if($sql2){
-                  if($row['adminkey'] == '1'){
-                    $_SESSION['U_unique_id'] = $row['unique_id'];
-                    $_SESSION['accesslvl'] = $row['adminkey'];
-                    header("location: Dashboard(staff).php");
-                    $msg = "success";
-                  }elseif($row['adminkey'] == '2'){
-                    $_SESSION['U_unique_id'] = $row['unique_id'];
-                    $_SESSION['accesslvl'] = $row['adminkey'];
-                    header("location: Dashboard(super).php");
-                    $msg = "success";
-                  }
-                   
+		include 'connect.php';
+        //$username = mysqli_real_escape_string($con, $_POST['usernameL']);
+        $username = ($_POST['usernameL']);
+        $password = ($_POST['passwordL']);
+        //$password = mysqli_real_escape_string($con, $_POST['passwordL']);
+        if(!empty($username) && !empty($password)){
+            $sql = mysqli_query($con,"SELECT * FROM accountcreation WHERE username = '$username'");
+            if(mysqli_num_rows($sql) > 0){
+                $row = mysqli_fetch_assoc($sql);
+                $user_pass = md5($password);
+                $enc_pass = $row['password'];
+                if($user_pass === $enc_pass){
+                    $status = "Active now";
+                    $sql2 = mysqli_query($con,"UPDATE accountcreation SET status = '{$status}' WHERE unique_id = {$row['unique_id']}");
+                    if($sql2){
+                      if($row['adminkey'] == 1){
+                        $_SESSION['U_unique_id'] = $row['unique_id'];
+                        $_SESSION['accesslvl'] = $row['adminkey'];
+                        header("location: ./Dashboard(staff)");
+                        $msg = "success";
+                      }elseif($row['adminkey'] == 2){
+                        $_SESSION['U_unique_id'] = $row['unique_id'];
+                        $_SESSION['accesslvl'] = $row['adminkey'];
+                        header("location: ./Dashboard(super)");
+                        $msg = "success";
+                      }
+                       
+                    }else{
+                      $msg = "Something went wrong. Please try again!";
+                      header('refresh: 1, url = Login');
+                    }
                 }else{
-                  $msg = "Something went wrong. Please try again!";
-                  header('refresh: 1, url = Login.php');
+                  $msg = "Username or Password is Incorrect!";
+                   header('refresh: 1, url = Login');
                 }
             }else{
-              $msg = "Username or Password is Incorrect!";
-               header('refresh: 1, url = Login.php');
+              $msg = "$username - This username not Exist!";
+              header('refresh: 1, url = Login');
             }
         }else{
-          $msg = "$username - This username not Exist!";
-          header('refresh: 1, url = Login.php');
+          $msg = "All input fields are required!";
+          header('refresh: 1, url = Login');
         }
-    }else{
-      $msg = "All input fields are required!";
-      header('refresh: 1, url = Login.php');
-    }
 	}
 ?>
 
@@ -54,7 +56,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="./Image Files/Logo/BulSU.png">
+  <link rel="icon" type="image/png" href="BulSU.png">
   <title>BulSU iTugon</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -76,19 +78,19 @@
         <div class="slideshow-container">
           <div class="mySlides fade">
             <div class="numbertext">1 / 3</div>
-            <img src="./Image Files/BulSU MVG/Mission.jpg" style="width:100%">
+            <img src="Mission.jpg" style="width:100%">
             <div class="text">Caption Text</div>
           </div>
 
           <div class="mySlides fade">
             <div class="numbertext">2 / 3</div>
-            <img src="./Image Files/BulSU MVG/Vision.jpg" style="width:100%">
+            <img src="Vision.jpg" style="width:100%">
             <div class="text">Caption Two</div>
           </div>
 
           <div class="mySlides fade">
             <div class="numbertext">3 / 3</div>
-            <img src="./Image Files/BulSU MVG/Goals.jpg" style="width:100%">
+            <img src="Goals.jpg" style="width:100%">
             <div class="text">Caption Three</div>
           </div>
 
@@ -118,7 +120,7 @@
               }
               slides[slideIndex-1].style.display = "block";  
               dots[slideIndex-1].className += " active";
-              setTimeout(showSlides, 2000); // Change image every 2 seconds
+              setTimeout(showSlides, 4000); // Change image every 2 seconds
             }
           </script>
         
@@ -129,7 +131,7 @@
             <div class="formcontainer vh-100 bg-light" id="formcontainer">
               
                 <div class="icon-big text-center icon-warning pt-5">
-                      <img src="./Image Files/logo/BulSU.png" alt="" >
+                      <img src="./Image Files/Logo/BulSU.png" alt="" >
                 </div>
                 <h2 id="h2">BulSU iTugon</h2>
                 <h2 id="h2">Login Form</h2>

@@ -9,7 +9,6 @@
 	$msg = "";
   include 'connect.php';
 	if (isset($_POST['submit'])) {
-        $con = new mysqli('localhost', 'root', '', 'db_admin');
 
         $firstname = $con->real_escape_string($_POST['firstname']);
         $lastname = $con->real_escape_string($_POST['lastname']);
@@ -24,12 +23,12 @@
         $sql = mysqli_query($con, "SELECT * FROM accountcreation WHERE email = '{$email}'");
             if(mysqli_num_rows($sql) > 0){
               $msg =  "$email - This email already exist!";
-              header('refresh: 1, url = AdminCreation.php');
+              header('refresh: 1, url = AdminCreation');
             }else{
               $sql1 = mysqli_query($con, "SELECT * FROM accountcreation WHERE username = '{$username}'");
               if(mysqli_num_rows($sql1) > 0){
                 $msg =  "$username - This username already exist!";
-                header('refresh: 1, url = AdminCreation.php');
+                header('refresh: 1, url = AdminCreation');
               }else{
                 if(isset($_FILES['image'])){
                   $img_name = $_FILES['image']['name'];
@@ -53,26 +52,27 @@
                               VALUES ({$ran_id},'{$accesslvl}','{$firstname}','{$lastname}', '{$email}','{$contactnum}','{$username}', '{$encrypt_pass}', '{$new_img_name}', '{$status}')");
                               if($insert_query){
                                 $msg = "success";
-                                header('refresh: 1, url = AdminCreation.php');
+                                header('refresh: 1, url = AdminCreation');
                               }
+                              $msg = "image uploaded";
                           }
                       }else{
                         $msg = "Please upload an image file - jpeg, png, jpg";
-                        header('refresh: 1, url = AdminCreation.php');
+                        header('refresh: 1, url = AdminCreation');
                       }
                   }else{
                     $msg = "Please upload an image file - jpeg, png, jpg";
-                    header('refresh: 1, url = AdminCreation.php');
+                    header('refresh: 1, url = AdminCreation');
                   }
                 }
               }
             }
       }else{
         $msg = "$email is not a valid email";
-        header('refresh: 1, url = AdminCreation.php');}
+        header('refresh: 1, url = AdminCreation');}
     }else{ 
       $msg = "all input fields are required";
-      header('refresh: 1, url = AdminCreation.php');
+      header('refresh: 1, url = AdminCreation');
     }
 	 }
 ?>
@@ -102,7 +102,7 @@
       <div class="sidebar-wrapper">
       <ul class="nav">
         <li class="">
-            <a href="../Dashboard(super).php">
+            <a href="../Dashboard(super)">
               <i class="fa fa-bank"></i>
               <p>Dashboard</p>
             </a>
@@ -114,25 +114,25 @@
                 <span class="fa fa-caret-down"></span>
               </a>
               <div class="dropdown-content" >
-                <a href="./Ticket(open).php">Open</a>
-                <a href="./Ticket(Pending).php">Pending</a>
-                <a href="./Ticket(reopened).php">Reopened</a>
+                <a href="./Ticket(open)">Open</a>
+                <a href="./Ticket(Pending)">Pending</a>
+                <a href="./Ticket(reopened)">Reopened</a>
               </div>
           </li>
           <li>
-            <a href="./FAQs(create).php">
+            <a href="./FAQs(create)">
               <i class="fa fa-book"></i>
               <p>Knowledgebase</p>
             </a>
           </li>
           <li class="active">
-            <a href="./AdminCreation.php">
+            <a href="./AdminCreation">
               <i class="fa fa-plus"></i>
               <p style="font-size: 10px;">Create Employee Account</p>
             </a>
           </li>
           <li>
-            <a href="./user.php">
+            <a href="./user">
               <i class="fa fa-user"></i>
               <p>User Profile</p>
             </a>
@@ -169,9 +169,9 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="./ChangeUsername.php">Change Username</a>
-                  <a class="dropdown-item" href="./ChangePassword.php">Change Password</a>
-                  <a class="dropdown-item" href="./truncateUser.php">Logout</a>
+                  <a class="dropdown-item" href="./ChangeUsername">Change Username</a>
+                  <a class="dropdown-item" href="./ChangePassword">Change Password</a>
+                  <a class="dropdown-item" href="./truncateUser">Logout</a>
                 </div>
               </li>
               
@@ -231,12 +231,19 @@
                     </div>
                   </div>
                     <div class="row">
-                      <div class="col-md-6 pr-1">
-                        <div class="form-group">
-                          <label>Select Image</label>
-                          <input type="file" name="image" class="form-control"accept="image/x-png,image/gif,image/jpeg,image/jpg" required>
+                        <div class="col-md-6 pr-1">
+                            <div class="row">
+                                <div class="col-md-6 pr-1">
+                                    <label class="">Select Image</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 pr-1">
+                                    <input type="file" name="image" class=" "accept="image/x-png,image/gif,image/jpeg,image/jpg" required>
+                                    <?php if ($msg != "") echo "<a class='errormsg text-decoration-none'>$msg </a> "; ?>
+                                </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
                     <div class="row">
                     <div class="col-md-6 pr-1">
@@ -298,9 +305,9 @@
                     <tbody>
                     <?php
                       include "connect.php";
-                      $sql = "CALL getAccountcreation()";
+                      $sql = "SELECT * FROM accountcreation WHERE adminkey = 1 AND 2";
                       $result = $con->query($sql);
-                      if ($result->num_rows > 0) {
+                      if(mysqli_num_rows($result) > 0){
                       // output data of each row
                         while($row = $result->fetch_assoc()) {
                           echo "<tr><td>" . $row["firstname"]. "</td><td>" . $row["lastname"] . "</td><td>" . $row["adminkey"] .

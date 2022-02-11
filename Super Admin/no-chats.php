@@ -10,6 +10,6 @@
 
 </head>
 <body class="container" style="max-height: 100vh;">
-    <img src="./no-chats.svg" class="col-12 py-5" style="max-height: 100vh;">
+    <img src="./no-chats.svg" class="col-12 py-8" style="max-height: 100vh;">
 </body>
 </html>

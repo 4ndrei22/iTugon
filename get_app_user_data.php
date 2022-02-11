@@ -1,13 +1,10 @@
 <?php
-     $db = mysqli_connect('localhost', 'root', '', 'db_admin' );
-     if (!$db) {
-         echo ("Database connection failed");
-     }
-
+     include 'connect.php';
+     
      $email = $_POST['email'];
      $password = $_POST['password'];
  
-     $query = $db->query("SELECT username, firstname, lastname, email, unqique_id FROM accountcreation WHERE email = '".$email."' AND password = '".md5($password)."'") or die($db->error);
+     $query = $con->query("SELECT username, firstname, lastname, email, unique_id FROM accountcreation WHERE email = '".$email."' AND password = '".md5($password)."'") or die($con->error);
      
      $result = array();
      

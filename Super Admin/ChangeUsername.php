@@ -1,7 +1,7 @@
 <?php
   session_start();
   if(!isset($_SESSION['U_unique_id'])){
-    header('refresh: 1, url = ../Login.php');
+    header('refresh: 1, url = ../Login');
   }
 ?>
 <?php
@@ -21,18 +21,18 @@
             $sql1 = "UPDATE `accountcreation` SET username = '$newUsername' WHERE username = '$username'";
             mysqli_query($con,$sql1);
             $msg = "update successfully";
-            header('refresh: 1, url = ChangeUsername.php');
+            header('refresh: 1, url = ChangeUsername');
           }else{
             $msg = "Incorrect Password";
-            header('refresh: 1, url = ChangeUsername.php');
+            header('refresh: 1, url = ChangeUsername');
           }
         }else{
           $msg = "$newUsername - This username already exists";
-          header('refresh: 1, url = ChangeUsername.php');
+          header('refresh: 1, url = ChangeUsername');
         }
       }else{
         $msg = "All input fields are required";
-        header('refresh: 1, url = ChangeUsername.php');
+        header('refresh: 1, url = ChangeUsername');
       }
     }
  
@@ -64,7 +64,7 @@
         <div class="sidebar-wrapper">
           <ul class="nav">
             <li class="">
-              <a href="../Dashboard(super).php">
+              <a href="../Dashboard(super)">
                 <i class="fa fa-bank"></i>
                 <p>Dashboard</p>
               </a>
@@ -76,25 +76,25 @@
                   <span class="fa fa-caret-down"></span>
                 </a>
                 <div class="dropdown-content" >
-                  <a href="./Ticket(open).php">Open</a>
-                  <a href="./Ticket(Pending).php">Pending</a>
-                  <a href="./Ticket(reopened).php">Reopened</a>
+                  <a href="./Ticket(open)">Open</a>
+                  <a href="./Ticket(Pending)">Pending</a>
+                  <a href="./Ticket(reopened)">Reopened</a>
                 </div>
             </li>
             <li class="">
-              <a href="./FAQs(create).php">
+              <a href="./FAQs(create)">
                 <i class="fa fa-book"></i>
                 <p>Knowledgebase</p>
               </a>
             </li>
             <li class="">
-              <a href="./AdminCreation.php">
+              <a href="./AdminCreation">
                 <i class="fa fa-plus"></i>
                 <p style="font-size: 10px;">Create Employee Account</p>
               </a>
             </li>
             <li class="">
-              <a href="./user.php">
+              <a href="./user">
                 <i class="fa fa-user"></i>
                 <p>User Profile</p>
               </a>
@@ -131,9 +131,9 @@
                     </p>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="./ChangeUsername.php">Change Username</a>
-                    <a class="dropdown-item" href="./ChangePassword.php">Change Password</a>
-                    <a class="dropdown-item" href="./truncateUser.php">Logout</a>
+                    <a class="dropdown-item" href="./ChangeUsername">Change Username</a>
+                    <a class="dropdown-item" href="./ChangePassword">Change Password</a>
+                    <a class="dropdown-item" href="./truncateUser">Logout</a>
                   </div>
                 </li>
                 
@@ -158,7 +158,7 @@
                       }
                     ?>
                   <?php if ($msg != "") echo $msg . "<br><br>"; ?>
-                  <form action="ChangeUsername.php" method = "post">                  
+                  <form action="ChangeUsername" method = "post">                  
                     <div class="row">
                       <div class="col-md-6 pr-1">
                         <div class="form-group">

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="../Image Files/Logo/BulSU.png">
+  <link rel="icon" type="image/png" href="../BulSU.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     BulSU iTugon
@@ -18,6 +18,7 @@
   <link href="../CSS Files/Staff_Dashboard.css" rel="stylesheet" />
   <link href="../CSS Files/Table.css" rel="stylesheet" />
   <link href="../CSS Files/demo.css" rel="stylesheet" />
+   <link href="../CSS Files/upload.css" rel="stylesheet" />
   <!--   Core JS Files   -->
   <script src="../JS Files/Errormsg.js"></script>
   <script src="../JS Files/core/jquery.min.js"></script>

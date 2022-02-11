@@ -11,9 +11,14 @@
 	padding-top: 7px;
 	border-radius: 50%;
 }
-.box-title, .box-ticket , .box-status {
+.box-status{
+    margin-top: -0.5px;
+	font-size:7px;
+	text-align: left;
+}
+.box-title, .box-ticket {
 	margin-top: -0.5px;
-	font-size:15px;
+	font-size:12px;
 	text-align: left;
 }
 .box-msg{
